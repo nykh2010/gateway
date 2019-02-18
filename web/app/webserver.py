@@ -1,0 +1,56 @@
+import tornado.httpserver
+from tornado import web
+from tornado.web import RequestHandler
+from tornado.options import define,options
+import uuid
+import os
+import time
+from socketserver import TCPServer,UDPServer,BaseRequestHandler
+from queue import Queue
+from threading import Thread
+import re
+import sys
+from gateway import GatewayHandler
+from auth import AuthHandler,LoginHandler
+from log import LogHandler
+from radio import RadioHandler
+from server import ServerHandler
+from wifi import WifiHandler
+from setup import SetupHandler
+from radio import RadioHandler
+from status import StatusHandler
+
+define('port',default=8000,type=int)
+define('ip',default='0.0.0.0',type=str)
+
+
+if __name__ == '__main__':
+    print('%s start...' % __file__)
+    tornado.options.parse_command_line()
+    app = tornado.web.Application(
+        [
+            (r'/',LoginHandler),            
+            (r'/server/(.*?)',ServerHandler),
+            (r'/server',ServerHandler),
+            (r'/gateway/(.*?)/(.*?)',GatewayHandler),
+            (r'/gateway/(.*?)',GatewayHandler),
+            (r'/status', StatusHandler),
+            (r'/radio/(.*?)',RadioHandler),
+            (r'/setup/(.*?)', SetupHandler),
+            (r'/setup', SetupHandler),
+            (r'/log', LogHandler),
+            (r'/auth/(.*?)', AuthHandler),
+            (r'/auth', AuthHandler),
+            (r'/wifi/(.*?)', WifiHandler),
+            (r'/wifi', WifiHandler),
+            (r'/radio', RadioHandler)
+        ],
+        debug = True,
+        static_path = os.path.join(os.path.dirname(__file__),"../static"),
+        template_path = os.path.join(os.path.dirname(__file__),"../templates"),
+        xsrf_cookies=True
+    )
+    httpServer = tornado.httpserver.HTTPServer(app)
+    httpServer.listen(options.port,options.ip)
+    tornado.ioloop.IOLoop.instance().start()
+    # pwindows.join()

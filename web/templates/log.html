@@ -1,0 +1,62 @@
+{% extends "mainboard.html" %}
+
+{% block container_wrap %}
+<div id="container_wrap">
+    <div class="nav">
+        <a href="javascript:void(0)">路由器设置&nbsp;&gt;</a>
+        <a href="javascript:void(0)">拨号日志&nbsp;</a>
+        <button class="return_a" onclick="change_dir('/setup')">返回</button>
+    </div>
+    <div class="fix_ie_shadow"></div>
+    <div class="form-border-shadow">
+    <div class="app-box">
+        <div class="box-bd">
+            <table id="logTab" style="width:90%; margin:0 auto;" class="data-table">
+                <thead class="TabHeader">
+                    <tr>
+                        <th class="th_0">序列号</th>
+                        <th class="th_1 sortable desc">时间</th>
+                        <th class="th_2 sortable none">事件描述</th>
+                    </tr>
+                </thead>
+                <tbody class="TabBody">
+                    <tr>
+                        <td>1</td>
+                        <td>2019-01-16 15:35:59</td>
+                        <td>WAN口向服务器发送拨号请求DHCP DISCOVERY</td>
+                    </tr>
+                    <tr class="evenrow">
+                        <td>2</td>
+                        <td>2019-01-16 15:35:56</td>
+                        <td>WAN口向服务器发送拨号请求DHCP DISCOVERY</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>2019-01-16 15:35:53</td>
+                        <td>WAN口向服务器发送拨号请求DHCP DISCOVERY</td>
+                    </tr>
+                    <tr class="evenrow">
+                        <td>4</td>
+                        <td>2019-01-16 15:35:47</td>
+                        <td>WAN口向服务器发送拨号请求DHCP DISCOVERY</td>
+                    </tr>
+                </tbody>
+                <tbody class="TabFooter">
+                    <tr>
+                        <td class="paging" colspan="3">
+                            <a href="javascript:void(0);">&lt;</a>
+                            <a href="#1" class="current">1</a>
+                            <a href="#2">2</a><a href="#3">3</a>
+                            <a href="#4">4</a><a href="#2">&gt;</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="item opt">
+                <input type="button" onclick="init_log('refresh');" class="btn btn_refresh" value="刷新">&nbsp;&nbsp;
+                <input type="button" onclick="log_delete();" id="log_delete_btn" class="btn btn_delete" value="删除">
+            </div>
+        </div>
+    </div>
+</div>
+{% end %}
