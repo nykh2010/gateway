@@ -1,12 +1,12 @@
 from tornado.web import RequestHandler
-from config import Config, Server, Gateway
+from config import Config
 from auth import auth
 
 
 
 class ServerHandler(RequestHandler):
-    server = Server()
-    gateway = Gateway()
+    server = Config("server")
+    gateway = Config("gateway")
     
     @auth
     def get(self):

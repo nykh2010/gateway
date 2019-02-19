@@ -11,11 +11,11 @@ def auth(fun):
 
 class AuthHandler(RequestHandler):
     '''认证'''
-    conf = Config()
+    conf = Config("auth")
     def check_user_passwd(self, user="admin", passwd=""):
         try:
-            default_user = self.conf.auth['username']
-            default_passwd = self.conf.auth['passwd']
+            default_user = self.conf.username
+            default_passwd = self.conf.passwd
             if user == default_user and passwd == default_passwd:
                 return True
             else:
@@ -30,7 +30,8 @@ class AuthHandler(RequestHandler):
             flag = self.check_user_passwd(passwd=old_passwd)
             if flag:
                 ret['status'] = 'success'
-                self.conf.auth['passwd'] = self.get_argument('pwd1')
+                new_pwd = self.get_argument('pwd1')
+                self.conf.set_item("passwd", new_pwd)
                 self.conf.save()
                 self.clear_cookie("token_id")
             else:

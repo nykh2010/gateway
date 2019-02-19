@@ -1,14 +1,14 @@
 from tornado.web import RequestHandler
 from auth import auth
-from config import Config, Gateway, Firmware, Service
+from config import Config
 import os
 from hashlib import sha256
 
 class GatewayHandler(RequestHandler):
     @auth
     def get(self,method):
-        gateway = Gateway()
-        firmware = Firmware()
+        gateway = Config("gateway")
+        firmware = Config("firmware")
         if method == 'restart':
             self.render("restart.html")
         elif method == 'id':
@@ -31,7 +31,7 @@ class GatewayHandler(RequestHandler):
             if args[0] == 'id':
                 # 修改网关地址
                 try:
-                    gateway = Gateway()
+                    gateway = Config("gateway")
                     gateway_id = self.get_argument('id')
                     gateway_mac = self.get_argument('mac')
                     gateway_key = self.get_argument('key')
@@ -71,8 +71,8 @@ class GatewayHandler(RequestHandler):
                 self.write(ret)
                 return
             if "zip" in file_name or "tar.gz" in file_name:
-                service_conf = Service()
-                firmware_path = os.path.join(service_conf.FIRMWARE_PATH, file_name)
+                service_conf = Config("service")
+                firmware_path = os.path.join(service_conf.path, file_name)
                 with open(firmware_path, 'wb') as f:
                     f.write(content)
                 ret['status'] = 'success'
@@ -80,10 +80,10 @@ class GatewayHandler(RequestHandler):
                 ret['status'] = 'failed'
                 ret['err_msg'] = 'format error'  
         elif method == 'restore':
-            print(self.get_argument('keep_wan_config'))
-            print(self.get_argument('keep_wifi_config'))
-            print(self.get_argument('keep_host_config'))
-            print(self.get_argument('keep_plugin'))
+            # print(self.get_argument('keep_wan_config'))
+            # print(self.get_argument('keep_wifi_config'))
+            # print(self.get_argument('keep_host_config'))
+            # print(self.get_argument('keep_plugin'))
             ret['status'] = 'success' 
                 
         self.write(ret)

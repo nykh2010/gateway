@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import tornado.httpserver
 from tornado import web
 from tornado.web import RequestHandler
@@ -21,10 +22,9 @@ from radio import RadioHandler
 from status import StatusHandler
 
 define('port',default=8000,type=int)
-define('ip',default='0.0.0.0',type=str)
+define('host',default='0.0.0.0',type=str)
 
-
-if __name__ == '__main__':
+def main():
     print('%s start...' % __file__)
     tornado.options.parse_command_line()
     app = tornado.web.Application(
@@ -39,6 +39,7 @@ if __name__ == '__main__':
             (r'/setup/(.*?)', SetupHandler),
             (r'/setup', SetupHandler),
             (r'/log', LogHandler),
+            (r'/log/(.*?)', LogHandler),
             (r'/auth/(.*?)', AuthHandler),
             (r'/auth', AuthHandler),
             (r'/wifi/(.*?)', WifiHandler),
@@ -51,6 +52,11 @@ if __name__ == '__main__':
         xsrf_cookies=True
     )
     httpServer = tornado.httpserver.HTTPServer(app)
-    httpServer.listen(options.port,options.ip)
+
+    httpServer.listen(options.port,options.host)
     tornado.ioloop.IOLoop.instance().start()
+    return 0
     # pwindows.join()
+
+if __name__ == '__main__':
+    main()

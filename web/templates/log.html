@@ -20,28 +20,19 @@
                     </tr>
                 </thead>
                 <tbody class="TabBody">
-                    <tr>
-                        <td>1</td>
-                        <td>2019-01-16 15:35:59</td>
-                        <td>WAN口向服务器发送拨号请求DHCP DISCOVERY</td>
-                    </tr>
+                    {% for index, record in enumerate(records) %}
+                    {% if (index % 2) %}
                     <tr class="evenrow">
-                        <td>2</td>
-                        <td>2019-01-16 15:35:56</td>
-                        <td>WAN口向服务器发送拨号请求DHCP DISCOVERY</td>
-                    </tr>
+                    {% else %}
                     <tr>
-                        <td>3</td>
-                        <td>2019-01-16 15:35:53</td>
-                        <td>WAN口向服务器发送拨号请求DHCP DISCOVERY</td>
+                    {% end %}
+                        <td>{{index}}</td>
+                        <td>{{record['time']}}</td>
+                        <td>{{record['msg']}}</td>
                     </tr>
-                    <tr class="evenrow">
-                        <td>4</td>
-                        <td>2019-01-16 15:35:47</td>
-                        <td>WAN口向服务器发送拨号请求DHCP DISCOVERY</td>
-                    </tr>
+                    {% end %}
                 </tbody>
-                <tbody class="TabFooter">
+                <!-- <tbody class="TabFooter">
                     <tr>
                         <td class="paging" colspan="3">
                             <a href="javascript:void(0);">&lt;</a>
@@ -50,11 +41,23 @@
                             <a href="#4">4</a><a href="#2">&gt;</a>
                         </td>
                     </tr>
-                </tbody>
+                </tbody> -->
             </table>
             <div class="item opt">
-                <input type="button" onclick="init_log('refresh');" class="btn btn_refresh" value="刷新">&nbsp;&nbsp;
-                <input type="button" onclick="log_delete();" id="log_delete_btn" class="btn btn_delete" value="删除">
+                <!-- <input type="button" onclick="init_log('refresh');" class="btn btn_refresh" value="刷新">&nbsp;&nbsp; -->
+                <!-- <input type="button" onclick="log_delete();" id="log_delete_btn" class="btn btn_delete" value="删除"> -->
+                <script type="text/javascript">
+                    $(document).ready(function(){
+                        window.setInterval(function(){
+                            $.get("/log/system",function(data){
+                                if (data) {
+                                    $(".TabBody").replaceWith(data);
+                                    console.log("%o",data);
+                                }
+                            });
+                        },10000);
+                    });
+                </script>
             </div>
         </div>
     </div>

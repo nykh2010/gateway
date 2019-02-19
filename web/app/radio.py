@@ -1,17 +1,17 @@
 from tornado.web import RequestHandler
 from auth import auth
-from config import Radio
+from config import Config
 
 class RadioHandler(RequestHandler):
     '''射频参数配置'''
     @auth
     def get(self):
-        radio = Radio()
+        radio = Config("radio")
         self.render("radiosetup.html", radio=radio)
 
     def post(self):
         ret = {}
-        radio = Radio()
+        radio = Config("radio")
         try:
             mode = self.get_argument("lora_mode")
             preamble = self.get_argument("preamble")
@@ -22,15 +22,15 @@ class RadioHandler(RequestHandler):
             crc_enable = self.get_argument("crc_enable_value")
             power = self.get_argument("power")
             sync = self.get_argument("sync")
-            radio.mode = mode
-            radio.preamble = preamble
-            radio.sf = spread
-            radio.bw = base_band
-            radio.cr = program_radio
-            radio.frequency = frequency
-            radio.crc = crc_enable
-            radio.power = power
-            radio.sync = sync
+            radio.set_item("mode", mode)
+            radio.set_item("preamble",preamble)
+            radio.set_item("sf", spread)
+            radio.set_item("bw", base_band)
+            radio.set_item("cr", program_radio)
+            radio.set_item("frequency", frequency)
+            radio.set_item("crc", crc_enable)
+            radio.set_item("power", power)
+            radio.set_item("sync", sync)
             radio.save()
             ret['status'] = 'success'
         except Exception as e:

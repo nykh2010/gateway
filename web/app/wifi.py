@@ -1,18 +1,18 @@
 from tornado.web import RequestHandler
 from auth import auth
-from config import Config, Wifi
+from config import Config
 
 class WifiHandler(RequestHandler):
     @auth
     def get(self):
-        wifi = Wifi() 
+        wifi = Config("wifi") 
         # print(dir(wifi))       
         self.render("wifi_setup.html", wifi=wifi)
     
     def post(self, method):
         ret = {}
         if method == 'update':
-            wifi = Wifi()
+            wifi = Config("wifi")
             try:
                 wifi.set_item('enable', self.get_argument('enable'))
                 if wifi.enable == 'true':
