@@ -2,4 +2,6 @@
 
 # ./Debug/ is the makefile direction
 
-# change 'CC := ' in ./Debug/makefile to select compile tool 
+# change 'CC := ' in ./Debug/makefile to select compile tool
+
+# This is a serial protocol. 
