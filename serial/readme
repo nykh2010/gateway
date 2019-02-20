@@ -1,0 +1,5 @@
+# ./main.c is to test ./serial and ./packet    
+
+# ./Debug/ is the makefile direction
+
+# change 'CC := ' in ./Debug/makefile to select compile tool 
