@@ -2,8 +2,8 @@
 {% block container_wrap %}
 <div id="container_wrap">
     <div class="nav">
-        <a href="javascript:void(0)">路由器设置&nbsp;&gt;</a>
-        <a href="javascript:void(0)">重启路由器&nbsp;</a>
+        <a href="javascript:void(0)">网关设置&nbsp;&gt;</a>
+        <a href="javascript:void(0)">重启网关&nbsp;</a>
         <button class="return_a" onclick="change_dir('/setup')">返回</button>
     </div>
     <div class="fix_ie_shadow"></div>
@@ -16,7 +16,7 @@
             <div class="box-bd">
                 <form id="soft_reboot_form" class="form-area" method="post" action="javascript:void(0);">
                     <div class="item opt">
-                        <div id="div_reboot_now_tip" class="center_tip">路由器系统将立即重新启动</div>
+                        <div id="div_reboot_now_tip" class="center_tip">网关将立即重新启动</div>
                     </div>
                     <div class="item opt">
                         <input class="btn submit_btn btn_reboot" onclick="soft_reboot();" value="立即重启" type="submit"> <!-- 重新启动 -->
