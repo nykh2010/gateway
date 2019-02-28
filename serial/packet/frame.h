@@ -25,22 +25,23 @@
 // simple serial async frame xor check byte, 1 bytes
 #define SIMPLE_SERIAL_ASYNC_FRAME_CHECK_SIZE           0x01
 
-// simple serial async frame control byte, 1 bytes
-#define SIMPLE_SERIAL_ASYNC_FRAME_PAYLOAD_CTRL_INDEX           0x03
-#define SIMPLE_SERIAL_ASYNC_FRAME_PAYLOAD_CTRL_SIZE            0x01
-#define SIMPLE_SERIAL_ASYNC_FRAME_PAYLOAD_CTRL_IDLE            0x00
-#define SIMPLE_SERIAL_ASYNC_FRAME_PAYLOAD_CTRL_MASK            0x80
-#define SIMPLE_SERIAL_ASYNC_FRAME_PAYLOAD_CTRL_DATA            0x00
-#define SIMPLE_SERIAL_ASYNC_FRAME_PAYLOAD_CTRL_COMM            0x80
-#define SIMPLE_SERIAL_ASYNC_FRAME_PAYLOAD_CTRL_DATA_MASK       0x7F
-#define SIMPLE_SERIAL_ASYNC_FRAME_PAYLOAD_CTRL_COMM_MASK       0x7F
-//#define SIMPLE_SERIAL_ASYNC_FRAME_PAYLOAD_CTRL_SET             0x03
-//#define SIMPLE_SERIAL_ASYNC_FRAME_PAYLOAD_CTRL_GET             0x04
-// ...
-#define SIMPLE_SERIAL_ASYNC_FRAME_PAYLOAD_CTRL_ACK             0x81
+// // simple serial async frame control byte, 1 bytes
+// #define SIMPLE_SERIAL_ASYNC_FRAME_PAYLOAD_CTRL_INDEX           0x03
+// #define SIMPLE_SERIAL_ASYNC_FRAME_PAYLOAD_CTRL_SIZE            0x01
 
-// simple serial async frame payload bytes, n bytes
-#define SIMPLE_SERIAL_ASYNC_FRAME_PAYLOAD_DATA_INDEX           0x04
+// #define SIMPLE_SERIAL_ASYNC_FRAME_PAYLOAD_CTRL_IDLE            0x00
+// #define SIMPLE_SERIAL_ASYNC_FRAME_PAYLOAD_CTRL_MASK            0x80
+// #define SIMPLE_SERIAL_ASYNC_FRAME_PAYLOAD_CTRL_DATA            0x00
+// #define SIMPLE_SERIAL_ASYNC_FRAME_PAYLOAD_CTRL_COMM            0x80
+// #define SIMPLE_SERIAL_ASYNC_FRAME_PAYLOAD_CTRL_DATA_MASK       0x7F
+// #define SIMPLE_SERIAL_ASYNC_FRAME_PAYLOAD_CTRL_COMM_MASK       0x7F
+// //#define SIMPLE_SERIAL_ASYNC_FRAME_PAYLOAD_CTRL_SET             0x03
+// //#define SIMPLE_SERIAL_ASYNC_FRAME_PAYLOAD_CTRL_GET             0x04
+// // ...
+// #define SIMPLE_SERIAL_ASYNC_FRAME_PAYLOAD_CTRL_ACK             0x81
+
+// // simple serial async frame payload bytes, n bytes
+// #define SIMPLE_SERIAL_ASYNC_FRAME_PAYLOAD_DATA_INDEX           0x04
 
 
 
