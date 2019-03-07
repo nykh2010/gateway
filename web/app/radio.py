@@ -1,6 +1,7 @@
 from tornado.web import RequestHandler
 from auth import auth
 from config import Config
+from connect_service import send_to_service
 
 class RadioHandler(RequestHandler):
     '''射频参数配置'''
@@ -32,6 +33,7 @@ class RadioHandler(RequestHandler):
             radio.set_item("power", power)
             radio.set_item("sync", sync)
             radio.save()
+            send_to_service('epd_service', '/radio/update')
             ret['status'] = 'success'
         except Exception as e:
             ret['status'] = 'failed'

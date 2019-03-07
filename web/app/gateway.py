@@ -79,11 +79,14 @@ class GatewayHandler(RequestHandler):
             else:
                 ret['status'] = 'failed'
                 ret['err_msg'] = 'format error'  
+                os.system('rm %s' % firmware_path)
         elif method == 'restore':
             # print(self.get_argument('keep_wan_config'))
             # print(self.get_argument('keep_wifi_config'))
             # print(self.get_argument('keep_host_config'))
             # print(self.get_argument('keep_plugin'))
+            os.system('cp /var/default/*.ini /etc/config')
+            os.system('reboot &')
             ret['status'] = 'success' 
                 
         self.write(ret)

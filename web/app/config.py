@@ -2,7 +2,7 @@ from configparser import ConfigParser
 import os
 # import json
 
-PATH = os.path.join(os.path.dirname(__file__), '../../config')
+PATH = '/etc/config'
 
 class Config:
     def __init__(self,name):
