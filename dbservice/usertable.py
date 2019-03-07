@@ -22,7 +22,7 @@ class Task(Base):
 
 class Excute(Base):
     '''任务执行表'''
-    __tablename__ = 'excute'
+    __tablename__ = 'execute'
 
     device_id = Column(String, primary_key=True)    # 终端id
     task_id = Column(String,ForeignKey('task.task_id'))      # 任务id
