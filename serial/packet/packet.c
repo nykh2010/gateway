@@ -54,6 +54,9 @@ int parse_simple_packet (simple_packet_recv_t * pkt) {
     if (pkt->size == 0) {
         return -1;
     }
+    if (pkt->size > SIMPLE_SERIAL_ASYNC_PACKET_BUF_MAX_SIZE) {
+        return -1;
+    }
     // PRINTF("recvd %d, all recvd %d, to recv %d\n", pkt->size, pkt->sizeRecieved, pkt->sizeToRecv);
     // PRINTF("recvd data %02X\n", *(pkt->buf + pkt->sizeRecieved) );
 
@@ -124,6 +127,6 @@ int parse_simple_packet (simple_packet_recv_t * pkt) {
         }
     }
     pkt->size = 0;
-    return 0;
+    return -1;
 }
 

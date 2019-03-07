@@ -14,6 +14,7 @@
 #include "../serial/serial.h"
 #include "../packet/frame.h"
 #include "../packet/packet.h"
+#include "../timer/timer.h"
 
 #define DEBUG_PRINTF 1
 #if DEBUG_PRINTF
@@ -32,59 +33,36 @@ int name_arr[] = {
 	9600,  4800,  2400,  1200,  300,  
 };
 
-void msleep (long msec) {
-    struct timeval now;
-    struct timespec waitMoment;
-    pthread_cond_t emptyCond;
-    pthread_mutex_t emptyMut;
-    pthread_cond_init(&emptyCond, NULL);
-    pthread_mutex_init(&emptyMut, NULL);
-    pthread_mutex_lock(&emptyMut);
-    gettimeofday(&now, NULL);
-    now.tv_usec += (msec * 1000);
-    if (now.tv_usec > 1000000) {
-        waitMoment.tv_sec = now.tv_sec + now.tv_usec/1000000;
-        waitMoment.tv_nsec = (now.tv_usec % 1000000) * 1000;
-    } else {
-        waitMoment.tv_sec = now.tv_sec;
-        waitMoment.tv_nsec = now.tv_usec * 1000;
-    }
-    pthread_cond_timedwait(&emptyCond, &emptyMut, &waitMoment);
-    pthread_mutex_unlock(&emptyMut);
-}
 
-int simpleq_length (serial_list_head_t * head) {
-    serial_packet_entry_t * entry = NULL;
-    int len = 0;
-	SIMPLEQ_FOREACH(entry, head, next) {
-        len++;
-    }
-    return len;
-}
-
-
-void serial_config (serial_handler_t * handler) {
+void serial_config (struct serial_handler * handler) {
     // initial
     handler->param.baud = 115200;
     handler->param.parity = 'N';
     handler->param.databits = 8;
     handler->param.stopbits = 1;
-    handler->readBuf.size = 512;
-    handler->writeBuf.size = 512;
+    // handler->readBuf.size = 512;
+    // handler->writeBuf.size = 512;
     // message list
     handler->readListMaxLen = 30;
     handler->writeListMaxLen = 30;
+    PRINTF("init serial with baud=%d, parity=%c, databits=%d, stopbits=%d, readListLen=%d, writeListLen=%d\n",
+    		handler->param.baud,
+			handler->param.parity,
+			handler->param.databits,
+			handler->param.stopbits,
+			handler->readListMaxLen,
+			handler->writeListMaxLen);
 }
 
 // serial write start routine
 static void * write_thread_exec (void * arg) {
-    serial_handler_t * handler = (serial_handler_t *)arg;
+	struct serial_handler * handler = (struct serial_handler *)arg;
     struct timeval now;
     struct timespec waitMoment;
-    simple_packet_t * packet;
-    packet = (simple_packet_t *)malloc(sizeof(simple_packet_t));
+    simple_packet_t _packet;
+    simple_packet_t * packet = &_packet;
     PRINTF("write thread exec created\n");
-
+    tcflush(handler->fd, TCIOFLUSH);
     while (!handler->writeThreadAttr.execStop) {
         serial_packet_entry_t * newEntry = NULL;
 
@@ -104,13 +82,9 @@ static void * write_thread_exec (void * arg) {
 
         if (newEntry != NULL) {
             if (create_simple_packet(packet, newEntry->data, newEntry->length) > 0) {
-//                int i;
             	write(handler->fd, packet->buf, packet->size);
-//                PRINTF("send:");
-//                for (i=0; i<packet->size; i++) {
-//                	PRINTF(" %02X", packet->buf[i]);
-//                }
-//                PRINTF("\n");
+            	packet->buf[packet->size-1] = '\0';
+            	PRINTF("serial send a %d bytes packet: %s\n", packet->size, (packet->buf+4));
             }
             SIMPLEQ_REMOVE_HEAD(&handler->writeList, next);
             handler->writeListLen--;
@@ -119,27 +93,20 @@ static void * write_thread_exec (void * arg) {
         }
         pthread_mutex_unlock(&handler->writeDataMut);
     }
-    free(packet);
+
     pthread_exit(NULL);
     return NULL;
 }
 
 // serial read start routine
 static void * read_thread_exec (void * arg) {
-    serial_handler_t * handler = (serial_handler_t* )arg;
-
-    simple_packet_recv_t * pRecv;
-    pRecv = (simple_packet_recv_t *)malloc(sizeof(simple_packet_recv_t));
-    if (pRecv != NULL) {
-        clear_simple_packet_recv(pRecv); 
-        PRINTF("read thread exec created\n");
-    } else {
-    	PRINTF("read thread exec create failed\n");
-    	return NULL;
-    }
-
+	struct serial_handler * handler = (struct serial_handler* )arg;
+    simple_packet_recv_t packet;
+    simple_packet_recv_t * pRecv = &packet;
+    PRINTF("read thread exec created\n");
+    clear_simple_packet_recv(pRecv);
     pthread_mutex_init(&pRecv->mutex, NULL);
-
+    tcflush(handler->fd, TCIFLUSH);
 
     while (!handler->readThreadAttr.execStop) {
     	pthread_mutex_lock(&pRecv->mutex);
@@ -159,6 +126,8 @@ static void * read_thread_exec (void * arg) {
         pthread_mutex_lock(&handler->readDataMut);
         pthread_mutex_lock(&pRecv->mutex);
         if (parse_simple_packet(pRecv) == 0) {
+        	handler->u->serial_recv(handler, SIMPLE_PACKET_PAYLOAD_ADDR(pRecv), SIMPLE_PACKET_PAYLOAD_SIZE(pRecv));
+#if 0
             serial_packet_entry_t * newEntry = NULL;
             newEntry = (serial_packet_entry_t *)malloc(sizeof(serial_packet_entry_t));
 
@@ -171,18 +140,20 @@ static void * read_thread_exec (void * arg) {
                 handler->readListLen++;
                 pthread_cond_signal(&handler->readDataCond);
             }
+#endif
             clear_simple_packet_recv(pRecv); 
         }
         pthread_mutex_unlock(&pRecv->mutex);
         pthread_mutex_unlock(&handler->readDataMut);
     }
-    free(pRecv);
+
     pthread_exit(NULL);
     return NULL;
-}       
+}   
 
-int serial_receive_from_list (serial_handler_t * handler, serial_buffer_t * buffer, int msec) {
+int serial_receive_from_list (struct serial_handler * handler, uint8_t * data, int msec) {
     serial_packet_entry_t * newEntry = NULL;
+    int size = 0;
     pthread_mutex_lock(&handler->readDataMut);
     newEntry = SIMPLEQ_FIRST(&handler->readList);
 
@@ -206,29 +177,29 @@ int serial_receive_from_list (serial_handler_t * handler, serial_buffer_t * buff
 
     if (newEntry != NULL) {
         // PRINTF("write list send a packet\n");
-        buffer->size = newEntry->length;
-        memcpy(buffer->data, newEntry->data, newEntry->length);
+        size = newEntry->length;
+        memcpy(data, newEntry->data, newEntry->length);
         SIMPLEQ_REMOVE_HEAD(&handler->readList, next);
         handler->readListLen--;
         free(newEntry->data);
         free(newEntry);
         pthread_mutex_unlock(&handler->readDataMut);
-        return 0;
+        return size;
     }
 
     pthread_mutex_unlock(&handler->readDataMut);
-    return -1;
+    return size;
 }
 
-int serial_send (serial_handler_t * handler, uint8_t * data, int size) {
-    simple_packet_t packet;
-    if (create_simple_packet(&packet, data, size) > 0) {
-        return write(handler->fd, packet.buf, packet.size);
-    }
-    return 0;
-}
+//int serial_send (struct serial_handler * handler, uint8_t * data, int size) {
+//    simple_packet_t packet;
+//    if (create_simple_packet(&packet, data, size) > 0) {
+//        return write(handler->fd, packet.buf, packet.size);
+//    }
+//    return 0;
+//}
 
-int serial_send_to_list (serial_handler_t * handler, uint8_t * data, int size) {
+int serial_send_to_list (struct serial_handler * handler, uint8_t * data, int size) {
     serial_packet_entry_t * newEntry = NULL;
     newEntry = (serial_packet_entry_t *)malloc(sizeof(serial_packet_entry_t));
     newEntry->data = (uint8_t *)malloc(size);
@@ -249,9 +220,27 @@ int serial_send_to_list (serial_handler_t * handler, uint8_t * data, int size) {
     return 0;
 }
 
-serial_state_t serial_start (serial_handler_t * handler) {
+int serial_clear_list (serial_list_head_t * head, pthread_mutex_t * mutex, int * len) {
+    serial_packet_entry_t * newEntry = NULL;
+    pthread_mutex_lock(mutex);
+    
+    for ( ; newEntry != NULL; ) {
+        newEntry = SIMPLEQ_FIRST(head);
+        SIMPLEQ_REMOVE_HEAD(head, next);
+        (*len)--;
+        free(newEntry->data);
+        free(newEntry);
+    }
+    (*len) = 0;
+    pthread_mutex_unlock(mutex);
+    return 0;
+}
+
+serial_state_t serial_start (struct serial_handler * handler, struct serial_callbacks * u) {
     serial_config(handler);
+    handler->u = u;
     // open serial device
+//    handler->fd = open(handler->port, O_RDWR | O_NONBLOCK | O_NOCTTY | O_NDELAY);
     handler->fd = open(handler->port, O_RDWR | O_NOCTTY);
     // initial 
     handler->threadStarted = 0;
@@ -274,7 +263,7 @@ serial_state_t serial_start (serial_handler_t * handler) {
     handler->writeListLen = 0;
 
     if (handler->fd < 0) {
-        PRINTF("open /dev/ttymxc1 error\n");
+        PRINTF("open %s error\n", handler->port);
         // close(handler->fd);
         return ERROR_OPENING;
     } else {
@@ -282,13 +271,14 @@ serial_state_t serial_start (serial_handler_t * handler) {
         int baudListLen;
         struct termios newtio;
         memset(&newtio, 0, sizeof(newtio));
+        PRINTF("open %s successfully\n", handler->port);
         if (tcgetattr(handler->fd, &newtio) != 0) {
             PRINTF("could not get serial port setting\n");
         }
         //
         // cfmakeraw(&newtio);
         // set baud rate
-        baudListLen = sizeof(name_arr);       
+        baudListLen = sizeof(name_arr);
         for (idx=0; idx<baudListLen; idx++) {
             if (name_arr[idx] == handler->param.baud)
                 break;
@@ -398,8 +388,9 @@ serial_state_t serial_start (serial_handler_t * handler) {
         } 
 #if DEBUG_PRINTF
         else {
-            PRINTF("create read thread successfully\n");
+      PRINTF("Create read thread successfully\n");
         }
+      
 #endif
         handler->threadStarted = 0;
     }
@@ -410,5 +401,16 @@ serial_state_t serial_start (serial_handler_t * handler) {
     }
     return STARTED;
 }
-
+void serial_close (struct serial_handler * handler) {
+	handler->readThreadAttr.execStop = 1;
+	handler->writeThreadAttr.execStop = 1;
+    if (pthread_join(handler->writeThread, NULL) == 0) {
+        PRINTF("successfully waited until serial write thread stopped execution\n");
+    }
+    if (pthread_join(handler->readThread, NULL) == 0) {
+        PRINTF("successfully waited until serial read thread stopped execution\n");
+    }
+    serial_clear_list(&handler->readList, &handler->readDataMut, &handler->readListLen);
+    serial_clear_list(&handler->writeList, &handler->writeDataMut, &handler->writeListLen);
+}
 
