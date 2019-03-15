@@ -8,19 +8,17 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
--include timer/subdir.mk
--include thread/subdir.mk
--include serial/subdir.mk
--include rts/subdir.mk
--include packet/subdir.mk
--include ots/subdir.mk
--include arm_Debug/timer/subdir.mk
--include arm_Debug/thread/subdir.mk
--include arm_Debug/serial/subdir.mk
--include arm_Debug/rts/subdir.mk
--include arm_Debug/packet/subdir.mk
--include arm_Debug/ots/subdir.mk
--include arm_Debug/subdir.mk
+-include source/timer/subdir.mk
+-include source/task/subdir.mk
+-include source/serial/subdir.mk
+-include source/rts/subdir.mk
+-include source/packet/subdir.mk
+-include source/ots/subdir.mk
+-include source/inifun/subdir.mk
+-include source/entry/subdir.mk
+-include source/bilink/subdir.mk
+-include source/subdir.mk
+-include example/subdir.mk
 -include subdir.mk
 -include objects.mk
 

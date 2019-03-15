@@ -13,18 +13,15 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
-arm_Debug \
-arm_Debug/ots \
-arm_Debug/packet \
-arm_Debug/rts \
-arm_Debug/serial \
-arm_Debug/thread \
-arm_Debug/timer \
-. \
-ots \
-packet \
-rts \
-serial \
-thread \
-timer \
+example \
+source/bilink \
+source/entry \
+source/inifun \
+source \
+source/ots \
+source/packet \
+source/rts \
+source/serial \
+source/task \
+source/timer \
 
