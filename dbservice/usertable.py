@@ -17,10 +17,13 @@ class Task(Base):
     '''任务表'''
     __tablename__ = 'task'
     task_id = Column(String, primary_key=True)  # 任务id
-    time = Column(Integer)                      # 任务执行时段
-    status = Column(String, default='Sleep')    # 任务状态
+    data_id = Column(String)
+    data_url = Column(String)
+    start_time = Column(String)                      # 任务执行时段
+    end_time = Column(String)       
+    status = Column(Integer, default=1)    # 任务状态
 
-class Excute(Base):
+class Execute(Base):
     '''任务执行表'''
     __tablename__ = 'execute'
 

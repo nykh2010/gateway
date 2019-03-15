@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from socketserver import UnixStreamServer, StreamRequestHandler
-from usertable import Base, WhiteList
+from usertable import Base, WhiteList, Execute, Task
 import json
 import os
 
@@ -36,12 +36,86 @@ class WhiteListHandler:
                 add_list.append(WhiteList(device_id=device))
             session.add_all(add_list)
             session.commit()
+        elif data['method'] == 'connect':
+            device_id = data['device_id']
+            res = session.query(WhiteList).filter_by(device_id=device_id).first()
+            if res:
+                res.last_connect_time = data['time']
+                session.add(res)
+                session.commit()
+        elif data['method'] == 'create':
+            # 以覆盖方式添加
+            res = session.query(WhiteList).all()
+            for record in res:
+                session.delete(record)
+            for device in data['device_list']:
+                new_device = WhiteList(device_id=device)
+                session.add(new_device)
+            session.commit()  
 
 class TaskHandler:
-    pass
+    def func(self, data):
+        method = data['method']
+        if method == 'check_id':
+            session = Session()
+            result = session.query(Task).filter_by(task_id=data['task_id']).all()
+            ret = []
+            for r in result:
+                d = r.__dict__
+                d.pop('_sa_instance_state')
+                ret.append(d)
+            print(ret)
+            return ret
+        elif method == 'create':
+            session = Session()
+            res = session.query(Task).all()
+            for record in res:
+                session.delete(record)
+            record = Task(task_id=data['task_id'],data_id=data['data_id'],data_url=data['data_url'],status=1)
+            session.add(record)
+            session.commit()
+        elif method == 'cancel':
+            session = Session()
+            res = session.query(Task).filter_by(task_id=data['task_id']).first()
+            res.status = 5
+            session.add(res)
+            session.commit()
+        elif method == 'result':
+            session = Session()
+            res = session.query(Task).filter_by(task_id=data['task_id']).first()
+            res.status = data['status']
+            session.add(res)
+            session.commit()
+            
 
 class ExecuteHandler:
-    pass
+    def func(self, data):
+        session = Session()
+        method = data['method']
+        if method == 'create':
+            task_id = data['task_id']
+            res = session.query(Execute).all()
+            for record in res:
+                session.delete(record)
+            for device_id in data['device_list']:
+                record = Execute(device_id=device_id, task_id=task_id, status=0)
+                session.add(record)
+            session.commit()
+            return 'success'
+        elif method == 'result':
+            fail_list = data.get('fail_list', [])
+            success_list = data.get('success_list',[])
+            task_id = data['task_id']
+            for device in success_list:
+                res = session.query(Execute).filter_by(task_id=task_id, device_id=device_id).first()
+                res.status = 2
+                session.add(res)
+            for device in fail_list:
+                res = session.query(Execute).filter_by(task_id=task_id, device_id=device_id).first()
+                res.status = 3
+                session.add(res)
+            session.commit()
+            return 'success'
 
 class SqlHandler:
     def func(self, data):
@@ -88,8 +162,8 @@ class DBServer(StreamRequestHandler):
 
     def handle(self):
         try:
-            # content = self.request.recv(0)
-            content = self.rfile.read1(1024)
+            content = self.request.recv(1024)
+            # content = self.rfile.read1(1024)
             # print(help(self.rfile))
             print(content)
             self.status_result = self.protocol(content)
