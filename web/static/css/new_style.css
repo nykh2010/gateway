@@ -2289,7 +2289,8 @@ a.app-button span.icon { width:30px; height:30px; display:inline-block; vertical
 #user_pwd_frm.form-area .form-label { width: 38%;}
 #wireless_base_2_4_frm .form-label { width: 40.5%;}
 #wireless_base_5_frm .form-label { width: 40.5%;}
-#wireless_advance_frm .form-label { width: 40.5%;}
+#wireless_advance_frm_1 .form-label { width: 40.5%;}
+#wireless_advance_frm_2 .form-label { width: 40.5%;}
 #lan_setup_frm .form-label {
     width:44%;
 }

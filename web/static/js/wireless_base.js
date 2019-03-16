@@ -814,11 +814,11 @@ function init_boa_deny_ip(){
 	});
 }
 
-function developer_set(){
+function developer_set(param){
 	//boa_deny_ip_set();
 	//var obj = {};
-	var xsrf = $("#wireless_advance_frm").children("input[name='_xsrf']").val();
-	var obj = igd.ui.form.collect("wireless_advance_frm");
+	var xsrf = $("#wireless_advance_frm_"+param).children("input[name='_xsrf']").val();
+	var obj = igd.ui.form.collect("wireless_advance_frm_"+param);
 	obj._xsrf = xsrf;
 	$.post("/radio", obj, function(data){
 		if (data.status == 'success') {

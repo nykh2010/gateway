@@ -830,7 +830,7 @@ var close_i_wired_popwin = function (id,callBack) {
     var me=this;
     /* by zhaoyang start */
     var info = {
-        title: '360安全路由P1',
+        title: '多功能通用网关',
         ssid: '',
         version: '10.1',
         stauts: "正常",
