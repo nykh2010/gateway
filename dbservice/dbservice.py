@@ -185,7 +185,7 @@ class DBServer(StreamRequestHandler):
 
 if __name__ == "__main__":
     print('%s start...' % __file__)
-    path = r'/home/xulingfeng/sqlite3.sock'
+    path = r'/home/nykh2010/sqlite3.sock'
     # try:
     #     with open(CONFIG_PATH, 'r') as f:
     #         config = f.read(1024)

@@ -7,7 +7,7 @@ from queue import Queue
 import json
 # from task import task
 import os 
-from gateway import gateway
+# from gateway import gateway
 # from protocol import protocol
 from protocol import TaskApp, RadioApp, GatewayApp
 from configparser import ConfigParser

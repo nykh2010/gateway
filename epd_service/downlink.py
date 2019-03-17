@@ -26,11 +26,11 @@ class DownlinkServer(StreamRequestHandler):
 class Downlink(UnixStreamServer):
     __error = False
     services = [
-        ('serial', r'/home/xulingfeng/serial.sock'),
-        ('database', r'/home/xulingfeng/sqlite3.sock')
+        ('serial', r'/home/nykh2010/serial.sock'),
+        ('database', r'/home/nykh2010/sqlite3.sock')
     ]
     # __client = socket(family=AF_UNIX)
-    __path = r'/home/xulingfeng/epdserver.sock'
+    __path = r'/home/nykh2010/epdserver.sock'
     def __init__(self):
         if os.path.exists(self.__path):
             os.unlink(self.__path)

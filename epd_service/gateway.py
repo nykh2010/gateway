@@ -65,4 +65,4 @@ class Gateway:
         return t-time()
         
 
-gateway = Gateway()
+# gateway = Gateway()

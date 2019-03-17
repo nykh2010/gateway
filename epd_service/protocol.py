@@ -5,7 +5,7 @@ from configparser import ConfigParser
 from epd_log import write_log_file
 import sys
 import os
-import task
+# import task
 import uplink
 from downlink import dl
 import time
@@ -50,11 +50,12 @@ class HeartRequest(Handle):
 
 class RegisterRequest(Handle):
     def func(self, data):
-        from gateway import gateway
-        if gateway.check_white_list(data['id']):
-            ret = {}
-            ret['key'] = gateway.get_auth_key()
-            return ret 
+        pass
+        # from gateway import gateway
+        # if gateway.check_white_list(data['id']):
+        #     ret = {}
+        #     ret['key'] = gateway.get_auth_key()
+        #     return ret 
 
 class TaskRequest(Handle):
     def func(self, data):
@@ -175,12 +176,17 @@ class TaskApp(RequestHandler):
                             raise HTTPError(500, log_message=result['msg'])
                         
                         # 生成执行表
+                        task_id = request['task_id']
+                        chunk = ""
+                        for device in request['device_list']:
+                            chunk += '(%s, %s, 1),' % (device, task_id)
+                        chunk = chunk[:-1]
                         data = {
                             "table_name":"sql",
                             "sql_cmd":"delete from `execute`;\
-                                insert into `execute`()"
+                                insert into `execute`(`device_id`,`task_id`,`status`) values \
+                                %s;" % chunk
                         }
-                        
                         # data = {
                         #     "table_name":"execute",
                         #     "method":"create",
@@ -217,9 +223,9 @@ class TaskApp(RequestHandler):
                 dl.send_service('serial', data)
                 
                 data = {
-                    "table_name":"task",
-                    "method":"cancel",
-                    "task_id":request['task_id']
+                    "table_name":"sql",
+                    "sql_cmd":"delete from task where task_id=%s;" \
+                        % request['task_id']
                 }
                 dl.send_service('database', data)
                 # result, msg = task.cancel_task(data['task_id'])
@@ -262,10 +268,14 @@ class GatewayApp(RequestHandler):
                 white_list = request.get('white_list', None)
                 if white_list:
                     data = {
-                        "table_name":"white_list",
-                        "method":"create",
-                        "device_list":white_list
+                        "table_name":"sql",
+                        "sql_cmd":"insert into white_list"
                     }
+                    # data = {
+                    #     "table_name":"white_list",
+                    #     "method":"create",
+                    #     "device_list":white_list
+                    # }
                     dl.send_service('database', data)
         except Exception as e:
             self.write(e.__str__())
