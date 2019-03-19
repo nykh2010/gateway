@@ -2,7 +2,7 @@ from configparser import ConfigParser
 import os
 # import json
 
-PATH = '/etc/config'
+PATH = '/etc/gateway/config'
 
 class Config:
     def __init__(self,name):
