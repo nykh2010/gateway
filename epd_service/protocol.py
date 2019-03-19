@@ -9,6 +9,7 @@ import os
 import uplink
 from downlink import dl
 import time
+from gateway import gw
 
 sys.path.append(os.path.dirname(__file__))
 
@@ -51,11 +52,6 @@ class HeartRequest(Handle):
 class RegisterRequest(Handle):
     def func(self, data):
         pass
-        # from gateway import gateway
-        # if gateway.check_white_list(data['id']):
-        #     ret = {}
-        #     ret['key'] = gateway.get_auth_key()
-        #     return ret 
 
 class TaskRequest(Handle):
     def func(self, data):
@@ -67,46 +63,35 @@ class TaskRequest(Handle):
             "table_name":"sql",
             "sql_cmd":"update `task` set `status`='%d' where `task_id`='%s';" % (status, task_id)
         }
-        # request = {
-        #     "table_name":"task",
-        #     "method":"result",
-        #     "task_id":task_id,
-        #     "status":status
-        # }
         dl.send_service('database', request)
         
-        chunk = ""
-        for success in success_list:
-            chunk += "`device_id`=%s or" % success
-        chunk = chunk[:-2]
-        print(chunk)
-        request = {
-            "table_name":"sql",
-            "sql_cmd":"update `execute` set `status`=2 where %s;" % chunk
-        }
+        if success_list:
+            chunk = ""
+            for success in success_list:
+                chunk += "`device_id`=%s or" % success
+            chunk = chunk[:-2]
+            print(chunk)
+            request = {
+                "table_name":"sql",
+                "sql_cmd":"update `execute` set `status`=2 where %s;" % chunk
+            }
 
-        # request = {
-        #     "table_name":"execute",
-        #     "method":"result",
-        #     "task_id":task_id,
-        #     "status":status,
-        #     "success_list":success_list,
-        #     "fail_list":fail_list
-        # }
-        dl.send_service('database', request)
-        
-        chunk = ""
-        for fail in fail_list:
-            chunk += "`device_id`=%s or" % fail
-        chunk = chunk[:-2]
-        print(chunk)
-        request = {
-            "table_name":"sql",
-            "sql_cmd":"update `execute` set `status`=3 where %s;" % chunk
-        }
-        dl.send_service('database', request)
+            dl.send_service('database', request)
+        if fail_list:
+            chunk = ""
+            for fail in fail_list:
+                chunk += "`device_id`=%s or" % fail
+            chunk = chunk[:-2]
+            # print(chunk)
+            request = {
+                "table_name":"sql",
+                "sql_cmd":"update `execute` set `status`=3 where %s;" % chunk
+            }
+            dl.send_service('database', request)
+        # 上传执行状态
         send_data = {
             "task_id":task_id,
+            "task_status":status,
             "success_list":success_list,
             "fail_list":fail_list
         }
@@ -133,15 +118,10 @@ class TaskApp(RequestHandler):
             if cmd == 'create':
                 data = {
                     "table_name":"sql",
-                    "sql_cmd":"select `status` from `white_list` where `task_id`=%s" % request['task_id']
+                    "sql_cmd":"select `status` from `task` where `task_id`=%s" % request['task_id']
                 }
-                # data = {
-                #     "table_name":"task",
-                #     "method":"check_id",
-                #     "task_id":request['task_id']
-                # }
                 resp = dl.send_service('database', data)
-                print(resp)
+                # print(resp)
                 if resp['status'] == 200:
                     task_status = None
                     if resp['result']:
@@ -158,13 +138,6 @@ class TaskApp(RequestHandler):
                                     (request['task_id'], request['data_id'], request['data_url'], request['start_time'], request['end_time'], 1)
                             }
                         else:
-                            # data = {
-                            #     "table_name":"task",
-                            #     "method":"create",
-                            #     "task_id":request['task_id'],
-                            #     "data_id":request['data_id'],
-                            #     "data_url":request['data_url']
-                            # }
                             data = {
                                 "table_name":"sql",
                                 "sql_cmd":"update `task` set (`data_id`=%s, `data_url`=%s, `start_time`=%s, `end_time`=%s, `status`=1) where `task_id`=%s;" %\
@@ -187,15 +160,15 @@ class TaskApp(RequestHandler):
                                 insert into `execute`(`device_id`,`task_id`,`status`) values \
                                 %s;" % chunk
                         }
-                        # data = {
-                        #     "table_name":"execute",
-                        #     "method":"create",
-                        #     "task_id":request['task_id'],
-                        #     "device_list":request['device_list']
-                        # }
                         result = dl.send_service('database', data)
                         if result['status'] == 400:
                             raise HTTPError(500, log_message=result['msg'])
+                        # 检测文件是否存在
+                        if os.path.exists('/media/%s.bin' % request['data_id']):
+                            pass
+                        else:
+                            ret_code = os.system("wget -c %s -t 10 -T 5 -P /media/%s.bin" % (request['data_url'], request['data_id']))
+                            write_log_file('system', 'task data download complete, ret code:%d' % ret_code)
                         data = {
                             "cmd":"task",
                             "method":"create",
@@ -203,16 +176,7 @@ class TaskApp(RequestHandler):
                             "status":1
                         }
                         dl.send_service('serial', data)
-                    # resp['result'][0][]
-                    
-                # if task.check_status(task_id=data['task_id']):
-                #     # task state
-                #     result, msg = task.create_task(data)
-                #     if not result:
-                #         raise HTTPError(400, msg)
-                #     else:
-                #         self.set_status(200, msg)
-                #         return
+                        raise HTTPError(200)
             elif cmd == 'cancel':
                 # cancel task
                 data = {
@@ -224,20 +188,18 @@ class TaskApp(RequestHandler):
                 
                 data = {
                     "table_name":"sql",
-                    "sql_cmd":"delete from task where task_id=%s;" \
+                    "sql_cmd":"delete from task where task_id='%s';" \
                         % request['task_id']
                 }
                 dl.send_service('database', data)
-                # result, msg = task.cancel_task(data['task_id'])
-                # if not result:
-                #     raise HTTPError(400, msg)
-                # else:
-                #     self.set_status(200, msg)
-                #     return
             elif cmd == 'confirm':
-                # confirm task
-                pass
-                # task.confirm_task(data)
+                # confirm task 
+                data = {
+                    "table_name":"sql",
+                    "sql_cmd":"update `task` set (`start_time`='%s', `end_time`='%s', `status`=2) where `task_id`='%s';" % \
+                        (request['start_time'], request['end_time'])
+                }
+                dl.send_service('database', data)
             else:
                 raise HTTPError(404)
         except Exception as e:
@@ -248,13 +210,20 @@ class RadioApp(RequestHandler):
         body = self.request.body.decode('utf-8')
         body = json.loads(body)
         src = "local" if body['from'] == 'local' else 'remote'
+        radio_number = body.get('radio_number')
         if cmd == 'update':
-            # protocol.set_radio()
             write_log_file('system', '%s setup radio parameters' % src)
-            # print('radio update')
+            data = {
+                "cmd":"update",
+                "radio":radio_number
+            }
         elif cmd == 'restart':
-            # protocol.restart_service()
             write_log_file('system', '%s restart radio' % src)
+            data = {
+                "cmd":"restart",
+                "radio":radio_number
+            }
+            dl.send_service("serial", data)     # 向串口发送消息
 
 class GatewayApp(RequestHandler):
     def post(self, cmd):
@@ -267,107 +236,20 @@ class GatewayApp(RequestHandler):
             elif cmd == 'auth':
                 white_list = request.get('white_list', None)
                 if white_list:
+                    chunk = ""
+                    for device in white_list:
+                        chunk += "('%s')," % device
                     data = {
                         "table_name":"sql",
-                        "sql_cmd":"insert into white_list"
+                        "sql_cmd":"create table add_list(`device_id`);\
+                            insert into add_list(`device_id`) values %s;\
+                            insert into white_list(`device_id`) select `device_id` from \
+                            add_list except select `device_id` from white_list;\
+                            drop table add_list;" % chunk[:-1]
                     }
-                    # data = {
-                    #     "table_name":"white_list",
-                    #     "method":"create",
-                    #     "device_list":white_list
-                    # }
                     dl.send_service('database', data)
+                auth_key = request.get('auth_key', None)
+                if auth_key:
+                    gw.set_auth_key(auth_key)
         except Exception as e:
             self.write(e.__str__())
-            
-# class Protocol:
-#     __app = [
-#         ('heart', HeartRequest),
-#         ('register', RegisterRequest),
-#     ]
-#     def __init__(self, ver=None):
-#         self.__ver = ver        # 协议版本
-#         self.__error = False    # 
-
-#     def route(self, data_dict):
-#         for d in self.__app:
-#             if data_dict['cmd'] == d[0]:
-#                 return d[1]
-
-#     def handle(self, data_dict):
-#         c = self.route(data_dict)
-#         self.__handle = c()
-#         return self.__handle.func(data_dict)
-
-#     def service(self, *args):
-#         print('protocol service start...')
-#         ver = self.get_ver(timeout=60)
-#         if not ver:
-#             downlink.set_error()
-#             write_log_file('system', 'radio module error')
-#             print('radio module error...')
-#         while not self.__error:
-#             # 读取downlink接收队列
-#             data_dict = downlink.read_buff()
-#             if data_dict is None:
-#                 continue
-#             ret = self.handle(data_dict)
-#             if ret is not None:
-#                 data = self.mutex(ret)
-#                 downlink.write_buff(data)
-
-#     def get_ver(self, timeout=None):
-#         end_time = None
-#         if timeout is not None:
-#             start_time = time()
-#             end_time = start_time + timeout
-#         # data = self.mutex(cmd_type=STATUS)
-#         send_data = {}
-#         send_data['cmd'] = 'read_ver'
-#         while True:
-#             if end_time is not None:
-#                 if time() - end_time >= 0:
-#                     return False
-#             downlink.write_buff(send_data)
-#             data = downlink.read_buff()
-#             try:
-#                 if data['cmd'] == 'read_ver':
-#                     self.__ver = data['ver']
-#                     return True
-#             except:
-#                 pass
-#             sleep(1)
-
-#     def set_radio(self):
-#         radioConfig = ConfigParser()
-#         radioConfig.read("/etc/config/radio.ini")
-#         msg = {}
-#         msg['cmd'] = 'set_radio'
-#         msg['data'] = {}
-#         for k,v in radioConfig.items('radio'):
-#             msg['data'][k] = v
-#         downlink.write_buff(msg)
-
-#     def restart_service(self):
-#         send_data = {}
-#         send_data['cmd'] = 'restart'
-#         downlink.write_buff(send_data)
-#         self.stop_service()
-#         sleep(1)
-#         self.start_service()
-
-#     def mutex(self, *args, **kwargs):
-#         cmd_type = kwargs['cmd']
-#         ret = {}
-#         ret['cmd'] = int(cmd_type)
-#         return ret
-
-#     def stop_service(self):
-#         self.__error = True
-#         self.__thread.join()
-
-#     def start_service(self):
-#         self.__thread = Thread(target=self.service, name='protocol')
-#         self.__thread.start()
-
-# protocol = Protocol()

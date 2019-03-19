@@ -1,23 +1,15 @@
 from random import randint
 from time import time
+from config import Config
 
 STEP_TIME = 20*60       # 任务间隔时间
 
-class Gateway:
+class Gateway(Config):
     # 网关参数
-    __workTimeQueue = []
     __authKey = None
-    __whiteList = set()
     def __init__(self):
-        self.gateway_id = str(randint(0,10))
-        self.sn = 0
-        self.gateway_list = [self.gateway_id]      # 组内只有一个网关
-        self.count = len(self.gateway_list)
-        with open('/etc/config/white_list', 'w+') as whiteListFile:
-            devices = whiteListFile.readlines()
-            self.__whiteList = set(devices)
-        with open('/etc/config/auth_key', 'w+') as authKeyFile:
-            self.__authKey = authKeyFile.read()
+        super().__init__('gateway')
+        # 启动后检测task内容是否完整
     
     def set_group(self, gateways):
         '''设置组内网关个数'''
@@ -42,9 +34,8 @@ class Gateway:
     def set_auth_key(self, auth_key):
         if auth_key is None:
             return
-        with open('/etc/config/auth_key', 'w') as authKeyFile:
-            authKeyFile.write(auth_key)
-        self.__authKey = auth_key
+        self.set_item('auth_key', auth_key)
+        self.save()
 
     def check_white_list(self, id):
         if id in self.__whiteList:
@@ -65,4 +56,4 @@ class Gateway:
         return t-time()
         
 
-# gateway = Gateway()
+gw = Gateway()

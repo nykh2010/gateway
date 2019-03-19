@@ -65,12 +65,12 @@ class Uplink(HTTPServer):
         self.__port = 5000
         
     def begin(self):
-        print("uplink start...")
+        write_log_file("system", "uplink start...")
         self.listen(self.__port, self.__host)
         tornado.ioloop.IOLoop.current(instance=False).start()
 
     def end(self):
-        print("end")
+        write_log_file("system", "uplink stop...")
         
     def send(self, payload):
         # upload data

@@ -10,7 +10,7 @@ def write_log_file(name, msg, level='info'):
         logger.setLevel(logging.INFO)
         fmt = "[%(asctime)s]-%(message)s"
         f = logging.Formatter(fmt=fmt)
-        handler = logging.FileHandler('/var/log/gateway/%s.log' % name)
+        handler = logging.FileHandler('/var/log/%s.log' % name)
         handler.setFormatter(f)
         logger.addHandler(handler)
         

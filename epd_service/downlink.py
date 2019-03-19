@@ -8,7 +8,6 @@ import sys
 sys.path.append(os.path.dirname(__file__))
 
 class DownlinkServer(StreamRequestHandler):
-    
     def route(self, data):
         from protocol import apps        
         for app in apps:
@@ -26,11 +25,10 @@ class DownlinkServer(StreamRequestHandler):
 class Downlink(UnixStreamServer):
     __error = False
     services = [
-        ('serial', r'/home/nykh2010/serial.sock'),
-        ('database', r'/home/nykh2010/sqlite3.sock')
+        ('serial', r'/var/run/serial.sock'),
+        ('database', r'/var/run/sqlite3.sock')
     ]
-    # __client = socket(family=AF_UNIX)
-    __path = r'/home/nykh2010/epdserver.sock'
+    __path = r'/var/run/epdserver.sock'
     def __init__(self):
         if os.path.exists(self.__path):
             os.unlink(self.__path)
@@ -68,93 +66,5 @@ class Downlink(UnixStreamServer):
             finally:
                 self.__client.close()
                 return content
-            
-
-
-# from serial import SerialException
-# from task import task
-# from threading import Thread
-# import json
-# from queue import Queue
-# import os
-# import time
-# from ctypes import *
-
-# tx_path = os.path.join(os.path.dirname(__file__), 'tx')
-# rx_path = os.path.join(os.path.dirname(__file__), 'rx')
-
-# libpath = "/usr/lib/libserialapp.so"
-# '''
-# int open_serial_bus (char * dev);
-# int serial_bus_send_data (const char * data, int size);
-# int serial_bus_receive_data (char * data, int msec);
-# void serial_bus_close (void);
-# '''
-# serial = CDLL(libpath)
-
-# HEAD_0 = 0x55
-# HEAD_1 = 0xaa
-
-# class Downlink:
-#     __readQueue = Queue(10)
-#     __errorFlag = False
-#     def __init__(self):
-#         try:
-#             status = serial.open_serial_bus(c_char_p(bytes("/dev/ttyUSB1", 'utf-8')))
-#             if status > 0:
-#                 print('serial open failed')
-#                 raise SerialException
-#         except:
-#             self.__errorFlag = True
-
-#     def start(self):
-#         self._recvThread = Thread(target=self.recive, name="serial")
-#         self._recvThread.start()
-
-#     def read_buff(self):
-#         # 字节码转字典
-#         try:
-#             return self.__readQueue.get(timeout=3)
-#         except:
-#             return None
-
-#     def write_buff(self, data):
-#         # 字典转字节码
-#         print(data)
-#         if not isinstance(data, dict):
-#             return
-#         content = json.dumps(data)
-#         s = len(content)
-#         status = serial.serial_bus_send_data(c_char_p(bytes(content,'utf-8')), s)
-#         print(status)
-#         # content = json.dumps(data)
-#         # os.write(self.__serialTx, content.encode('utf-8'))
-    
-#     def recive(self):
-#         print("serial recv start...")
-#         while True:
-#             data = bytes(256)
-#             status = serial.serial_bus_receive_data(c_char_p(data), 500)
-#             if status:
-#                 content = data[:status]
-#                 print("serial recv:")
-#                 for d in content:
-#                     print("%s" % hex(d),end=' ')
-#                 print()
-#                 content = self.parse(content)
-#                 self.__readQueue.put_nowait(content)
-
-#     def parse(self, content):
-#         ret = {}
-#         ret['cmd'] = content[0]
-#         ret['data'] = content[2:]
-#         return ret
-
-#     def set_error(self):
-#         self.__errorFlag = True
-
-#     def stop(self):
-#         self._recvThread.join()
-#         # self.serial_fd.close()
 
 dl = Downlink()
