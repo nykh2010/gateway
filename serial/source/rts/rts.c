@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <signal.h>
 
+#include "../config.h"
 #include "../ots/ots.h"
 #include "../packet/frame.h"
 #include "../packet/packet.h"
@@ -151,7 +152,7 @@ int rts_send (struct rts_conn * c, struct simple_payload_buf * s, long int msec)
 			c->is_tx++;
 			break;
 		}
-		timer_wait_ms(1);
+		timer_wait_ms(RTS_BUSY_TIME_MS);
 	}
 	c->u->sent(c, ret, c->is_tx);
 	// timeout

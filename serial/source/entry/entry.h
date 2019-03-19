@@ -49,7 +49,7 @@ struct task_entry {
 #define SET_BIT_OF_INT32_BUF(buf, idx)    (*((buf) + (idx) / 32)) |= (0x00000001 << ((idx) % 32))
 #define RESET_BIT_OF_INT32_BUF(buf, idx)  (*((buf) + (idx) / 32)) &= ~(0x00000001 << ((idx) % 32))
 
-int entry_open (char * dev);
+int entry_open (void);
 
 int entry_send_data (const char * data, int size);
 

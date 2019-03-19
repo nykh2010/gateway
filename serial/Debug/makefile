@@ -19,6 +19,17 @@ RM := rm -rf
 -include source/bilink/subdir.mk
 -include source/subdir.mk
 -include example/subdir.mk
+-include ARM_Debug/source/timer/subdir.mk
+-include ARM_Debug/source/task/subdir.mk
+-include ARM_Debug/source/serial/subdir.mk
+-include ARM_Debug/source/rts/subdir.mk
+-include ARM_Debug/source/packet/subdir.mk
+-include ARM_Debug/source/ots/subdir.mk
+-include ARM_Debug/source/inifun/subdir.mk
+-include ARM_Debug/source/entry/subdir.mk
+-include ARM_Debug/source/bilink/subdir.mk
+-include ARM_Debug/source/subdir.mk
+-include ARM_Debug/example/subdir.mk
 -include subdir.mk
 -include objects.mk
 

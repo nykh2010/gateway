@@ -345,7 +345,7 @@ int parse_json_cmd (const char * str, int size) {
     	    			// read sql and initialize task handler
     	    			init_task(SQL_TABLE_PATH, task_handler);
     	    			// open entry and start to rTASK_STATUS_NONEeceive
-    	    			entry_open(NULL);
+    	    			entry_open();
     	    			// initialize key
     	    			task_handler->task_status = TASK_STATUS_LISTEN_ACCESS;
     	    			// set timer signal
@@ -476,7 +476,7 @@ int send_update_result_to_server(uint8_t * srcaddr) {
 }
 
 /*--------------------------------------------------------------------------------*/
-int entry_open (char * dev) {
+int entry_open (void) {
 	int ret;
     ret = bilink_open(&bilink_conn_obj, &bilink_callback_obj);
     printf("bilink opened\n");
@@ -504,12 +504,21 @@ int entry_send_data (const char * data, int size) {
 void entry_close (void) {
 	bilink_close(&bilink_conn_obj);
 }
-
 int entry_receive_data (char * data, int msec) {
+	int ret = 0;
+
+	ret = serial_receive_from_list (&bilink_conn_obj.rts.ots.pld.serial, (uint8_t *)data, msec);
+
+	return ret;
+}
+
+
+int parse_serial_data (void) {
 	union bilink_packet b;
 	struct simple_payload_buf p;
 	int size;
-	size = serial_receive_from_list (&bilink_conn_obj.rts.ots.pld.serial, b.buf, msec);
+	size = serial_receive_from_list (&bilink_conn_obj.rts.ots.pld.serial, b.buf, 20);
+
 	if (size > 0) {
 		if (b.ctrl.broad) {
 			switch (b.ctrl.comm) {

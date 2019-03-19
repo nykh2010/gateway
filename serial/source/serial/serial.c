@@ -19,7 +19,7 @@
 #include "../packet/packet.h"
 #include "../timer/timer.h"
 
-#define DEBUG_PRINTF 1
+#define DEBUG_PRINTF 0
 #if DEBUG_PRINTF
     #define PRINTF(...) printf(__VA_ARGS__)
 #else

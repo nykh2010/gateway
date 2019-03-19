@@ -7,7 +7,7 @@
 #define RTS_EXAMPLE        3 //
 #define ENTRY_EXAMPLE      4 //
 #define MANAGE_EXAMPLE     5 //
-#define EXAMPLE  MANAGE_EXAMPLE
+#define EXAMPLE  ENTRY_EXAMPLE
 
 #if ( EXAMPLE == OTS_EXAMPLE )
 #include "../example/ots_test.h"
@@ -23,7 +23,8 @@
 
 
 #ifndef SERIAL_CONFIG_PATH
-#define SERIAL_CONFIG_PATH  "/home/user/eclipse-workspace/serialapp/Debug/config/serial.ini"
+//#define SERIAL_CONFIG_PATH  "/home/user/eclipse-workspace/serialapp/Debug/config/serial.ini"
+#define SERIAL_CONFIG_PATH  "./config/serial.ini"
 #endif
 
 #define CONFIG_SECTION_SERIAL          "[serial]"
@@ -61,6 +62,7 @@
 #define SQL_TABLE_PATH  "/var/run/gateway/sqlite3/sqlite3.sock"
 #define DATA_BIN_PATH  "/var/run/gateway/test_bin"
 //
-
+#define RTS_BUSY_TIME_MS  20
+#define RTS_ACK_TIME_MS   20
 
 #endif

@@ -10,6 +10,7 @@
 #include <string.h>
 #include <stdarg.h>
 
+#include "../config.h"
 #include "../serial/serial.h"
 #include "../bilink/bilink_packet.h"
 #include "../packet/packet.h"
@@ -67,7 +68,7 @@ static struct rts_callbacks rts_callback_obj = {
 int bilink_open (struct bilink_conn * c, const struct bilink_callbacks * callbacks) {
 	int ret;
 	uint64_to_addr(0x0123456789ABCDEF, c->selfaddr);
-    c->timeout_ms = 40;
+    c->timeout_ms = RTS_ACK_TIME_MS;
     c->initkey[0] = 0x5A;
     c->initkey[1] = 0xEF;
     c->newkey[0] = 0xAA;
