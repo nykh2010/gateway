@@ -52,6 +52,7 @@
 
 //  unix socket config
 #define UNIX_DOMAIN "/var/run/gateway/serialserver.sock"
+//#define UNIX_DOMAIN "./serialserver.sock"
 #define UNIX_DOMAIN_SIZE 64
 #define UNIX_DOMAINRECV_BUFFER_SIZE   1024
 #define MAX_CLIENT_NUM  10

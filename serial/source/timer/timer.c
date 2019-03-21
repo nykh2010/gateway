@@ -109,6 +109,8 @@ void timer_wait_ms (long ms) {
 #endif
 }
 
+
+
 int get_current_time (struct timeval * t) {
 	return gettimeofday(t, NULL);
 }
@@ -169,6 +171,23 @@ struct tm_utc * string_to_system_time(struct tm_utc * tm, char * str) {
         &tm->tm_mon, &tm->tm_mday,&tm->tm_hour,
         &tm->tm_min, &tm->tm_sec);
 	return tm;
+}
+
+time_t string_to_time(char * str) {
+	struct tm ptm;
+	sscanf(str, "%d-%d-%d %d:%d:%d", &ptm.tm_year,
+        &ptm.tm_mon, &ptm.tm_mday, &ptm.tm_hour,
+        &ptm.tm_min, &ptm.tm_sec);
+	ptm.tm_year -= 1900;
+	ptm.tm_mon -= 1;
+	return mktime(&ptm);
+}
+
+char * time_to_string(char * str, time_t t) {
+	struct tm *ptm;
+	ptm = gmtime(&t);
+	snprintf(str, 20, "%d-%d-%d %d:%d:%d", ptm->tm_year+1900, ptm->tm_mon+1, ptm->tm_mday, ptm->tm_hour, ptm->tm_min, ptm->tm_sec);
+	return str;
 }
 
 int system_time_to_string (char * str, struct tm_utc * tm) {

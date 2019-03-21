@@ -11,14 +11,23 @@
 
 #include <json-c/json.h>
 #include "../config.h"
-
+#include "../bilink/bilink.h"
+#include "../task/task.h"
 
 #define UNIX_NET_ACK "ACK"
 #define UNIX_NET_ACK_LEN 3
 #define MAX_RECV_LEN 1024
 
+#define DEBUG 1
+#if DEBUG
+#include <stdio.h>
+#define PRINTF(...) printf(__VA_ARGS__)
+#else
+#define PRINTF(...)
+#endif
+
  
-//static int running = 1;
+static int running = 1;
  
 int unix_send_without_recv (const char * path, const char * src, int size) {
 	int ret = -1;
@@ -100,15 +109,46 @@ int unix_send_with_recv (const char * path, const char * src, int size, char * d
 	return ret;
 }
 
+static void * client_thread_exec(void * arg) {
+	struct client_conn * c = (struct client_conn *)arg;
+	while (running) {
+		parse_serial_data(c->parent);
+	}
+	return 0;
+}
 
+int client_open (struct client_conn * c) {
+	if (c == NULL) {
+//		if ((c = (struct client_conn *)malloc(sizeof(struct client_conn))) == NULL) {
+//			printf("bilink client open failed\n");
+//			return -1;
+//		} else {
+//		    printf("client opened\n");
+//		}
+	}
+
+    //_serial_packet_entryeate write thread
+    if (pthread_create(&c->thread, NULL, client_thread_exec, (void *)c) != 0) {
+        PRINTF("create server thread failed\n");
+//        free(c);
+        return -1;
+    }
+	return 0;
+}
+
+int client_close (struct client_conn * c) {
+	pthread_join(c->thread, NULL);
+//	free(c);
+	return 0;
+}
 //
-//int client_main(int argc, char *argv[])
 //{
+//
 //	char buf[MAX_RECV_LEN];
 //	int num = 0;
 //	int sock_fd = -1;
 //	struct sockaddr_un serv_addr;
-//	// struct sockaddr_un cli_addr;
+//
 //	socklen_t serv_addr_len = 0;
 //
 //	memset(&serv_addr, 0, sizeof(serv_addr));
@@ -128,7 +168,6 @@ int unix_send_with_recv (const char * path, const char * src, int size, char * d
 //	if (connect(sock_fd, (struct sockaddr *)&serv_addr, serv_addr_len) < 0)
 //	{
 //		perror("Fail to connect");
-//		// close(sock_fd);
 //		exit(1);
 //	}
 //

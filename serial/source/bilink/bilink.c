@@ -67,6 +67,12 @@ static struct rts_callbacks rts_callback_obj = {
 
 int bilink_open (struct bilink_conn * c, const struct bilink_callbacks * callbacks) {
 	int ret;
+//	if ((c = (struct bilink_conn *)malloc(sizeof(struct bilink_conn))) == NULL) {
+//		printf("bilink open failed\n");
+//		return -1;
+//	} else {
+//		printf("bilink opened\n");
+//	}
 	uint64_to_addr(0x0123456789ABCDEF, c->selfaddr);
     c->timeout_ms = RTS_ACK_TIME_MS;
     c->initkey[0] = 0x5A;
@@ -82,6 +88,7 @@ int bilink_open (struct bilink_conn * c, const struct bilink_callbacks * callbac
 
 void bilink_close(struct bilink_conn *c) {
 	rts_close(&c->rts);
+	free(c);
 }
 
 int bilink_send_ctrl (struct bilink_conn * c, struct simple_payload_buf * s) {

@@ -13,18 +13,9 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
-ARM_Debug/example \
-ARM_Debug/source/bilink \
-ARM_Debug/source/entry \
-ARM_Debug/source/inifun \
-ARM_Debug/source \
-ARM_Debug/source/ots \
-ARM_Debug/source/packet \
-ARM_Debug/source/rts \
-ARM_Debug/source/serial \
-ARM_Debug/source/task \
-ARM_Debug/source/timer \
 example \
+source/bi_client \
+source/bi_server \
 source/bilink \
 source/entry \
 source/inifun \

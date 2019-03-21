@@ -9,7 +9,46 @@
 
 #define LITTLE_ENDIAN 1
 #define SIZE_OF_INT64 8
+#define SIZE_OF_INT32 4
 /*--------------------------------------------------------------------------------*/
+uint32_t array_to_uint32 (uint8_t * from) {
+	uint32_t ret = 0;
+	int num = 0;
+	if (from == NULL) {
+		return ret;
+	}
+	for (num=0; num<SIZE_OF_INT32; num++){
+#if LITTLE_ENDIAN
+		// Low bits first (Little-Endian)
+		ret += (uint32_t)from[SIZE_OF_INT32-num-1];
+		ret <<= 8;
+
+#else
+		// High bits first (Big-Endian)
+		ret += (uint32_t)from[num];
+		ret <<= 8;
+#endif
+	}
+	return ret;
+}
+/*--------------------------------------------------------------------------------*/
+int uint32_to_array (uint32_t from, uint8_t * to) {
+	int num = 0;
+	if (to == NULL) {
+		return -1;
+	}
+	for (num=0; num<SIZE_OF_INT32; num++){
+#if LITTLE_ENDIAN
+		// Low bits first (Little-Endian)
+		to[num] = (uint8_t)((from >> num*8) & 0x000000FF);
+#else
+		// High bits first (Big-Endian)
+		to[SIZE_OF_INT32-num-1] = (uint8_t)((from >> num*8) & 0x000000FF);
+#endif
+	}
+	return 0;
+}
+
 uint64_t addr_to_uint64 (uint8_t * from) {
 	uint64_t ret = 0;
 	int num = 0;
@@ -216,12 +255,20 @@ int packet_add_content (uint8_t * buf, int index, uint8_t type, uint8_t len, uin
 }
 
 /*--------------------------------------------------------------------------------*/
+int packet_add_key (uint8_t * buf, int index, uint8_t * key) {
+	memcpy(buf+index, key, BILINK_PACKECT_AUTHORIZATION_KEY_SIZE);
+	index += 2;
+	return index;
+}
+
+/*--------------------------------------------------------------------------------*/
 int packet_add_autherization_key (uint8_t * buf, int index, uint8_t * key) {
 	authorization_key(buf+index, ((union bilink_packet *)buf)->srcaddr, key);
 	index += 2;
 	return index;
 }
 
+/*--------------------------------------------------------------------------------*/
 int create_bilink_broadcast_packet (uint8_t * buf, uint8_t * srcaddr, uint8_t * key, uint8_t ctrl, ...) {
 	va_list ap;
 	union bilink_packet * bpkt = (union bilink_packet *)buf;

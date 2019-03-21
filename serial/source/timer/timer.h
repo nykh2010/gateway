@@ -10,9 +10,20 @@ struct tm_utc{
   int tm_year;			/* Year     [1900-]*/
 };
 
+  int tm_sec;			/* Seconds.	[0-60] (1 leap second) */
+  int tm_min;			/* Minutes.	[0-59] */
+  int tm_hour;			/* Hours.	[0-23] */
+  int tm_mday;			/* Day.		[1-31] */
+  int tm_mon;			/* Month.	[0-11] */
+  int tm_year;			/* Year	- 1900.  */
+
 void timer_wait_us (long us);
 
 void timer_wait_ms (long ms);
+
+char * time_to_string(char * str, time_t t);
+
+time_t string_to_time(char * str);
 
 int get_current_time (struct timeval * t);
 

@@ -41,13 +41,18 @@ int entry_test (int argc, char * argv[]) {
     int size;
 
     srand(49);
-    entry_open();
+#if 1
     if (argc > 0) {
     	mode = *(argv[1]);
+    	entry_open();
     } else {
     	PRINTF("need select mode T/R\n");
         return -1;
     }
+#else
+    mode = 'T';
+    entry_open();
+#endif
     printf("serial test\n");
 //    count,before,after,end
 //    1,2,3,4
@@ -76,11 +81,11 @@ int entry_test (int argc, char * argv[]) {
             }
 
 //            // sleep(1);
-//            PRINTF("send:%s\n", (payload));
+            PRINTF("send:%s\n", (payload));
 
 //            timer_wait_ms(10);
-//            sleep(1);
-//            PRINTF("send:%s\n", SIMPLE_PAYLOAD_SEND_DATA_ADDR(payload));
+            sleep(1);
+
         } else if (mode == 'R') {
 
             // buffer.size = handler->recv(handler, buffer.buf, 100);

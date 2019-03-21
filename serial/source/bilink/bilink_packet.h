@@ -17,24 +17,75 @@
 #define BILINK_PACKECT_MAX_BROADCAST_MSG_SIZE    51
 #define BILINK_PACKECT_BROADCAST_MSG_SIZE        48
 #endif
+
 #define BILINK_PACKECT_MAX_UNICAST_HEAD_SIZE     20
 #define BILINK_PACKECT_MAX_BROADCAST_HEAD_SIZE   12
-
 #define BILINK_PACKECT_SRC_ADDR_SIZE            8
 #define BILINK_PACKECT_CTRL_BYTE_SIZE           1
 #define BILINK_PACKECT_DEST_ADDR_SIZE           8
 #define BILINK_PACKECT_LENGTH_SIZE              1
 #define BILINK_PACKECT_AUTHORIZATION_KEY_SIZE   2
-
-#define BILINK_PACKECT_CTRL_COMM_MASK  0x7F
+#define BILINK_PACKECT_CTRL_COMM_MASK           0x7F
 
 /*------------------------------------------------------------------------*/
 // CTRL BYTE command define
 // node to gateway ,BC
-#define BILINK_COMM_BEAT_REQ 0x50
 // gateway to node
-#define BILINK_COMM_BEAT_RESP 0x60
+#define BILINK_REGISTER_BEAT_REQ  0x00
+#define BILINK_REGISTER_REQ       0x11
+#define BILINK_REGISTER_RESP      0x01
+#define BILINK_BEAT_REQ           0x02
+#define BILINK_ACCESS_REQ         0x13
+#define BILINK_ACCESS_RESP        0x03
+#define BILINK_CONTROL_REQ        0x14
+#define BILINK_DATA_REQ           0x15
+#define BILINK_REISSUE_REQ        0x16
+#define BILINK_QUERY_REQ          0x17
+#define BILINK_QUERY_RESP         0x07
 
+// SUb conmand
+// #define BILINK_REGISTER_BEAT_REQ  0x00
+// no sub command
+// #define BILINK_REGISTER_REQ       0x11
+#define BILINK_REGISTER_REQ_SUB_KEY_NEWKEY             0x01
+#define BILINK_REGISTER_REQ_SUB_LEN_NEWKEY             0x02
+// #define BILINK_REGISTER_RESP      0x01
+// no sub command
+// #define BILINK_BEAT_REQ           0x02
+#define BILINK_BEAT_REQ_SUB_KEY_VERSION                0x02
+#define BILINK_BEAT_REQ_SUB_LEN_VERSION                0x08
+// #define BILINK_ACCESS_REQ         0x13
+#define BILINK_ACCESS_REQ_SUB_KEY_FLUSH_TIME           0x01
+#define BILINK_ACCESS_REQ_SUB_LEN_FLUSH_TIME           0x04
+#define BILINK_ACCESS_REQ_SUB_KEY_UTC_TIME             0x02
+#define BILINK_ACCESS_REQ_SUB_LEN_UTC_TIME             0x04
+// #define BILINK_ACCESS_RESP        0x03
+#define BILINK_ACCESS_RESP_SUB_KEY_POWER               0x01
+#define BILINK_ACCESS_RESP_SUB_LEN_POWER               0x01
+#define BILINK_ACCESS_RESP_SUB_KEY_LAST_FLUSH_TIME     0x02
+#define BILINK_ACCESS_RESP_SUB_LEN_LAST_FLUSH_TIME     0x02
+// #define BILINK_CONTROL_REQ        0x14
+#define BILINK_CONTROL_REQ_SUB_KEY_VERSION             0x01
+#define BILINK_CONTROL_REQ_SUB_LEN_VERSION             0x08
+#define BILINK_CONTROL_REQ_SUB_KEY_PKT_NUM             0x02
+#define BILINK_CONTROL_REQ_SUB_LEN_PKT_NUM             0x02
+#define BILINK_CONTROL_REQ_SUB_KEY_NEXT_FLUSH_TIME     0x03
+#define BILINK_CONTROL_REQ_SUB_LEN_NEXT_FLUSH_TIME     0x04
+// #define BILINK_DATA_REQ           0x15
+// SEQUEUE + DATA
+// #define BILINK_REISSUE_REQ        0x16
+// SEQUEUE + DATA
+// #define BILINK_QUERY_REQ          0x17
+#define BILINK_QUERY_REQ_SUB_KEY_REISSUE_TIME          0x01
+#define BILINK_QUERY_REQ_SUB_LEN_REISSUE_TIME          0x04
+// #define BILINK_QUERY_RESP         0x07
+#define BILINK_QUERY_RESP_SUB_KEY_LOST_PKT_NUM         0x01
+#define BILINK_QUERY_RESP_SUB_LEN_LOST_PKT_NUM         0x02
+#define BILINK_QUERY_RESP_SUB_KEY_LOST_PKT_SEQ         0x02
+#define BILINK_QUERY_RESP_SUB_LEN_LOST_PKT_SEQ         0x02
+
+
+#if 0
 // node to gateway
 #define BILINK_COMM_NETWORK_ACCESS_REQ 0x51
 	#define BILINK_COMM_NETWORK_ACCESS_SUB_POWER 0x02
@@ -112,18 +163,16 @@
 // gateway to node
 #define BILINK_COMM_UPDATE_ACCESS_KEY_REQ 0x66
 	#define BILINK_COMM_UPDATE_ACCESS_KEY_SUB_NEW_KEY 0x01
-	//
 	#define BILINK_COMM_UPDATE_ACCESS_KEY_SUB_NEW_KEY_LEN 0x02
-
 // node to gateway
 #define BILINK_COMM_UPDATE_ACCESS_KEY_RESP 0x56
+#endif
+
+
 
 
 
 #if 0
-
-
-
 // gcc uint64_t store in memery: high first (big head)
 //
 union bilink_packet {
@@ -284,6 +333,9 @@ enum {
 	WITH_CONTENT = 0x01,
 };
 
+int uint32_to_array (uint32_t from, uint8_t * to);
+
+uint32_t array_to_uint32 (uint8_t * from);
 
 uint64_t addr_to_uint64 (uint8_t * from);
 
@@ -300,6 +352,8 @@ uint8_t * string_to_data_id (uint8_t * to, char * from);
 int create_bilink_unicast_packet (uint8_t * buf, uint8_t * srcaddr, uint8_t * destaddr, uint8_t * key, uint8_t ctrl, ...);
 
 int create_bilink_broadcast_packet (uint8_t * buf, uint8_t * srcaddr, uint8_t * key, uint8_t ctrl, ...);
+
+int packet_add_key (uint8_t * buf, int index, uint8_t * key);
 
 int authorization_key (uint8_t * word, uint8_t * src, uint8_t * key);
 
