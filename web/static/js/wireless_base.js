@@ -814,13 +814,30 @@ function init_boa_deny_ip(){
 	});
 }
 
-function developer_set(){
+function developer_set(param){
 	//boa_deny_ip_set();
 	//var obj = {};
-	var xsrf = $("#wireless_advance_frm").children("input[name='_xsrf']").val();
-	var obj = igd.ui.form.collect("wireless_advance_frm");
+	var xsrf = $("#wireless_advance_frm_"+param).children("input[name='_xsrf']").val();
+	var obj = igd.ui.form.collect("wireless_advance_frm_"+param);
 	obj._xsrf = xsrf;
 	$.post("/radio", obj, function(data){
+		if (data.status == 'success') {
+			show_message('success');
+			return;
+		}
+		else {
+			show_message('error');
+			return;
+		}
+	});
+}
+
+function radio_restart(param) {
+	var xsrf = $("#wireless_advance_frm_"+param).children("input[name='_xsrf']").val();
+	var obj = {};
+	obj.radio_number = param;
+	obj._xsrf = xsrf;
+	$.post("/radio/restart", obj, function(data){
 		if (data.status == 'success') {
 			show_message('success');
 			return;

@@ -42,7 +42,15 @@ epd-->server
 4、重启服务
 epd-->serial
 {
-    "cmd":"restart"
+    "cmd":"restart",
+    "radio":"(射频模块通道)"
+}
+
+5、射频参数更新
+epd-->serial
+{
+    "cmd":"update",
+    "radio":"(射频模块通道)"
 }
 
 5、新任务通知

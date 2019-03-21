@@ -1,6 +1,6 @@
 ﻿var language = {};
 language.CN = {
-	TITLE:"360安全路由",
+	TITLE:"多功能通用网关",
 	//按钮
 	BUTTON:{
 		down_app_btn:"立即体验",
