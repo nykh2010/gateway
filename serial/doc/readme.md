@@ -55,77 +55,62 @@ Bilink protocol and serial protocol used in BOE gateway with i.mx6ull platform, 
 > │   └── rts_test.h
 > ├── make-for-arm.sh
 > └── source
->     ├── bi_client
->     │   ├── bi_client.c
->     │   └── bi_client.h
->     ├── bilink
->     │   ├── bilink.c
->     │   ├── bilink.h
->     │   ├── bilink_packet.c
->     │   └── bilink_packet.h
->     ├── bi_server
->     │   ├── bi_server.c
->     │   └── bi_server.h
->     ├── config.h
->     ├── entry
->     │   ├── entry.c
->     │   └── entry.h
->     ├── entrydef.h
->     ├── inifun
->     │   ├── inirw.c
->     │   └── inirw.h
->     ├── main.c
->     ├── ots
->     │   ├── ots.c
->     │   └── ots.h
->     ├── packet
->     │   ├── frame.h
->     │   ├── packet.c
->     │   └── packet.h
->     ├── payload.h
->     ├── rts
->     │   ├── rts.c
->     │   └── rts.h
->     ├── serial
->     │   ├── serial.c
->     │   └── serial.h
->     ├── task
->     │   ├── task.c
->     │   └── task.h
->     └── timer
->         ├── timer.c
->         └── timer.h
+>  ├── bi_client
+>  │   ├── bi_client.c
+>  │   └── bi_client.h
+>  ├── bilink
+>  │   ├── bilink.c
+>  │   ├── bilink.h
+>  │   ├── bilink_packet.c
+>  │   └── bilink_packet.h
+>  ├── bi_server
+>  │   ├── bi_server.c
+>  │   └── bi_server.h
+>  ├── config.h
+>  ├── entry
+>  │   ├── entry.c
+>  │   └── entry.h
+>  ├── entrydef.h
+>  ├── inifun
+>  │   ├── inirw.c
+>  │   └── inirw.h
+>  ├── main.c
+>  ├── ots
+>  │   ├── ots.c
+>  │   └── ots.h
+>  ├── packet
+>  │   ├── frame.h
+>  │   ├── packet.c
+>  │   └── packet.h
+>  ├── payload.h
+>  ├── rts
+>  │   ├── rts.c
+>  │   └── rts.h
+>  ├── serial
+>  │   ├── serial.c
+>  │   └── serial.h
+>  ├── task
+>  │   ├── task.c
+>  │   └── task.h
+>  └── timer
+>      ├── timer.c
+>      └── timer.h
 > ```
-> 
-> 
+>
 
 ## modified 2019-03-21
 
-
-
-```flow
-entry=>start: entry
-io1=>inputoutput: 输入用户名密码
-sub1=>subroutine: 数据库查询子类
-cond=>condition: 是否有此用户
-cond2=>condition: 密码是否正确
-op=>operation: 读入用户信息
-
-entry->io1->sub1->cond
-cond(yes,right)->cond2
-cond(no)->io1(right)
-cond2(yes,right)->op->e
-cond2(no)->io1 
-```
-
-
+new frame:
 
 ```mermaid
 graph LR
-A(Hard edge) -->B{Round edge}
-    B --> C{Decision}
-    C -->|One| D[Result one]
-    C -->|Two| E[Result two]
+A(entry) --> B(bilink)
+A --> C(server)
+A --> D(client)
+B --> E(serial send thread)
+B --> F(serial recv thread)
+C --> G(task json parse)
+D --> H(serial msg parse)
 ```
 
 
