@@ -411,12 +411,19 @@ int parse_json_cmd (struct entry * e, const char * str, int size) {
     	    		// creste
     	    		if (TRUE == json_object_object_get_ex(recv_obj, "task_id", &key_obj)) {
     	    			// create task
+    	    			time_t now;
+
     	    			task_open(&e->thdr, SQL_TABLE_PATH);
     	    			e->thdr.parent = e;
     	    			// set timer signal
     	    			signal(SIGALRM, broadcast_block_data);
-    	    			alarm(1);
-//    	    			alarm(1800);
+    	    			time(&now);
+
+    	    			if (e->thdr.start_time > now) {
+        	    			alarm(1);
+    //    	    			alarm(start_time - now);
+    	    			}
+
     	    			//
 
     	    		} else {
@@ -425,7 +432,7 @@ int parse_json_cmd (struct entry * e, const char * str, int size) {
     	    	} else if (0 == strncmp(json_object_to_json_string(key_obj), "cancel", 6)) {
     	    		// cancel task
     	    		printf("recv cancel task\n");
-    	    		// close entry
+    	    		// close task
 
     	    		// delete task
 
@@ -454,7 +461,7 @@ int parse_json_cmd (struct entry * e, const char * str, int size) {
 
 
 
-int send_success_register_client_to_server (uint8_t * device_id, uint8_t * auth_key, uint8_t * msg) {
+int send_register_success_to_epd (uint8_t * device_id, uint8_t * auth_key, uint8_t * msg) {
     struct json_object * new_obj = NULL;
 //	struct json_object * key_obj = NULL;
 	char tmp_str[20];
@@ -473,7 +480,7 @@ int send_success_register_client_to_server (uint8_t * device_id, uint8_t * auth_
         return -1;
     }
     json_object_object_add(new_obj, "cmd", json_object_new_string("register"));
-    addr_to_string(tmp_str, device_id);
+    hex_to_str(tmp_str, device_id, BILINK_PACKECT_SRC_ADDR_SIZE);
     json_object_object_add(new_obj, "device_id", json_object_new_string(tmp_str));
     tmp = auth_key[0];
     tmp <<= 8;
@@ -489,7 +496,7 @@ int send_success_register_client_to_server (uint8_t * device_id, uint8_t * auth_
 	return 0;
 }
 
-int send_network_access_to_server(uint8_t * device_id, uint8_t * data_id, int battery, int status, uint8_t * msg) {
+int send_network_access_to_epd (uint8_t * device_id, uint8_t * data_id, int battery, int status, uint8_t * msg) {
     struct json_object * new_obj = NULL;
 //	struct json_object * key_obj = NULL;
 	char tmp_str[20];
@@ -508,9 +515,9 @@ int send_network_access_to_server(uint8_t * device_id, uint8_t * data_id, int ba
         return -1;
     }
     json_object_object_add(new_obj, "cmd", json_object_new_string("heart"));
-    addr_to_string(tmp_str, device_id);
+    hex_to_str(tmp_str, device_id, BILINK_PACKECT_SRC_ADDR_SIZE);
     json_object_object_add(new_obj, "device_id", json_object_new_string(tmp_str));
-    data_id_to_string(tmp_str, data_id);
+    hex_to_str(tmp_str, data_id, BILINK_ACCESS_RESP_SUB_LEN_VERSION);
     json_object_object_add(new_obj, "data_id", json_object_new_string(tmp_str));
     json_object_object_add(new_obj, "battery", json_object_new_int(battery));
     send_buf = (char *)json_object_to_json_string(new_obj);
@@ -521,12 +528,8 @@ int send_network_access_to_server(uint8_t * device_id, uint8_t * data_id, int ba
 	return 0;
 }
 
-int send_update_schedule_to_server(uint8_t * srcaddr) {
 
-	return 0;
-}
-
-int send_update_result_to_server(uint8_t * srcaddr) {
+int send_update_result_to_epd(uint8_t * srcaddr) {
 
 	return 0;
 }
@@ -535,6 +538,17 @@ int parse_serial_data (struct entry * e) {
 	union bilink_packet b;
 	struct simple_payload_buf p;
 	int size;
+	int battery;
+	uint8_t type;
+	uint8_t length;
+	uint8_t index = 0;
+	// to store a-key
+	uint8_t word[2];
+	uint8_t msg[20];
+	char tmp_str[20];
+//	char tmp_str2[20];
+	uint8_t str_time[4];
+	time_t cur_time;
 	size = serial_receive_from_list (&e->bhdr.rts.ots.pld.serial, b.buf, 20);
 
 	if (size > 0) {
@@ -542,44 +556,66 @@ int parse_serial_data (struct entry * e) {
 			switch (b.ctrl.comm) {
 				case BILINK_BEAT_REQ :
 					// test , without check
-					if (1 || SRC_INCLUDED == check_execute_list(SQL_TABLE_PATH, b.srcaddr)) {
-
-						uint8_t word[2];
-						authorization_key(word, b.srcaddr, e->bhdr.newkey);
-						if (0 == memcmp(word, b.bc.akey,
-								BILINK_PACKECT_AUTHORIZATION_KEY_SIZE)) {
-							uint8_t str_time[4];
-							time_t cur_time;
-							time(&cur_time);
-							// check version
-
-							// respond
-							p.size = create_unicast_packet(p.payload.data,
-									e->bhdr.selfaddr,
-									BILINK_ACCESS_REQ,
-									b.srcaddr,
-									WITH_CONTENT);
-							//
-							uint32_to_array(cur_time, str_time);
-							p.size = packet_add_content(p.payload.data,
-									p.size,
-									BILINK_ACCESS_REQ_SUB_KEY_FLUSH_TIME,
-									BILINK_ACCESS_REQ_SUB_LEN_FLUSH_TIME,
-									(uint8_t *)str_time);
-							//
-							uint32_to_array(cur_time, str_time);
-							p.size = packet_add_content(p.payload.data,
-									p.size,
-									BILINK_ACCESS_REQ_SUB_KEY_UTC_TIME,
-									BILINK_ACCESS_REQ_SUB_LEN_UTC_TIME,
-									(uint8_t *)str_time);
-							p.size = packet_add_key(p.payload.data,
-									p.size,
-									e->thdr.auth_key);
-							bilink_send_data(&e->bhdr, &p);
-
-						}
+					if (0 || SRC_INCLUDED != check_execute_list(SQL_TABLE_PATH, b.srcaddr)) {
+						break;
 					}
+					authorization_key(word, b.srcaddr, e->bhdr.newkey);
+					// check a-key
+					if (0 != memcmp(word, b.bc.msg+b.bc.length, BILINK_PACKECT_AUTHORIZATION_KEY_SIZE)) {
+						break;
+					}
+					// read msg
+					index = 0;
+					while (index < b.bc.length) {
+						type = b.bc.msg[index++];
+						length = b.bc.msg[index++];
+						switch (type) {
+							case BILINK_BEAT_REQ_SUB_KEY_POWER :
+								battery = b.bc.msg[index];
+								break;
+							case BILINK_BEAT_REQ_SUB_KEY_VERSION :
+								memcpy(msg, b.bc.msg+index, length);
+								break;
+							default :
+								break;
+						}
+						index += length;
+					}
+					// if data version in the same
+					if (0 == memcmp(hex_to_str(tmp_str, msg, BILINK_BEAT_REQ_SUB_LEN_VERSION),
+									e->thdr.data_id,
+									BILINK_BEAT_REQ_SUB_KEY_VERSION) ) {
+						break;
+					}
+					// respond
+					p.size = create_unicast_packet(p.payload.data,
+							e->bhdr.selfaddr,
+							BILINK_ACCESS_REQ,
+							b.srcaddr,
+							WITH_CONTENT);
+					// update time
+					uint32_to_array(e->thdr.start_time, str_time);
+					p.size = packet_add_content(p.payload.data,
+							p.size,
+							BILINK_ACCESS_REQ_SUB_KEY_FLUSH_TIME,
+							BILINK_ACCESS_REQ_SUB_LEN_FLUSH_TIME,
+							(uint8_t *)str_time);
+					// cur_time
+					time(&cur_time);
+					uint32_to_array(cur_time, str_time);
+					p.size = packet_add_content(p.payload.data,
+							p.size,
+							BILINK_ACCESS_REQ_SUB_KEY_UTC_TIME,
+							BILINK_ACCESS_REQ_SUB_LEN_UTC_TIME,
+							(uint8_t *)str_time);
+					// a-key
+					p.size = packet_add_key(p.payload.data,
+							p.size,
+							e->thdr.auth_key);
+					// send packet
+					bilink_send_data(&e->bhdr, &p);
+
+
 					break;
 				case BILINK_REGISTER_BEAT_REQ :
 					if (SRC_INCLUDED == check_white_list(SQL_TABLE_PATH, b.srcaddr)) {
@@ -602,6 +638,7 @@ int parse_serial_data (struct entry * e) {
 									p.size,
 									e->bhdr.initkey);
 							bilink_send_data(&e->bhdr, &p);
+
 						}
 					}
 					break;
@@ -610,10 +647,7 @@ int parse_serial_data (struct entry * e) {
 					break;
 			}
 		} else {
-			uint8_t type;
-			uint8_t length;
-			uint8_t index = 0;
-			uint8_t word[2];
+
 			// destination matching
 			if (memcmp(b.uc.destaddr, e->bhdr.selfaddr, BILINK_PACKECT_DEST_ADDR_SIZE) != 0)
 				return 0;
@@ -624,10 +658,8 @@ int parse_serial_data (struct entry * e) {
 			// select
 			switch (b.ctrl.comm) {
 				case BILINK_ACCESS_RESP :
-					index = 0;
 					uint8_t last_flush_time[4];
-					uint8_t msg[20];
-					int battery;
+					index = 0;
 					while (index < b.uc.length) {
 						type = b.uc.msg[index++];
 						length = b.uc.msg[index++];
@@ -636,27 +668,42 @@ int parse_serial_data (struct entry * e) {
 								battery = b.uc.msg[index];
 								break;
 							case BILINK_ACCESS_RESP_SUB_KEY_LAST_FLUSH_TIME :
-								memcpy(last_flush_time, b.uc.msg+index, BILINK_ACCESS_RESP_SUB_LEN_LAST_FLUSH_TIME);
+								memcpy(last_flush_time, b.uc.msg+index, length);
+								break;
+							case BILINK_ACCESS_RESP_SUB_KEY_VERSION :
+								memcpy(msg, b.uc.msg+index, length);
 								break;
 							default :
 								break;
 						}
 						index += length;
 					}
-
-					send_network_access_to_server(b.srcaddr, last_flush_time, battery, 0, msg);
+					//
+					send_network_access_to_epd (b.srcaddr, msg, battery, 0, NULL);
 					break;
 				case BILINK_QUERY_RESP :
+					int seq;
+					int pkt_num = 0;
+					int num = 0;
 					index = 0;
 					while (index < b.uc.length) {
 						type = b.uc.msg[index++];
 						length = b.uc.msg[index++];
 						switch (type) {
 							case BILINK_QUERY_RESP_SUB_KEY_LOST_PKT_NUM :
-
+								// big first
+								pkt_num = b.uc.msg[index];
+								pkt_num <<= 8;
+								pkt_num += b.uc.msg[index+1];
 								break;
 							case BILINK_QUERY_RESP_SUB_KEY_LOST_PKT_SEQ :
 
+								for (num=0; num<pkt_num; num++) {
+									seq = b.uc.msg[index+(num<<1)];
+									seq <<= 8;
+									seq += b.uc.msg[index+(num<<1)+1];
+									SET_BIT_OF_INT32_BUF(e->thdr.packet_status, seq);
+								}
 								break;
 							default :
 								break;
@@ -667,23 +714,9 @@ int parse_serial_data (struct entry * e) {
 
 					break;
 				case BILINK_REGISTER_RESP :
-
-//					send_update_result_to_server(b.srcaddr);
-
+					send_register_success_to_epd (b.srcaddr, e->bhdr.newkey, NULL);
 					break;
-				// case BILINK_COMM_REISSUE_DATA_BLOCK_RESP :
 
-				// 	break;
-				// case BILINK_COMM_UPDATE_ACCESS_KEY_RESP :
-				// 	if (SRC_INCLUDED == check_white_list(SQL_TABLE_PATH, b.srcaddr)) {
-				// 		uint8_t word[2];
-				// 		authorization_key(word, b.srcaddr, bilink_conn_obj.newkey);
-				// 		if (0 == memcmp(word, b.uc.akey,
-				// 				BILINK_PACKECT_AUTHORIZATION_KEY_SIZE)) {
-				// 			send_success_register_client_to_server (b.srcaddr, bilink_conn_obj.newkey, NULL);
-				// 		}
-				// 	}
-				// 	break;
 				default  :
 					break;
 			}

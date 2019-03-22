@@ -52,6 +52,8 @@
 // #define BILINK_REGISTER_RESP      0x01
 // no sub command
 // #define BILINK_BEAT_REQ           0x02
+#define BILINK_BEAT_REQ_SUB_KEY_POWER                  0x01
+#define BILINK_BEAT_REQ_SUB_LEN_POWER                  0x01
 #define BILINK_BEAT_REQ_SUB_KEY_VERSION                0x02
 #define BILINK_BEAT_REQ_SUB_LEN_VERSION                0x08
 // #define BILINK_ACCESS_REQ         0x13
@@ -64,6 +66,8 @@
 #define BILINK_ACCESS_RESP_SUB_LEN_POWER               0x01
 #define BILINK_ACCESS_RESP_SUB_KEY_LAST_FLUSH_TIME     0x02
 #define BILINK_ACCESS_RESP_SUB_LEN_LAST_FLUSH_TIME     0x02
+#define BILINK_ACCESS_RESP_SUB_KEY_VERSION             0x03
+#define BILINK_ACCESS_RESP_SUB_LEN_VERSION             0x08
 // #define BILINK_CONTROL_REQ        0x14
 #define BILINK_CONTROL_REQ_SUB_KEY_VERSION             0x01
 #define BILINK_CONTROL_REQ_SUB_LEN_VERSION             0x08
@@ -333,13 +337,17 @@ enum {
 	WITH_CONTENT = 0x01,
 };
 
+uint8_t * str_to_hex (uint8_t * dest, char * src, int src_len);
+
+char * hex_to_str (char * dest, uint8_t * src, int src_len);
+
 int uint32_to_array (uint32_t from, uint8_t * to);
 
 uint32_t array_to_uint32 (uint8_t * from);
 
-uint64_t addr_to_uint64 (uint8_t * from);
+uint64_t array_to_uint64 (uint8_t * from);
 
-int uint64_to_addr (uint64_t from, uint8_t * to);
+int uint64_to_array (uint64_t from, uint8_t * to);
 
 char * addr_to_string (char * to, uint8_t * from);
 

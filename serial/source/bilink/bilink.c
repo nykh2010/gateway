@@ -73,7 +73,7 @@ int bilink_open (struct bilink_conn * c, const struct bilink_callbacks * callbac
 //	} else {
 //		printf("bilink opened\n");
 //	}
-	uint64_to_addr(0x0123456789ABCDEF, c->selfaddr);
+	uint64_to_array(0x0123456789ABCDEF, c->selfaddr);
     c->timeout_ms = RTS_ACK_TIME_MS;
     c->initkey[0] = 0x5A;
     c->initkey[1] = 0xEF;

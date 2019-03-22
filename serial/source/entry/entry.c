@@ -26,7 +26,7 @@
 #include "entry.h"
 
 /*--------------------------------------------------------------------------------*/
-#define DEBUG_PRINTF 0
+#define DEBUG_PRINTF 1
 #if DEBUG_PRINTF
     #define PRINTF(...) printf(__VA_ARGS__)
 #else
@@ -75,6 +75,7 @@ int entry_open (void) {
 			}
 		}
 	}
+	PRINTF("entry_open : entry opened\n");
     // open client
     return 0;
 }

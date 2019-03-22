@@ -35,6 +35,9 @@
 #define SIMPLE_PAYLOAD_OK                   0x03
 #define SIMPLE_PAYLOAD_STATUS               0x04
 #define SIMPLE_PAYLOAD_RESET                0x05
+//
+#define SIMPLE_PAYLOAD_SEND_MODE            0x06
+#define SIMPLE_PAYLOAD_RECV_MODE            0x07
 // ...
 #define SIMPLE_PAYLOAD_ACK                  0x7F
 

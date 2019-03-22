@@ -10,6 +10,47 @@
 #define LITTLE_ENDIAN 1
 #define SIZE_OF_INT64 8
 #define SIZE_OF_INT32 4
+
+/*--------------------------------------------------------------------------------*/
+char hex_to_ascii (char hex) {
+	hex &= 0x0F;
+	// 'A'=0x41=65  '0'=0x30=48
+	return (hex > 9 ? hex+55 : hex+48);
+}
+/*--------------------------------------------------------------------------------*/
+char ascii_to_hex (char ascii) {
+	// 'a'=97
+	if (ascii > 96) {
+		return (ascii - 87);
+	}
+	// 'A'=65
+	if (ascii > 64) {
+		return (ascii - 55);
+	}
+	// 'A'=0x41=65  '0'=0x30=48
+	return (ascii - 48);
+}
+/*--------------------------------------------------------------------------------*/
+char * hex_to_str (char * dest, uint8_t * src, int src_len) {
+	int i = 0;
+	for (i=0; i<src_len; i++) {
+		dest[(i<<1)] = hex_to_ascii(src[i]>>4);
+		dest[(i<<1)+1] = hex_to_ascii(src[i]);
+	}
+	dest[(i<<1)] = '\0';
+	return dest;
+}
+
+/*--------------------------------------------------------------------------------*/
+uint8_t * str_to_hex (uint8_t * dest, char * src, int src_len) {
+	int i = 0;
+	for (i=0; i<src_len; i+=2) {
+		dest[(i>>1)] = ascii_to_hex(src[i]);
+		dest[(i>>1)] <<= 4;
+		dest[(i>>1)] = ascii_to_hex(src[i+1]);
+	}
+	return dest;
+}
 /*--------------------------------------------------------------------------------*/
 uint32_t array_to_uint32 (uint8_t * from) {
 	uint32_t ret = 0;
@@ -49,7 +90,7 @@ int uint32_to_array (uint32_t from, uint8_t * to) {
 	return 0;
 }
 
-uint64_t addr_to_uint64 (uint8_t * from) {
+uint64_t array_to_uint64 (uint8_t * from) {
 	uint64_t ret = 0;
 	int num = 0;
 	if (from == NULL) {
@@ -70,6 +111,24 @@ uint64_t addr_to_uint64 (uint8_t * from) {
 	return ret;
 }
 
+/*--------------------------------------------------------------------------------*/
+int uint64_to_array (uint64_t from, uint8_t * to) {
+	int num = 0;
+	if (to == NULL) {
+		return -1;
+	}
+	for (num=0; num<SIZE_OF_INT64; num++){
+#if LITTLE_ENDIAN
+		// Low bits first (Little-Endian)
+		to[num] = (uint8_t)((from >> num*8) & 0x00000000000000FF);
+#else
+		// High bits first (Big-Endian)
+		to[SIZE_OF_INT64-num-1] = (uint8_t)((from >> num*8) & 0x00000000000000FF);
+#endif
+	}
+	return 0;
+}
+/*--------------------------------------------------------------------------------*/
 char * addr_to_string (char * to, uint8_t * from) {
 	uint64_t ret = -1;
 #if LITTLE_ENDIAN
@@ -85,37 +144,7 @@ char * addr_to_string (char * to, uint8_t * from) {
 
 	return (ret > 0 ? to : NULL);
 }
-
-char * data_id_to_string (char * to, uint8_t * from) {
-	uint64_t ret = -1;
-#if LITTLE_ENDIAN
-		// Low bits first (Little-Endian)
-		ret = snprintf(to,  5, "%2X%2X", *(from+1), *(from));
-
-#else
-		// High bits first (Big-Endian)
-		ret = snprintf(to,  5, "%2X%2X", *(from), *(from+1));
-#endif
-
-	return (ret > 0 ? to : NULL);
-}
-
-uint8_t * string_to_data_id (uint8_t * to, char * from) {
-	uint64_t ret = -1;
-	uint32_t recv[2];
-#if LITTLE_ENDIAN
-		// Low bits first (Little-Endian)
-	ret = sscanf(from, "%2X%2X", (recv+1), (recv));
-
-#else
-		// High bits first (Big-Endian)
-	ret = sscanf(from, "%2X%2X", (recv), (recv+1));
-#endif
-	to[0] = (uint8_t)recv[0];
-	to[1] = (uint8_t)recv[1];
-	return (ret > 0 ? to : NULL);
-}
-
+/*--------------------------------------------------------------------------------*/
 uint8_t * string_to_addr (uint8_t * to, char * from) {
 	uint64_t ret = -1;
 	uint32_t recv[8];
@@ -137,29 +166,38 @@ uint8_t * string_to_addr (uint8_t * to, char * from) {
 	to[7] = (uint8_t)recv[7];
 	return (ret > 0 ? to : NULL);
 }
-
 /*--------------------------------------------------------------------------------*/
-int uint64_to_addr (uint64_t from, uint8_t * to) {
-	int num = 0;
-	if (to == NULL) {
-		return -1;
-	}
-	for (num=0; num<SIZE_OF_INT64; num++){
+char * data_id_to_string (char * to, uint8_t * from) {
+	uint64_t ret = -1;
 #if LITTLE_ENDIAN
 		// Low bits first (Little-Endian)
-		to[num] = (uint8_t)((from >> num*8) & 0x00000000000000FF);
+		ret = snprintf(to,  5, "%2X%2X", *(from+1), *(from));
+
 #else
 		// High bits first (Big-Endian)
-		to[SIZE_OF_INT64-num-1] = (uint8_t)((from >> num*8) & 0x00000000000000FF);
+		ret = snprintf(to,  5, "%2X%2X", *(from), *(from+1));
 #endif
-	}
-	return 0;
+
+	return (ret > 0 ? to : NULL);
 }
 /*--------------------------------------------------------------------------------*/
-int func_1 (uint8_t * msg, uint8_t size) {
+uint8_t * string_to_data_id (uint8_t * to, char * from) {
+	uint64_t ret = -1;
+	uint32_t recv[2];
+#if LITTLE_ENDIAN
+		// Low bits first (Little-Endian)
+	ret = sscanf(from, "%2X%2X", (recv+1), (recv));
 
-	return 0;
+#else
+		// High bits first (Big-Endian)
+	ret = sscanf(from, "%2X%2X", (recv), (recv+1));
+#endif
+	to[0] = (uint8_t)recv[0];
+	to[1] = (uint8_t)recv[1];
+	return (ret > 0 ? to : NULL);
 }
+
+/*--------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------*/
 /* CITT CRC16 polynomial ^16 + ^12 + ^5 + 1 */
 /*---------------------------------------------------------------------------*/
@@ -367,11 +405,11 @@ int main (int argc, char * argv[]) {
 
 	int len = 0;
 //	* ((uint64_t *)pkt.uc.srcaddr) = 0x0123456789ABCDEF;
-	uint64_to_addr(0x0123456789ABCDEF, pkt.uc.srcaddr);
+	uint64_to_array(0x0123456789ABCDEF, pkt.uc.srcaddr);
 	pkt.uc.ctrl.broad = 1;
 	pkt.uc.ctrl.comm = 1;
 //	* ((uint64_t *)pkt.uc.destaddr) = 0x8080808080808080;
-	uint64_to_addr(0x8080808080808080, pkt.uc.destaddr);
+	uint64_to_array(0x8080808080808080, pkt.uc.destaddr);
 	pkt.uc.length = 1;
 	pkt.uc.msg[0] = 'A';
 	len = 30;
