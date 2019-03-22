@@ -27,8 +27,10 @@ struct rts_callbacks {
 struct rts_conn {
     struct ots_conn ots;
     const struct rts_callbacks * u;
-    pthread_cond_t req_cond;
-    pthread_mutex_t req_mutex;
+    pthread_cond_t data_req_cond;
+    pthread_mutex_t data_req_mutex;
+    pthread_cond_t cmd_req_cond;
+    pthread_mutex_t cmd_req_mutex;
 //	uint8_t sndnxt;
 	uint8_t is_tx;
 //	uint8_t rx_miss;

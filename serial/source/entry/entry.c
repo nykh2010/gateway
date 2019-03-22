@@ -99,7 +99,8 @@ int entry_send_data (const char * data, int size) {
 	struct simple_payload_buf payload;
 	payload.size = size;
 	memcpy(payload.buf+1, data, size);
-	payload.buf[0] = 0x80;
+	// payload.buf[0] = 0x80;
+	payload.payload.ctrl = SIMPLE_PAYLOAD_TYPE_DATA;
 	payload.size += 1;
     ret = bilink_send_data (&tEntry.bhdr, &payload);
 	return ret;

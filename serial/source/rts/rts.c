@@ -33,18 +33,32 @@ static void recv_from_ots (struct ots_conn * ptr) {
 		// receive command
 		switch (COMM_BYTE_MASK(ctrl)) {
 			case SIMPLE_PAYLOAD_ACK :
-				pthread_mutex_lock(&c->req_mutex);
+				pthread_mutex_lock(&c->data_req_mutex);
 //				PRINTF("rts recv ack\n");
 				PAYLOAD_ATTR_RESET(ptr->pld, PAYLOAD_ATTR_WAITING_ACK);
-				pthread_cond_signal(&c->req_cond);
-				pthread_mutex_unlock(&c->req_mutex);
+				pthread_cond_signal(&c->data_req_cond);
+				pthread_mutex_unlock(&c->data_req_mutex);
 				break;
 			case SIMPLE_PAYLOAD_BUSY :
-				pthread_mutex_lock(&c->req_mutex);
+				pthread_mutex_lock(&c->data_req_mutex);
 //				PRINTF("rts recv busy\n");
 				PAYLOAD_ATTR_SET(ptr->pld, PAYLOAD_ATTR_RETURN_BUSY);
-				pthread_cond_signal(&c->req_cond);
-				pthread_mutex_unlock(&c->req_mutex);
+				pthread_cond_signal(&c->data_req_cond);
+				pthread_mutex_unlock(&c->data_req_mutex);
+				break;
+			case SIMPLE_PAYLOAD_OK :
+				pthread_mutex_lock(&c->cmd_req_mutex);
+//				PRINTF("rts recv ok\n");
+				PAYLOAD_ATTR_RESET(ptr->pld, PAYLOAD_ATTR_WAITING_CMD);
+				pthread_cond_signal(&c->cmd_req_cond);
+				pthread_mutex_unlock(&c->cmd_req_mutex);
+				break;
+			case SIMPLE_PAYLOAD_ERROR :
+				pthread_mutex_lock(&c->cmd_req_mutex);
+//				PRINTF("rts recv error\n");
+				PAYLOAD_ATTR_SET(ptr->pld, PAYLOAD_ATTR_WAITING_CMD);
+				pthread_cond_signal(&c->cmd_req_cond);
+				pthread_mutex_unlock(&c->cmd_req_mutex);
 				break;
 			default :
 				c->u->recv_ctrl(c);
@@ -71,8 +85,8 @@ static struct ots_callbacks rts_for_ots = {
 
 int rts_open (struct rts_conn * c, const struct rts_callbacks * callbacks) {
 	PRINTF("rts_open\n");
-	pthread_cond_init(&c->req_cond, NULL);
-	pthread_mutex_init(&c->req_mutex, NULL);
+	pthread_cond_init(&c->data_req_cond, NULL);
+	pthread_mutex_init(&c->data_req_mutex, NULL);
 //	c->sndnxt = 0;
 	c->is_tx = 0;
 //	c->rx_miss = 0;
@@ -82,8 +96,8 @@ int rts_open (struct rts_conn * c, const struct rts_callbacks * callbacks) {
 }
 
 void rts_close (struct rts_conn *c) {
-	pthread_cond_destroy(&c->req_cond);
-	pthread_mutex_destroy(&c->req_mutex);
+	pthread_cond_destroy(&c->data_req_cond);
+	pthread_mutex_destroy(&c->data_req_mutex);
 	ots_close(&c->ots);
 }
 
@@ -115,11 +129,11 @@ static int rts_send_sub (struct rts_conn * c, struct simple_payload_buf * s, lon
 
 	ots_send(&c->ots, s);
 	PRINTF("rts_send_sub sec=%ld nsec=%ld\n", waitMoment.tv_sec, waitMoment.tv_nsec);
-	pthread_mutex_lock(&c->req_mutex);
+	pthread_mutex_lock(&c->data_req_mutex);
 	PAYLOAD_ATTR_SET(c->ots.pld, PAYLOAD_ATTR_WAITING_ACK);
 //	timer_wait_ms(msec);
-//	pthread_cond_destroy(&c->req_cond);
-	pthread_cond_timedwait(&c->req_cond, &c->req_mutex, &waitMoment);
+//	pthread_cond_destroy(&c->data_req_cond);
+	pthread_cond_timedwait(&c->data_req_cond, &c->data_req_mutex, &waitMoment);
 	// have not receive ACK
 	if(PAYLOAD_ATTR_GET(c->ots.pld, PAYLOAD_ATTR_WAITING_ACK)) {
 		if (PAYLOAD_ATTR_GET(c->ots.pld, PAYLOAD_ATTR_RETURN_BUSY)) {
@@ -133,7 +147,7 @@ static int rts_send_sub (struct rts_conn * c, struct simple_payload_buf * s, lon
 //		PAYLOAD_ATTR_SET(c->ots.pld, PAYLOAD_ATTR_RELIABLE_SENDING);
 		ret = RTS_SEND_OK;
 	}
-	pthread_mutex_unlock(&c->req_mutex);
+	pthread_mutex_unlock(&c->data_req_mutex);
 
 //	PAYLOAD_ATTR_RESET(c->ots.pld, PAYLOAD_ATTR_RELIABLE_SENDING);
 	PRINTF("rts_send_sub wait time %ld us\n",time_interval_us(&startMoment));
@@ -159,3 +173,44 @@ int rts_send (struct rts_conn * c, struct simple_payload_buf * s, long int msec)
 	return ret;
 }
 
+int rts_send_ctrl (struct rts_conn * c, uint8_t ctrl, long int msec) {
+	int ret = -1;
+	long usec_temp;
+	struct timeval startMoment;
+	struct timespec waitMoment;
+	if (c == NULL) {
+		return -1;
+	}
+	get_current_time(&startMoment);
+	PRINTF("rts_send_ctrl sec=%ld usec=%ld\n", startMoment.tv_sec, startMoment.tv_usec);
+
+    waitMoment.tv_sec = startMoment.tv_sec + msec/1000;
+    usec_temp = (msec % 1000);
+    usec_temp *= 1000;
+    usec_temp += startMoment.tv_usec;
+	if (usec_temp > 1000000) {
+		waitMoment.tv_sec += 1;
+		waitMoment.tv_nsec = (usec_temp - 1000000) * 1000;
+	} else {
+		waitMoment.tv_nsec = usec_temp * 1000;
+	}
+
+	ots_send_ctrl(&c->ots, ctrl);
+	PRINTF("rts_send_ctrl sec=%ld nsec=%ld\n", waitMoment.tv_sec, waitMoment.tv_nsec);
+
+	pthread_mutex_lock(&c->cmd_req_mutex);
+	PAYLOAD_ATTR_SET(c->ots.pld, PAYLOAD_ATTR_WAITING_CMD);
+	pthread_cond_timedwait(&c->cmd_req_cond, &c->cmd_req_mutex, &waitMoment);
+	// have not receive OK
+	if(PAYLOAD_ATTR_GET(c->ots.pld, PAYLOAD_ATTR_WAITING_CMD)) {
+		PAYLOAD_ATTR_RESET(c->ots.pld, PAYLOAD_ATTR_WAITING_CMD);
+		ret = -1;
+	} else {
+		ret = 0;
+	}
+	pthread_mutex_unlock(&c->cmd_req_cond);
+	// PRINTF("rts_send_ctrl wait time %ld us\n",time_interval_us(&startMoment));
+	// get_current_time(&startMoment);
+	// PRINTF("rts_send_sub sec=%ld usec=%ld\n", startMoment.tv_sec, startMoment.tv_usec);
+	return ret;
+}
