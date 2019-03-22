@@ -17,20 +17,24 @@ import os
 
 sys.path.append(os.path.dirname(__file__))
 
+token = r"MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu"
+
 class Upload:
     __waitRequest = []
-    def send(self, payload, topic='/dma/report/periph', wait_event=None, need_wait=False, cache=False):
+    def send(self, payload, topic='pc_test', wait_event=None, need_wait=False, cache=False):
         print(payload)
         if cache:
-            url = r'http://localhost:7788/mqtt/publish/offlinecache'
+            url = r'http://127.0.0.1:7788/mqtt/publish/offlinecache'
         else:
-            url = r'http://localhost:7788/mqtt/publish/'
+            url = r'http://127.0.0.1:7788/mqtt/publish'
         data = {}
         data['topic'] = topic
-        data['d'] = payload
+        data['payload'] = payload
 
         body = json.dumps(data)
-        os.system("curl %s -d '%s'" % (url, body))
+        print(type(body))
+        cmd = "curl -H 'token: %s' -d '%s' '%s'" % (token, body, url)
+        os.system(cmd)
         
     def add_wait_list(self, device_id, wait_event):
         request = (device_id, wait_event)

@@ -197,7 +197,7 @@ class TaskApp(RequestHandler):
                 data = {
                     "table_name":"sql",
                     "sql_cmd":"update `task` set (`start_time`='%s', `end_time`='%s', `status`=2) where `task_id`='%s';" % \
-                        (request['start_time'], request['end_time'])
+                        (request['start_time'], request['end_time'], request['task_id'])
                 }
                 dl.send_service('database', data)
             else:
@@ -234,7 +234,7 @@ class GatewayApp(RequestHandler):
                 pass
                 # gateway.set_group(data.get('gateway_list', None))
             elif cmd == 'auth':
-                white_list = request.get('white_list', None)
+                white_list = request['payload']['d'].get('white_list', None)
                 if white_list:
                     chunk = ""
                     for device in white_list:
@@ -248,8 +248,8 @@ class GatewayApp(RequestHandler):
                             drop table add_list;" % chunk[:-1]
                     }
                     dl.send_service('database', data)
-                auth_key = request.get('auth_key', None)
-                if auth_key:
-                    gw.set_auth_key(auth_key)
+                # auth_key = request.get('auth_key', None)
+                # if auth_key:
+                #     # gw.set_auth_key(auth_key)
         except Exception as e:
             self.write(e.__str__())

@@ -55,7 +55,7 @@ class Downlink(UnixStreamServer):
                 self.__client.connect(path)
                 content = json.dumps(data)
                 self.__client.send(content.encode('utf-8'))
-                resp = self.__client.recv(1024)
+                resp = self.__client.recv(1024*1024)
                 if not resp:
                     raise Exception()
                 resp = resp.decode('utf-8')
