@@ -11,7 +11,7 @@ import os
 # from protocol import protocol
 from protocol import TaskApp, RadioApp, GatewayApp
 from configparser import ConfigParser
-from epd_log import write_log_file
+from epd_log import epdlog as LOG
 import sys
 import os
 
@@ -20,9 +20,9 @@ sys.path.append(os.path.dirname(__file__))
 token = r"MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu"
 
 class Upload:
-    __waitRequest = []
+    # __waitRequest = []
     def send(self, payload, topic='pc_test', wait_event=None, need_wait=False, cache=False):
-        print(payload)
+        # print(payload)
         if cache:
             url = r'http://127.0.0.1:7788/mqtt/publish/offlinecache'
         else:
@@ -32,24 +32,25 @@ class Upload:
         data['payload'] = payload
 
         body = json.dumps(data)
-        print(type(body))
+        # print(type(body))
         cmd = "curl -H 'token: %s' -d '%s' '%s'" % (token, body, url)
+        LOG.info(cmd)
         os.system(cmd)
         
-    def add_wait_list(self, device_id, wait_event):
-        request = (device_id, wait_event)
-        self.__waitRequest.append(request)
+    # def add_wait_list(self, device_id, wait_event):
+    #     request = (device_id, wait_event)
+    #     self.__waitRequest.append(request)
 
-    def wait_event(self, device_id, wait_event):
-        pass
+    # def wait_event(self, device_id, wait_event):
+    #     pass
         
     
-    def send_event(self, device_id, event):
-        pass
+    # def send_event(self, device_id, event):
+    #     pass
 
-    def check_wait_request(self):
-        if self.__waitRequest:
-            pass
+    # def check_wait_request(self):
+    #     if self.__waitRequest:
+    #         pass
 
 
 app = Application(
@@ -69,12 +70,12 @@ class Uplink(HTTPServer):
         self.__port = 5000
         
     def begin(self):
-        write_log_file("system", "uplink start...")
+        LOG.info("sever host:%s port:%d", (self.__host, self.__port))
         self.listen(self.__port, self.__host)
         tornado.ioloop.IOLoop.current(instance=False).start()
 
     def end(self):
-        write_log_file("system", "uplink stop...")
+        LOG.info("server stop")
         
     def send(self, payload):
         # upload data

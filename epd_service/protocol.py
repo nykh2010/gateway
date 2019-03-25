@@ -2,7 +2,7 @@ from threading import Thread
 import json
 from time import time, sleep
 from configparser import ConfigParser
-from epd_log import write_log_file
+from epd_log import epdlog as LOG
 import sys
 import os
 # import task
@@ -25,16 +25,18 @@ class Handle:
 class HeartRequest(Handle):
     def func(self, request):
         time_str = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(time.time()))
-        write_log_file('connect', '%s heart beat' % request['device_id'])
+        LOG.info('%s heart beat', request['device_id'])
         # data = {
         #     "table_name":"white_list",
         #     "method":"connect",
         #     "device_id":request['device_id'],
         #     "time":time_str
         # }
+        sql_cmd = "update `white_list` set `last_connect_time`='%s' where `device_id`='%s';" % (time_str, request['device_id'])
+        LOG.info("query database: %s", sql_cmd)
         data = {
             "table_name":"sql",
-            "sql_cmd":"update `white_list` set `last_connect_time`='%s' where `device_id`='%s';" % (time_str, request['device_id'])
+            "sql_cmd": sql_cmd
         }
         dl.send_service('database', data)
         self.upload(request)
@@ -59,30 +61,31 @@ class TaskRequest(Handle):
         status = data['status']
         success_list = data.get('success_list', None)
         fail_list = data.get('fail_list', None)
+        sql_cmd = "update `task` set `status`='%d' where `task_id`='%s';" % (status, task_id)
         request = {
             "table_name":"sql",
-            "sql_cmd":"update `task` set `status`='%d' where `task_id`='%s';" % (status, task_id)
+            "sql_cmd": sql_cmd
         }
-        dl.send_service('database', request)
+        LOG.info("query database:%s", sql_cmd)
+        ret = dl.send_service('database', request)
         
         if success_list:
             chunk = ""
             for success in success_list:
                 chunk += "`device_id`=%s or" % success
             chunk = chunk[:-2]
-            print(chunk)
+            # LOG.info(chunk)
             request = {
                 "table_name":"sql",
                 "sql_cmd":"update `execute` set `status`=2 where %s;" % chunk
             }
-
             dl.send_service('database', request)
         if fail_list:
             chunk = ""
             for fail in fail_list:
                 chunk += "`device_id`=%s or" % fail
             chunk = chunk[:-2]
-            # print(chunk)
+            LOG.info(chunk)
             request = {
                 "table_name":"sql",
                 "sql_cmd":"update `execute` set `status`=3 where %s;" % chunk
@@ -115,6 +118,7 @@ class TaskApp(RequestHandler):
         try:
             request = self.request.body.decode('utf-8')
             request = json.loads(request)
+
             if cmd == 'create':
                 data = {
                     "table_name":"sql",
@@ -168,7 +172,7 @@ class TaskApp(RequestHandler):
                             pass
                         else:
                             ret_code = os.system("wget -c %s -t 10 -T 5 -P /media/%s.bin" % (request['data_url'], request['data_id']))
-                            write_log_file('system', 'task data download complete, ret code:%d' % ret_code)
+                            LOG('system', 'task data download complete, ret code:%d' % ret_code)
                         data = {
                             "cmd":"task",
                             "method":"create",
@@ -212,13 +216,13 @@ class RadioApp(RequestHandler):
         src = "local" if body['from'] == 'local' else 'remote'
         radio_number = body.get('radio_number')
         if cmd == 'update':
-            write_log_file('system', '%s setup radio parameters' % src)
+            LOG('system', '%s setup radio parameters' % src)
             data = {
                 "cmd":"update",
                 "radio":radio_number
             }
         elif cmd == 'restart':
-            write_log_file('system', '%s restart radio' % src)
+            LOG('system', '%s restart radio' % src)
             data = {
                 "cmd":"restart",
                 "radio":radio_number

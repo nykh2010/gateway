@@ -4,6 +4,7 @@ from socket import socket, AF_UNIX
 from threading import Thread
 import json
 import sys
+from epd_log import epdlog as LOG
 
 sys.path.append(os.path.dirname(__file__))
 
@@ -37,9 +38,11 @@ class Downlink(UnixStreamServer):
         self.__thread.start()
 
     def start_service(self):
+        LOG.info("downlink service start")
         self.serve_forever()
 
     def stop_service(self):
+        LOG.info("downlink service stop")
         self.server_close()
         self.__thread.join()
 
@@ -61,7 +64,7 @@ class Downlink(UnixStreamServer):
                 resp = resp.decode('utf-8')
                 content = json.loads(resp, encoding='utf-8')
             except Exception as e:
-                print(e.__repr__())
+                LOG.error(e.__repr__())
                 content = None
             finally:
                 self.__client.close()
