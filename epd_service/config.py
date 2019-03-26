@@ -1,5 +1,6 @@
 from configparser import ConfigParser
 import os
+from epd_log import epdlog as LOG
 # import json
 
 PATH = '/etc/gateway'
@@ -13,7 +14,7 @@ class Config:
             for k,v in self.__config.items(name):
                 self.__setattr__(k, v)
         except Exception as e:
-            print(e)
+            LOG.error(e.__repr__())
             self.__config.add_section(self.__name)
             self.save()
     

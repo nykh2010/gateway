@@ -5,7 +5,7 @@ import uplink
 import downlink
 import threading
 import hashlib
-from epd_log import write_log_file
+from epd_log import epdlog as LOG
 
 STEP_TIME = 20*60       # 任务间隔时间
 handler_interval = 10   # 10秒产生一次定时任务
@@ -35,38 +35,46 @@ class Gateway(Config):
         else:
             md5_obj = hashlib.md5()
             for res in result['result']:
-                md5_obj.update(res['device_id'].encode('utf-8'))
+                md5_obj.update(("%s\n" % res['device_id']).encode('utf-8'))
             md5_code = md5_obj.hexdigest()
-            write_log_file('system', "white_list md5 code:%s" % md5_code)
+            LOG.info("white_list md5 code:%s", md5_code)
+            self.__whiteListMD5 = md5_code
             return md5_code
     
     def get_task_status(self):
         data = {
             'table_name': 'sql',
-            'sql_cmd': 'select `task_id`,`task_status` from task;'
+            'sql_cmd': 'select `task_id`,`status` from task;'
         }
         result = downlink.dl.send_service('database', data)
-        print(result)
+        LOG.info('get task status result: %s', result['status'])
         if result['result']:
+            self.__taskId = result['task_id']
+            self.__taskStatus = result['status']
             return result['task_id'], result['status']
-        return None, None
+        return 0, 0
     
     def get_auth_key(self):
         # 从文件中获取auth_key
         return self.key
+
+    def set_auth_key(self, key):
+        self.set_item('key', str(key))
+        self.save()
     
     def timer_handler(self, args=None):
         '''
             定时任务
         '''
         data = {
-            'white_list_md5': self.__whiteListMD5,
-            'task_id': self.__taskId,
-            'task_status': self.__taskStatus,
-            'auth_key': self.__authKey
+            "d": {
+                'task_id': self.__taskId,
+                'whitelist_md5': self.__whiteListMD5,
+                'check_code': int(self.key)
+            }
         }
         upload = uplink.Upload()
-        upload.send(data)
+        upload.send(data, topic='gateway/report/status')
         timer = threading.Timer(handler_interval, self.timer_handler)
         timer.start()
     

@@ -70,7 +70,7 @@ class Uplink(HTTPServer):
         self.__port = 5000
         
     def begin(self):
-        LOG.info("sever host:%s port:%d", (self.__host, self.__port))
+        LOG.info("sever host:%s port:%d", self.__host, self.__port)
         self.listen(self.__port, self.__host)
         tornado.ioloop.IOLoop.current(instance=False).start()
 

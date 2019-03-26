@@ -65,7 +65,10 @@ class Downlink(UnixStreamServer):
                 content = json.loads(resp, encoding='utf-8')
             except Exception as e:
                 LOG.error(e.__repr__())
-                content = None
+                content = {
+                    'status':500,
+                    'msg':e.__repr__()
+                }
             finally:
                 self.__client.close()
                 return content

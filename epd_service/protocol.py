@@ -10,6 +10,8 @@ import uplink
 from downlink import dl
 import time
 from gateway import gw
+import hashlib
+from epd_exception import EpdException
 
 sys.path.append(os.path.dirname(__file__))
 
@@ -18,9 +20,9 @@ class Handle:
     def func(self):
         pass
     
-    def upload(self, data):
+    def upload(self, topic, data):
         up = uplink.Upload()
-        up.send(data)
+        up.send(topic=topic, payload=data)
 
 class HeartRequest(Handle):
     def func(self, request):
@@ -43,12 +45,17 @@ class HeartRequest(Handle):
     
     def upload(self, data):
         # 上传信息
-        send_data = {}
-        send_data['nid'] = data['device_id']
-        send_data['data_id'] = data['data_id']
-        send_data['battery'] = data.get('battery', 100)
+        send_data = {
+            "nid": data["device_id"],
+            "d":{
+                "data_id": data["data_id"],
+                "battery": data.get('battery', 100),
+                "status": data.get('status', ""),
+                "msg": data.get('msg', "")
+            }
+        }
         # from uplink import upload
-        super().upload(send_data)
+        super().upload('dma/report/periph', send_data)
         
 
 class RegisterRequest(Handle):
@@ -101,7 +108,15 @@ class TaskRequest(Handle):
         self.upload(send_data)
     
     def upload(self, data):
-        super().upload(data)
+        send_data = {
+            "d":{
+                "task_id": data['task_id'],
+                "status": data['task_status'],
+                "success_list": data['success_list'],
+                "failed_list": data['fail_list']
+            }
+        }
+        super().upload('gateway/report/task/result', send_data)
 
 apps = [
     ("heart", HeartRequest),
@@ -118,11 +133,11 @@ class TaskApp(RequestHandler):
         try:
             request = self.request.body.decode('utf-8')
             request = json.loads(request)
-
+            body = request['d']
             if cmd == 'create':
                 data = {
                     "table_name":"sql",
-                    "sql_cmd":"select `status` from `task` where `task_id`=%s" % request['task_id']
+                    "sql_cmd":"select `status` from `task` where `task_id`=%s" % body['task_id']
                 }
                 resp = dl.send_service('database', data)
                 # print(resp)
@@ -138,26 +153,34 @@ class TaskApp(RequestHandler):
                             data = {
                                 "table_name":"sql",
                                 "sql_cmd":"insert into `task`(`task_id`,`data_id`,`data_url`,`start_time`, `end_time`, `status`) \
-                                    VALUES (%s,%s,%s,%s, %s, %d); " % \
-                                    (request['task_id'], request['data_id'], request['data_url'], request['start_time'], request['end_time'], 1)
+                                    VALUES ('%s','%s','%s','%s', '%s', %d); " % \
+                                    (body['task_id'], body['image_data_id'], body['image_data_url'], body['start_time'], body['end_time'], 1)
                             }
                         else:
                             data = {
                                 "table_name":"sql",
-                                "sql_cmd":"update `task` set (`data_id`=%s, `data_url`=%s, `start_time`=%s, `end_time`=%s, `status`=1) where `task_id`=%s;" %\
-                                    (request['data_id'], request['data_url'], request['start_time'], request['end_time'], request['task_id'])
+                                "sql_cmd":"update `task` set (`data_id`='%s', `data_url`='%s', `start_time`='%s', `end_time`='%s', `status`=1) where `task_id`='%s';" %\
+                                    (body['image_data_id'], body['image_data_url'], body['start_time'], body['end_time'], body['task_id'])
                             }
-
                         result = dl.send_service('database', data)
-                        if result['status'] == 400:
+                        if result['status'] != 200:
                             raise HTTPError(500, log_message=result['msg'])
                         
                         # 生成执行表
-                        task_id = request['task_id']
-                        chunk = ""
-                        for device in request['device_list']:
-                            chunk += '(%s, %s, 1),' % (device, task_id)
-                        chunk = chunk[:-1]
+                        task_id = body['task_id']
+                        iot_dev_list_url = body['iot_dev_list_url']
+                        os.system('wget -c %s -O iot_dev_list' % iot_dev_list_url)
+                        hash_obj = hashlib.md5()
+                        with open('iot_dev_list', 'rb') as f:
+                            dev_list = f.readlines()
+                            chunk = ""
+                            for dev in dev_list:
+                                chunk += '(%s, %s, 1),' % (dev, task_id)
+                                hash_obj.update(dev)
+                            hash_code = hash_obj.hexdigest()
+                        if body['iot_dev_list_md5'] != hash_code:
+                            raise HTTPError(400, "iot dev list md5 check failed")
+                        
                         data = {
                             "table_name":"sql",
                             "sql_cmd":"delete from `execute`;\
@@ -165,43 +188,86 @@ class TaskApp(RequestHandler):
                                 %s;" % chunk
                         }
                         result = dl.send_service('database', data)
-                        if result['status'] == 400:
+                        if result['status'] != 200:
                             raise HTTPError(500, log_message=result['msg'])
                         # 检测文件是否存在
-                        if os.path.exists('/media/%s.bin' % request['data_id']):
+                        if os.path.exists('/media/%s.bin' % str(body['image_data_id'])):
                             pass
                         else:
-                            ret_code = os.system("wget -c %s -t 10 -T 5 -P /media/%s.bin" % (request['data_url'], request['data_id']))
-                            LOG('system', 'task data download complete, ret code:%d' % ret_code)
+                            ret_code = os.system("wget -c %s -O /media/%s.bin" % (body['image_data_url'], str(body['image_data_id'])))
+                            LOG.info('task data download complete, ret code:%d', ret_code)
+                            with open('/media/%s.bin' % body['image_data_id'], 'rb') as f:
+                                hash_obj = hashlib.md5()
+                                while True:
+                                    content = f.read(1024)
+                                    if not content:
+                                        break
+                                    hash_obj.update(content)
+                                hash_code = hash_obj.hexdigest()
+                                if body['image_data_md5'] != hash_code:
+                                    raise HTTPError(400, "data file md5 check failed")
                         data = {
                             "cmd":"task",
                             "method":"create",
-                            "task_id":request['task_id'],
+                            "task_id":body['task_id'],
                             "status":1
                         }
                         dl.send_service('serial', data)
-                        raise HTTPError(200)
+                        # raise HTTPError(200)
+                        status = 'ok'
+                        msg = "task_id %s create success" % body['task_id']
+                    else:
+                        # 不可创建任务
+                        LOG.info("task could not create, task status: %d", task_status)
+                        status = 'failed'
+                        msg = "task_id %s create not allowed" % body['task_id']
+                    # 上传命令处理结果
+                    upload = uplink.Upload()
+                    resp = {
+                        "id": request['id'],
+                        "from": request['from'],
+                        "status": status,
+                        "command": request['command'],
+                        "d":{
+                            "code":"task_status",
+                            "msg":msg
+                        }
+                    }
+                    gw.get_task_status()
+                    upload.send(resp, topic='dma/cmd/resp')
             elif cmd == 'cancel':
                 # cancel task
                 data = {
                     "cmd":"task",
                     "method":"cancel",
-                    "task_id":request['task_id']
+                    "task_id":body['task_id']
                 }
                 dl.send_service('serial', data)
                 
                 data = {
                     "table_name":"sql",
                     "sql_cmd":"delete from task where task_id='%s';" \
-                        % request['task_id']
+                        % body['task_id']
                 }
                 dl.send_service('database', data)
+                # 上传处理结果
+                upload = uplink.Upload()
+                resp = {
+                    "id": request['id'],
+                    "from": request['from'],
+                    "status": "ok",
+                    "command": request['command'],
+                    "d":{
+                        "result":"ok"
+                    }
+                }
+                upload.send(resp, topic='dma/cmd/resp')
             elif cmd == 'confirm':
                 # confirm task 
                 data = {
                     "table_name":"sql",
                     "sql_cmd":"update `task` set (`start_time`='%s', `end_time`='%s', `status`=2) where `task_id`='%s';" % \
-                        (request['start_time'], request['end_time'], request['task_id'])
+                        (body['start_time'], body['end_time'], body['task_id'])
                 }
                 dl.send_service('database', data)
             else:
@@ -216,13 +282,13 @@ class RadioApp(RequestHandler):
         src = "local" if body['from'] == 'local' else 'remote'
         radio_number = body.get('radio_number')
         if cmd == 'update':
-            LOG('system', '%s setup radio parameters' % src)
+            LOG.info('%s setup radio parameters', src)
             data = {
                 "cmd":"update",
                 "radio":radio_number
             }
         elif cmd == 'restart':
-            LOG('system', '%s restart radio' % src)
+            LOG.info('%s restart radio', src)
             data = {
                 "cmd":"restart",
                 "radio":radio_number
@@ -234,26 +300,54 @@ class GatewayApp(RequestHandler):
         try:
             request = self.request.body.decode('utf-8')
             request = json.loads(request)
+            body= request["d"]
             if cmd == 'group':
                 pass
                 # gateway.set_group(data.get('gateway_list', None))
-            elif cmd == 'auth':
-                white_list = request['payload']['d'].get('white_list', None)
-                if white_list:
+            elif cmd == 'white_list':
+                white_list_url = body['url']
+                white_list_md5 = body['md5']
+                LOG.info("get white list update request")
+                os.system('wget -c %s -O white_list' % white_list_url)
+                hash_obj = hashlib.md5()
+                with open('white_list', 'rb') as white_list_file:
                     chunk = ""
-                    for device in white_list:
-                        chunk += "('%s')," % device
+                    for line in white_list_file.readlines():
+                        hash_obj.update(line)
+                        chunk += "('%s')," % (line[:-1].decode('utf-8'))
+                hash_code = hash_obj.hexdigest()
+
+                if hash_code != white_list_md5:
+                    LOG.error('white list file md5 check failed')
+                    raise EpdException(code=400, message="md5 check failed")
+                else:
                     data = {
-                        "table_name":"sql",
-                        "sql_cmd":"create table add_list(`device_id`);\
-                            insert into add_list(`device_id`) values %s;\
-                            insert into white_list(`device_id`) select `device_id` from \
-                            add_list except select `device_id` from white_list;\
-                            drop table add_list;" % chunk[:-1]
+                        "table_name": "sql",
+                        "sql_cmd": "delete from `white_list`;\
+                            insert into white_list(`device_id`) values %s;" % chunk[:-1]
                     }
                     dl.send_service('database', data)
-                # auth_key = request.get('auth_key', None)
-                # if auth_key:
-                #     # gw.set_auth_key(auth_key)
-        except Exception as e:
-            self.write(e.__str__())
+                    gw.get_whitelist_md5()
+                    LOG.info('update database, white_list table')
+                    resp_status = "ok"
+                    resp_data = {"result":"ok"}
+            elif cmd == 'check_code':
+                gw.set_auth_key(body['check_code'])
+                resp_status = "ok"
+                resp_data = {"result":"ok"}
+        except EpdException as e:
+            LOG.error(e.__repr__())
+            resp_status = "err",
+            resp_data = {"msg":e.message}
+        finally:
+            upload = uplink.Upload()
+            resp = {
+                "id": request['id'],
+                "from": request['from'],
+                "status": resp_status,
+                "command": request['command'],
+                "d": resp_data
+            }
+            upload.send(resp, topic="dma/cmd/resp")
+            # self.write(e.__str__())
+
