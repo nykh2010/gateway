@@ -1,6 +1,7 @@
 from tornado.web import RequestHandler
 from config import Config
 import uuid
+from tornado.log import app_log as LOG
 
 def auth(fun):
     def auth_wrap(obj, *args, **kwargs):
@@ -21,7 +22,7 @@ class AuthHandler(RequestHandler):
             else:
                 return False
         except Exception as e:
-            print(e)
+            LOG.info(e.__str__())
 
     def post(self, method):
         ret = {}

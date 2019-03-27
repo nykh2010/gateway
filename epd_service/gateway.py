@@ -106,6 +106,16 @@ class Gateway(Config):
         self.__taskId, self.__taskStatus = self.get_task_status()     # 更新任务状态
         return True
 
+    def set_task_status(self, task_id, task_status):
+        if self.__taskId != task_id:
+            return False
+        epd_task = EpdTask()
+        epd_task.set_item('task_status', task_status)
+        epd_task.set_item('task_id', '0')
+        epd_task.save()
+        self.__taskId, self.__taskStatus = self.get_task_status()     # 更新任务状态
+        return True
+
     def check_task_integrity(self, image_data_md5, iot_dev_list_md5):
         hash_obj = hashlib.md5()
         with open("%s.tmp" % self.data_url, "rb") as datafile:

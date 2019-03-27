@@ -3512,3 +3512,755 @@
 [2019-03-27 10:30:13,031]-uplink.py:37 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
 [2019-03-27 10:30:23,051]-uplink.py:37 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
 [2019-03-27 10:30:33,072]-uplink.py:37 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:47:17,365]-downlink.py:41 downlink service start
+[2019-03-27 11:47:17,370]-main.py:10 epd service start...
+[2019-03-27 11:47:17,370]-uplink.py:55 sever host:0.0.0.0 port:5000
+[2019-03-27 11:47:27,369]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:47:37,379]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:47:47,388]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:47:57,396]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:48:07,413]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:48:17,428]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:48:27,442]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:48:37,457]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:48:47,467]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:48:57,487]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:49:07,502]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:49:17,523]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:49:27,532]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:49:37,543]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:49:47,564]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:49:57,585]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:50:07,595]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:50:17,609]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:50:27,630]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:50:37,657]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:50:47,680]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:50:57,704]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:51:07,730]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:51:17,754]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:51:27,779]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:51:37,792]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:51:47,814]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:51:57,824]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:52:07,845]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:52:17,859]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:52:27,870]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:52:37,891]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:52:47,911]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:52:57,931]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:53:07,952]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:53:17,976]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:53:24,692]-downlink.py:41 downlink service start
+[2019-03-27 11:53:24,699]-main.py:10 epd service start...
+[2019-03-27 11:53:24,699]-uplink.py:55 sever host:0.0.0.0 port:5000
+[2019-03-27 11:53:34,698]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:53:44,714]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:53:54,730]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:54:04,751]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:54:14,766]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:54:24,781]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:54:34,796]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:54:44,811]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:54:54,826]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:55:04,841]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:55:14,856]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:55:24,872]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:55:34,887]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:55:44,908]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:55:54,923]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:56:04,938]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:56:14,954]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:56:24,969]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:56:34,984]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:56:44,999]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:56:55,014]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:57:05,028]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:57:15,038]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:57:25,053]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:57:35,068]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:57:45,084]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:57:55,099]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:58:05,114]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:58:15,129]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:58:25,144]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:58:35,159]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:58:45,170]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:58:55,180]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:59:05,196]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:59:15,210]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:59:25,224]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:59:35,234]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:59:45,255]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 11:59:55,270]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:00:05,285]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:00:15,300]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:00:25,316]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:00:35,331]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:00:45,346]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:00:55,370]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:01:05,385]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:01:15,400]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:01:25,416]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:01:35,425]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:01:45,441]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:01:55,451]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:02:05,466]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:02:15,481]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:02:25,496]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:02:35,517]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:02:45,538]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:02:55,553]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:03:05,568]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:03:15,583]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:03:25,598]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:03:35,614]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:03:45,629]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:03:55,644]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:04:05,659]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:04:15,669]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:04:25,679]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:04:35,701]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:04:45,722]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:04:55,743]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:05:05,757]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:05:15,772]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:05:25,793]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:05:35,808]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:05:45,824]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:05:55,839]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:06:05,854]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:06:15,869]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:06:25,894]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:06:35,909]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:06:45,924]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:06:55,939]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:07:05,952]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:07:15,964]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:07:25,985]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:07:36,006]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:07:46,021]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:07:56,041]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:08:06,056]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:08:16,077]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:08:26,098]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:08:36,119]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:08:46,134]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:08:56,149]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:09:06,170]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:09:16,191]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:09:26,202]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:09:36,223]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:09:46,244]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:09:56,259]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:10:06,280]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:10:16,300]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:10:26,310]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:10:36,326]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:10:46,341]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:10:56,356]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:11:06,371]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:11:16,386]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:11:26,401]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:11:36,417]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:11:46,432]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:11:56,456]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:12:06,471]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:12:16,481]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:12:26,496]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:12:36,511]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:12:46,527]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:12:56,542]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:13:06,557]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:13:16,572]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:13:26,587]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:13:36,603]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:13:46,613]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:13:56,628]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:14:06,638]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:14:16,659]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:14:26,674]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:14:36,684]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:14:46,693]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:14:56,704]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:15:06,718]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:15:16,733]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:15:26,754]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:15:36,769]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:15:46,783]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:15:56,791]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:16:06,805]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:16:16,813]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:16:26,833]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:16:36,842]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:16:46,862]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:16:56,869]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:17:06,889]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:17:16,903]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:17:26,924]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:17:36,945]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:17:46,966]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:17:56,994]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:18:07,018]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:18:17,046]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:18:27,066]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:18:37,089]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:18:47,107]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:18:57,134]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:19:07,155]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:19:17,183]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:19:27,202]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:19:37,217]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:19:47,230]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:19:57,242]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:20:07,253]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:20:17,278]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:20:27,305]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:20:37,332]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:20:47,352]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:20:57,376]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:21:07,397]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:21:17,418]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:21:27,438]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:21:37,459]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:21:47,479]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:21:57,500]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:22:07,521]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:22:17,542]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:22:27,563]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:22:37,584]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:22:47,605]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:22:57,632]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:23:07,656]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:23:17,677]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:23:27,691]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:23:37,711]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:23:47,724]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:23:57,746]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:24:07,767]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:24:17,782]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:24:27,797]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:24:37,812]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:24:47,834]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:24:57,850]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:25:07,865]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:25:17,875]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:25:27,890]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:25:37,901]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:25:47,923]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:25:57,932]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:26:07,938]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:26:17,945]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:26:27,956]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:26:37,976]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:26:47,997]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:26:58,016]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:27:08,037]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:27:18,058]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:27:28,082]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:27:38,103]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:27:48,128]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:27:58,151]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:28:08,175]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:28:18,196]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:28:28,212]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:28:38,228]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:28:48,249]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:28:58,269]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:29:08,285]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:29:18,295]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:29:28,316]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:29:38,337]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:29:48,357]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:29:58,378]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:30:08,400]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:30:18,422]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:30:28,449]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:30:38,476]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:30:48,502]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:30:58,517]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:31:08,535]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:31:18,550]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:31:28,562]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:31:38,569]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:31:48,580]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:31:58,601]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 12:32:08,624]-uplink.py:34 curl -H 'token: MQRROJMAjKxaUy&kGMLoGc7YJDLLaiTu' -d '{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}' 'http://127.0.0.1:7788/mqtt/publish'
+[2019-03-27 13:16:50,662]-downlink.py:41 downlink service start
+[2019-03-27 13:16:50,669]-main.py:10 epd service start...
+[2019-03-27 13:16:50,669]-uplink.py:60 sever host:0.0.0.0 port:5000
+[2019-03-27 13:18:23,802]-downlink.py:41 downlink service start
+[2019-03-27 13:18:23,808]-main.py:10 epd service start...
+[2019-03-27 13:18:23,808]-uplink.py:61 sever host:0.0.0.0 port:5000
+[2019-03-27 13:19:20,989]-downlink.py:41 downlink service start
+[2019-03-27 13:19:20,995]-main.py:10 epd service start...
+[2019-03-27 13:19:20,995]-uplink.py:61 sever host:0.0.0.0 port:5000
+[2019-03-27 13:19:54,883]-downlink.py:41 downlink service start
+[2019-03-27 13:19:54,886]-main.py:10 epd service start...
+[2019-03-27 13:19:54,886]-uplink.py:62 sever host:0.0.0.0 port:5000
+[2019-03-27 13:20:34,947]-downlink.py:41 downlink service start
+[2019-03-27 13:20:34,953]-main.py:10 epd service start...
+[2019-03-27 13:20:34,954]-uplink.py:62 sever host:0.0.0.0 port:5000
+[2019-03-27 13:21:35,696]-downlink.py:41 downlink service start
+[2019-03-27 13:21:35,702]-main.py:10 epd service start...
+[2019-03-27 13:21:35,703]-uplink.py:63 sever host:0.0.0.0 port:5000
+[2019-03-27 13:22:52,789]-downlink.py:41 downlink service start
+[2019-03-27 13:22:52,795]-main.py:10 epd service start...
+[2019-03-27 13:22:52,795]-uplink.py:65 sever host:0.0.0.0 port:5000
+[2019-03-27 13:23:25,467]-downlink.py:41 downlink service start
+[2019-03-27 13:23:25,470]-main.py:10 epd service start...
+[2019-03-27 13:23:25,471]-uplink.py:65 sever host:0.0.0.0 port:5000
+[2019-03-27 13:23:54,175]-downlink.py:41 downlink service start
+[2019-03-27 13:23:54,180]-main.py:10 epd service start...
+[2019-03-27 13:23:54,180]-uplink.py:65 sever host:0.0.0.0 port:5000
+[2019-03-27 13:24:06,475]-uplink.py:40 {"status":"ok"}
+[2019-03-27 13:25:15,390]-downlink.py:41 downlink service start
+[2019-03-27 13:25:15,395]-main.py:10 epd service start...
+[2019-03-27 13:25:15,396]-uplink.py:64 sever host:0.0.0.0 port:5000
+[2019-03-27 13:25:25,394]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:25:25,403]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:25:35,404]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:25:35,409]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:25:45,411]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:25:45,416]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:25:55,421]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:25:55,427]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:26:05,429]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:26:05,434]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:26:15,436]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:26:15,441]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:26:25,443]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:26:25,448]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:26:35,450]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:26:35,455]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:26:45,457]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:26:45,462]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:26:55,464]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:26:55,469]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:27:05,472]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:27:05,478]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:27:15,480]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:27:15,485]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:27:25,487]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:27:25,492]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:27:35,494]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:27:35,499]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:27:45,501]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:27:45,506]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:27:55,508]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:27:55,514]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:28:05,516]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:28:05,518]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:28:15,519]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:28:15,524]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:28:25,526]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:28:25,531]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:28:35,533]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:28:35,538]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:28:45,540]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:28:45,545]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:28:55,547]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:28:55,553]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:29:05,555]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:29:05,560]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:29:15,562]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:29:15,568]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:29:25,570]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:29:25,575]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:29:35,577]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:29:35,583]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:29:45,585]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:29:45,590]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:29:55,592]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:29:55,598]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:30:05,600]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:30:05,605]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:30:15,607]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:30:15,612]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:30:25,614]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:30:25,619]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:30:35,622]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:30:35,627]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:30:45,629]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:30:45,639]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:30:55,642]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:30:55,647]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:31:05,649]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:31:05,654]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:31:15,656]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:31:15,661]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:31:25,663]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:31:25,668]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:31:35,670]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:31:35,676]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:31:45,678]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:31:45,683]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:31:55,686]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:31:55,691]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:32:05,693]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:32:05,698]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:32:15,700]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:32:15,705]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:32:25,707]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:32:25,718]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:32:35,720]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:32:35,725]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:32:45,727]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:32:45,732]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:32:55,734]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:32:55,740]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:33:05,742]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:33:05,747]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:33:15,749]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:33:15,754]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:33:25,756]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:33:25,759]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:33:35,761]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:33:35,766]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:33:45,768]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:33:45,773]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:33:55,775]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:33:55,780]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:34:05,781]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:34:05,785]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:34:11,717]-downlink.py:41 downlink service start
+[2019-03-27 13:34:11,722]-main.py:10 epd service start...
+[2019-03-27 13:34:11,723]-uplink.py:61 sever host:0.0.0.0 port:5000
+[2019-03-27 13:34:21,721]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:34:21,729]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:34:31,731]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:34:31,736]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:34:41,738]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:34:41,743]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:34:51,745]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:34:51,750]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:35:01,752]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:35:01,757]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:35:11,760]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:35:11,770]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:35:21,773]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:35:21,783]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:35:31,785]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:35:31,790]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:35:41,792]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:35:41,803]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:35:51,805]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:35:51,810]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:36:01,812]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:36:01,814]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:36:11,815]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:36:11,820]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:36:21,822]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:36:21,827]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:36:31,830]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:36:31,832]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:36:41,833]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:36:41,838]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:36:51,840]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:36:51,842]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:37:01,844]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:37:01,848]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:37:11,851]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:37:11,855]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:37:21,857]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:37:21,863]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:37:31,865]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:37:31,870]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:37:41,872]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:37:41,874]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:37:51,875]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:37:51,877]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:38:01,878]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:38:01,883]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:38:11,885]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:38:11,889]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:38:21,890]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:38:21,896]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:38:31,898]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:38:31,903]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:38:41,905]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:38:41,910]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:38:51,912]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:38:51,915]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:39:01,916]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:39:01,921]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:39:11,923]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:39:11,928]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:39:21,931]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:39:21,936]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:39:31,938]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:39:31,943]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:39:41,945]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:39:41,950]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:39:51,952]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:39:51,957]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:40:01,959]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:40:01,964]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:40:11,966]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:40:11,971]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:40:21,973]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:40:21,978]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:40:31,980]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:40:31,984]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:40:41,987]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:40:41,992]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:40:51,994]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:40:51,999]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:41:02,001]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:41:02,006]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:41:12,008]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:41:12,013]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:41:22,015]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:41:22,020]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:41:32,023]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:41:32,028]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:41:42,030]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:41:42,036]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:41:52,038]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:41:52,043]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:42:02,045]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:42:02,051]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:42:12,052]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:42:12,057]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:42:22,059]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:42:22,065]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:42:32,067]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:42:32,072]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:42:42,074]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:42:42,079]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:42:52,081]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:42:52,086]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:43:02,088]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:43:02,093]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:43:12,096]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:43:12,100]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:43:22,103]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:43:22,113]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:43:32,115]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:43:32,120]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:43:42,122]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:43:42,128]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:43:52,130]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:43:52,135]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:44:02,137]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:44:02,143]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:44:12,145]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:44:12,150]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:44:22,152]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:44:22,157]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:44:32,159]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:44:32,164]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:44:42,166]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:44:42,171]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:44:52,173]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:44:52,178]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:45:02,180]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:45:02,185]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:45:12,187]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:45:12,192]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:45:22,194]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:45:22,199]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:45:32,201]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:45:32,206]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:45:42,208]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:45:42,218]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:45:52,220]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:45:52,225]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:46:02,227]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:46:02,232]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:46:12,234]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:46:12,239]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:46:22,241]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:46:22,247]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:46:32,249]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:46:32,254]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:46:42,257]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:46:42,262]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:46:52,264]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:46:52,268]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:47:02,270]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:47:02,275]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:47:12,278]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:47:12,283]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:47:22,285]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:47:22,290]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:47:32,292]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:47:32,297]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:47:42,299]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:47:42,310]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:47:52,312]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:47:52,317]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:48:02,320]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:48:02,325]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:48:12,327]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:48:12,333]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:48:22,335]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:48:22,340]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:48:32,342]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:48:32,347]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:48:42,349]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:48:42,355]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:48:52,358]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:48:52,363]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:49:02,365]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:49:02,370]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:49:12,372]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:49:12,377]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:49:22,379]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:49:22,384]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:49:32,386]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:49:32,391]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:49:42,393]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:49:42,398]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:49:52,400]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:49:52,405]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:50:02,407]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:50:02,412]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:50:12,414]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:50:12,419]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:50:22,422]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:50:22,427]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:50:32,429]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:50:32,434]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:50:42,436]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:50:42,441]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:50:52,443]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:50:52,448]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:51:02,450]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:51:02,455]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:51:12,457]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:51:12,462]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:51:22,464]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:51:22,469]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:51:32,471]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:51:32,474]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:51:42,476]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:51:42,481]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:51:52,483]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:51:52,488]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:52:02,490]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:52:02,495]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:52:12,497]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:52:12,502]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:52:22,504]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:52:22,509]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:52:32,511]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:52:32,516]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:52:42,518]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:52:42,523]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:52:52,525]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:52:52,527]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:53:02,529]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:53:02,533]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:53:12,536]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:53:12,541]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:53:22,543]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:53:22,548]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:53:32,550]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:53:32,555]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:53:42,557]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:53:42,562]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:53:52,564]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:53:52,569]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:54:02,571]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:54:02,575]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:54:12,578]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:54:12,582]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:54:22,584]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:54:22,586]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:54:32,587]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:54:32,589]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:54:42,590]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:54:42,595]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:54:52,597]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:54:52,602]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:55:02,604]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:55:02,609]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:55:12,611]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:55:12,614]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:55:22,616]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:55:22,620]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:55:32,622]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:55:32,628]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:55:42,630]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:55:42,635]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:55:52,637]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:55:52,642]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:56:02,644]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:56:02,649]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:56:12,651]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:56:12,656]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:56:22,658]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:56:22,663]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:56:32,665]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:56:32,670]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:56:42,672]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:56:42,678]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:56:52,680]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:56:52,685]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:57:02,687]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:57:02,693]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:57:12,695]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:57:12,700]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:57:22,702]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:57:22,707]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:57:32,709]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:57:32,713]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:57:42,714]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:57:42,719]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:57:52,721]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:57:52,726]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:58:02,728]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:58:02,739]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:58:12,741]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:58:12,746]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:58:22,748]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:58:22,753]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:58:32,756]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:58:32,760]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:58:42,761]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:58:42,767]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:58:52,769]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:58:52,774]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:59:02,776]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:59:02,781]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:59:12,783]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:59:12,788]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:59:22,790]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:59:22,795]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:59:32,797]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:59:32,802]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:59:42,804]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:59:42,808]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 13:59:52,809]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 13:59:52,814]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 14:00:02,816]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 14:00:02,821]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 14:00:12,823]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 14:00:12,828]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 14:00:22,832]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 14:00:22,837]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 14:00:32,839]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 14:00:32,844]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 14:00:42,847]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 14:00:42,852]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 14:00:52,855]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 14:00:52,860]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 14:01:02,862]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 14:01:02,866]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 14:01:12,867]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 14:01:12,872]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 14:01:22,874]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 14:01:22,879]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 14:01:32,881]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 14:01:32,883]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 14:01:42,884]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 14:01:42,889]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 14:01:52,891]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 14:01:52,896]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 14:02:02,899]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 14:02:02,904]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 14:02:12,905]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 14:02:12,907]-uplink.py:39 result:{"status":"ok"}
+[2019-03-27 14:02:22,908]-uplink.py:35 b'{"topic": "gateway/report/status", "payload": {"d": {"task_id": 1, "whitelist_md5": "a1087d19c2be8a2d97aa4c124bc37623", "check_code": 3014}}}'
+[2019-03-27 14:02:22,913]-uplink.py:39 result:{"status":"ok"}

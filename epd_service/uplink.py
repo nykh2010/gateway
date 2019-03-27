@@ -14,6 +14,7 @@ from configparser import ConfigParser
 from epd_log import epdlog as LOG
 import sys
 import os
+import urllib.request
 
 sys.path.append(os.path.dirname(__file__))
 
@@ -29,10 +30,15 @@ class Upload:
         data['topic'] = topic
         data['payload'] = payload
 
-        body = json.dumps(data)
-        cmd = "curl -H 'token: %s' -d '%s' '%s'" % (token, body, url)
-        LOG.info(cmd)
-        os.system(cmd)
+        try:
+            params = json.dumps(data).encode('utf-8')
+            LOG.info(params)
+            request = urllib.request.Request(url, data=params, headers={'token':token})
+            resp = urllib.request.urlopen(request)
+            content = resp.read().decode('utf-8')
+            LOG.info("result:"+content)
+        except Exception as e:
+            LOG.error(e.__str__())
 
 
 app = Application(

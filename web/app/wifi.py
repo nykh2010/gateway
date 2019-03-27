@@ -1,6 +1,7 @@
 from tornado.web import RequestHandler
 from auth import auth
 from config import Config
+from tornado.log import app_log as LOG
 
 class WifiHandler(RequestHandler):
     @auth
@@ -23,7 +24,7 @@ class WifiHandler(RequestHandler):
                 ret['status'] = 'success'
                 wifi.save()
             except Exception as e:
-                print(e)
+                LOG.error(e.__str__())
                 ret['status'] = 'failed'
                 ret['err_msg'] = e.__repr__
             finally:

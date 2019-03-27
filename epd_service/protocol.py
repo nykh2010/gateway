@@ -71,8 +71,22 @@ class TaskRequest(Handle):
     def func(self, data):
         task_id = data['task_id']
         status = data['status']
-        success_list = data.get('success_list', [])
-        fail_list = data.get('fail_list', [])
+        # success_list = data.get('success_list', [])
+        # fail_list = data.get('fail_list', [])
+        try:
+            ret = gw.set_task_status(task_id, status)
+            if not ret:
+                raise Exception()
+            with open("/tmp/success") as successfile:
+                content = successfile.read()
+                success_list = content.split('\n')
+            with open("/tmp/fail") as failfile:
+                content = failfile.read()
+                fail_list = content.split('\n')
+        except Exception as e:
+            LOG.error(e.__str__())
+            return
+        
         # 上传执行状态
         send_data = {
             "task_id":task_id,

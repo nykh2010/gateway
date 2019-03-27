@@ -2,6 +2,7 @@ from tornado.web import RequestHandler
 from auth import auth
 from config import Config
 from connect_service import send_to_service
+from tornado.log import app_log as LOG
 
 class RadioHandler(RequestHandler):
     '''射频参数配置'''
@@ -70,5 +71,5 @@ class RadioHandler(RequestHandler):
         except Exception as e:
             ret['status'] = 'failed'
             ret['err_msg'] = e.__repr__()
-            print(e)
+            LOG.error(e.__str__())
         self.write(ret)

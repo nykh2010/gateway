@@ -1,8 +1,9 @@
 from configparser import ConfigParser
 import os
+from tornado.log import app_log as LOG
 # import json
 
-PATH = '/etc/gateway/config'
+PATH = '/etc/gateway'
 
 class Config:
     def __init__(self,name):
@@ -13,7 +14,7 @@ class Config:
             for k,v in self.__config.items(name):
                 self.__setattr__(k, v)
         except Exception as e:
-            print(e)
+            LOG.error(e.__str__())
             self.__config.add_section(self.__name)
             self.save()
     

@@ -1,6 +1,7 @@
 from tornado.web import RequestHandler
 from config import Config
 from auth import auth
+from tornado.log import app_log as LOG
 
 
 
@@ -32,4 +33,5 @@ class ServerHandler(RequestHandler):
             except Exception as e:
                 ret['status'] = 'failed'
                 ret['err_msg'] = e.__repr__()
+                LOG.error(e.__str__())
             self.write(ret)
