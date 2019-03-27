@@ -46,7 +46,7 @@ class Downlink(UnixStreamServer):
         self.server_close()
         self.__thread.join()
 
-    def send_service(self, service_name, data):
+    def send_service(self, service_name, data, need_resp=False):
         path = ""
         for service in self.services:
             if service_name == service[0]:
@@ -58,11 +58,12 @@ class Downlink(UnixStreamServer):
                 self.__client.connect(path)
                 content = json.dumps(data)
                 self.__client.send(content.encode('utf-8'))
-                resp = self.__client.recv(1024*1024)
-                if not resp:
-                    raise Exception()
-                resp = resp.decode('utf-8')
-                content = json.loads(resp, encoding='utf-8')
+                if need_resp:
+                    resp = self.__client.recv(1024*1024)
+                    if not resp:
+                        raise Exception()
+                    resp = resp.decode('utf-8')
+                    content = json.loads(resp, encoding='utf-8')
             except Exception as e:
                 LOG.error(e.__repr__())
                 content = {

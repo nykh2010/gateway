@@ -26,21 +26,16 @@ class Handle:
 
 class HeartRequest(Handle):
     def func(self, request):
-        time_str = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(time.time()))
         LOG.info('%s heart beat', request['device_id'])
-        # data = {
-        #     "table_name":"white_list",
-        #     "method":"connect",
-        #     "device_id":request['device_id'],
-        #     "time":time_str
-        # }
-        # sql_cmd = "update `white_list` set `last_connect_time`='%s' where `device_id`='%s';" % (time_str, request['device_id'])
-        # LOG.info("query database: %s", sql_cmd)
-        # data = {
-        #     "table_name":"sql",
-        #     "sql_cmd": sql_cmd
-        # }
-        # dl.send_service('database', data)
+        if gw.is_in_executelist(request['device_id'], request['data_id']):
+            LOG.info("%s is in execute list", request['device_id'])
+            status = "ok"
+        else:
+            status = "error"
+        send_data = {
+            "status":status
+        }
+        dl.send_service('serial', send_data)
         self.upload(request)
     
     def upload(self, data):
@@ -54,13 +49,23 @@ class HeartRequest(Handle):
                 "msg": data.get('msg', "")
             }
         }
-        # from uplink import upload
         super().upload('dma/report/periph', send_data)
-        
 
 class RegisterRequest(Handle):
     def func(self, data):
-        pass
+        device_id = data['device_id']
+        LOG.info("%s register", device_id)
+        ret = gw.is_in_whitelist(device_id)
+        if ret:
+            LOG.info("%s is in white list", device_id)
+            status = "ok"
+        else:
+            status = "error"
+        send_data = {
+            "status":status
+        }
+        dl.send_service('serial', send_data)
+        
 
 class TaskRequest(Handle):
     def func(self, data):
@@ -68,36 +73,6 @@ class TaskRequest(Handle):
         status = data['status']
         success_list = data.get('success_list', [])
         fail_list = data.get('fail_list', [])
-        # sql_cmd = "update `task` set `status`='%d' where `task_id`='%s';" % (status, task_id)
-        # request = {
-        #     "table_name":"sql",
-        #     "sql_cmd": sql_cmd
-        # }
-        # LOG.info("query database:%s", sql_cmd)
-        # ret = dl.send_service('database', request)
-        
-        # if success_list:
-        #     chunk = ""
-        #     for success in success_list:
-        #         chunk += "`device_id`=%s or" % success
-        #     chunk = chunk[:-2]
-        #     # LOG.info(chunk)
-        #     request = {
-        #         "table_name":"sql",
-        #         "sql_cmd":"update `execute` set `status`=2 where %s;" % chunk
-        #     }
-        #     dl.send_service('database', request)
-        # if fail_list:
-        #     chunk = ""
-        #     for fail in fail_list:
-        #         chunk += "`device_id`=%s or" % fail
-        #     chunk = chunk[:-2]
-        #     LOG.info(chunk)
-        #     request = {
-        #         "table_name":"sql",
-        #         "sql_cmd":"update `execute` set `status`=3 where %s;" % chunk
-        #     }
-        #     dl.send_service('database', request)
         # 上传执行状态
         send_data = {
             "task_id":task_id,
@@ -184,14 +159,6 @@ class TaskApp(RequestHandler):
                 else:
                     status = 'err'
                     result = {'code':'cancel_failed', 'msg':'task not found'}
-                
-
-                # data = {
-                #     "table_name":"sql",
-                #     "sql_cmd":"delete from task where task_id='%s';" \
-                #         % body['task_id']
-                # }
-                # dl.send_service('database', data)
                 # 上传处理结果
                 upload = uplink.Upload()
                 resp = {
@@ -244,7 +211,6 @@ class GatewayApp(RequestHandler):
             body= request["d"]
             if cmd == 'group':
                 pass
-                # gateway.set_group(data.get('gateway_list', None))
             elif cmd == 'white_list':
                 ret = gw.create_whitelist(body['url'], body['md5'])
                 if ret:
@@ -269,5 +235,4 @@ class GatewayApp(RequestHandler):
                 "d": resp_data
             }
             upload.send(resp, topic="dma/cmd/resp")
-            # self.write(e.__str__())
 

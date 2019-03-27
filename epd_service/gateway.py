@@ -57,6 +57,17 @@ class Gateway(Config):
         if md5 != hash_code:
             return False
         return True
+
+    def is_in_whitelist(self, device_id):
+        return device_id in self.__whitelist
+
+    def is_in_executelist(self, device_id, data_id):
+        epd_task = EpdTask()
+        if epd_task.image_data_id != device_id:
+            return False
+        if not epd_task.is_in_executelist(device_id):
+            return False
+        return True
     
     def create_task(self, task_id, image_data_id, image_data_url,\
             image_data_md5, iot_dev_list_md5, iot_dev_list_url, start_time, end_time):

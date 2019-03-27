@@ -7,7 +7,7 @@ from config import Config
 # from uplink import upload
 
 class EpdTask(Config):
-    __execute_list = None
+    __execute_list = set()
     def __init__(self):
         super().__init__('epdtask')
         self.update_execute_list()
@@ -19,6 +19,9 @@ class EpdTask(Config):
                 self.__execute_list = set(content.split('\n'))
         except:
             pass
+
+    def is_in_executelist(self, device_id):
+        return device_id in self.__execute_list
 
 # epd = EpdTask()
 # print(dir(epd))

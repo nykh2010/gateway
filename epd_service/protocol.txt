@@ -11,6 +11,10 @@ serial-->epd
     “status”:(运行状态),
     "msg":"(需要上报的消息)"
 }
+应答：
+{
+    "status":"ok"       "ok","error"
+}
 
 2、注册上报
 serial-->epd
@@ -29,6 +33,8 @@ serial-->epd
     "success_list":["(终端id)",...],
     "fail_list":["(终端id)",...]
 }
+
+
 
 3、任务状态上报
 epd-->server
