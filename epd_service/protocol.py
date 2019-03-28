@@ -132,7 +132,8 @@ class TaskApp(RequestHandler):
                         "cmd":"task",
                         "method":"create",
                         "task_id":body['task_id'],
-                        "status":1
+                        "start_time":body['start_time'],
+                        "end_time":body['end_time']
                     }
                     dl.send_service('serial', data)
                     # raise HTTPError(200)
