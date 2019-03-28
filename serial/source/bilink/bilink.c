@@ -17,6 +17,7 @@
 #include "..//payload.h"
 #include "../rts/rts.h"
 #include "../timer/timer.h"
+#include "../inifun/inirw.h"
 /*--------------------------------------------------------------------------------*/
 #define DEBUG_PRINTF 0
 #if DEBUG_PRINTF
@@ -31,11 +32,18 @@
 /*--------------------------------------------------------------------------------*/
 static void rts_recv_data (struct rts_conn *ptr) {
 
-
+	int tmp;
 	serial_packet_entry_t * newEntry = NULL;
 	struct serial_handler * handler = (struct serial_handler* )ptr;
 
-    PRINTF("rts recv data over: %s\n", ptr->ots.pld.rbuf.buf);
+	log_debug("rts recv %d bytes data", ptr->ots.pld.rbuf.size-1);
+
+	for (tmp=0; tmp<(ptr->ots.pld.rbuf.size-1); tmp++) {
+		printf("%02X ",  ptr->ots.pld.rbuf.payload.data[tmp]);
+	}
+	printf("\n");
+
+
     pthread_mutex_lock(&handler->readDataMut);
 	newEntry = (serial_packet_entry_t *)malloc(sizeof(serial_packet_entry_t));
 
@@ -67,27 +75,55 @@ static struct rts_callbacks rts_callback_obj = {
 
 int bilink_open (struct bilink_conn * c, const struct bilink_callbacks * callbacks) {
 	int ret;
-//	if ((c = (struct bilink_conn *)malloc(sizeof(struct bilink_conn))) == NULL) {
-//		printf("bilink open failed\n");
-//		return -1;
-//	} else {
-//		printf("bilink opened\n");
-//	}
-	uint64_to_array(0x0123456789ABCDEF, c->selfaddr);
-    c->timeout_ms = RTS_ACK_TIME_MS;
-    c->initkey[0] = 0x5A;
-    c->initkey[1] = 0xEF;
-    c->newkey[0] = 0xAA;
-    c->newkey[1] = 0x55;
-    c->tx_max = 3;
+	char tmp_str[64];
+
+	IniReadValue("[bilink]", "selfId", tmp_str, CONFIG_PATH);
+	log_debug("selfId = %s", tmp_str);
+	str_to_hex(c->selfaddr, tmp_str, 16);
+
+    c->timeout_ms = readIntValue("[bilink]", "rtsSendTimeoutMs", CONFIG_PATH);
+    log_debug("rtsSendTimeoutMs = %d", (int)c->timeout_ms);
+
+	IniReadValue("[bilink]", "initKey", tmp_str, CONFIG_PATH);
+	str_to_hex(c->initkey, tmp_str, 4);
+	log_debug("initKey %s", tmp_str);
+
+	IniReadValue("[bilink]", "newKey", tmp_str, CONFIG_PATH);
+	str_to_hex(c->newkey, tmp_str, 4);
+	log_debug("newKey = %s", tmp_str);
+
+    c->tx_max = 1;
     c->u = callbacks;
-    ret = rts_open(&c->rts, &rts_callback_obj);
+    if ((ret = rts_open(&c->rts, &rts_callback_obj)) == 0) {
+
+        log_info("rts successfully opened.");
+        log_debug("wait for write semaphore.");
+        sem_wait(&c->rts.ots.pld.serial.writeDataSem);
+        log_debug("wait for read semaphore.");
+        sem_wait(&c->rts.ots.pld.serial.readDataSem);
+        log_info("got read and write semaphores.");
+        log_debug("wait for MCU status.");
+
+//        if (0 == rts_send_ctrl(&c->rts, SIMPLE_PAYLOAD_STATUS, 500)) {
+//        	log_info("got MCU status.");
+//        	if (0 != rts_send_ctrl(&c->rts, SIMPLE_PAYLOAD_RESE_MODE, 500)) {
+//        		log_error("Radio change to RESE mode error.");
+//        	}
+//        } else {
+//        	log_error("The MCU status is not OK.");
+////        	return -1;
+//        }
+
+    } else {
+    	log_error("rts open failed.");
+    }
 
     return ret;
 }
 
 void bilink_close(struct bilink_conn *c) {
 	rts_close(&c->rts);
+    log_info("rts closed.");
 	free(c);
 }
 
@@ -104,8 +140,13 @@ int bilink_send_data (struct bilink_conn * c, struct simple_payload_buf * s) {
 		return -1;
 	}
 
-	s->buf[SIMPLE_PAYLOAD_TYPE_INDEX] = SIMPLE_PAYLOAD_TYPE_DATA;
+//	s->buf[SIMPLE_PAYLOAD_TYPE_INDEX] = SIMPLE_PAYLOAD_TYPE_DATA;
+	s->payload.ctrl = SIMPLE_PAYLOAD_TYPE_DATA;
 	s->size += 1;
+
+//	s->buf[SIMPLE_PAYLOAD_TYPE_INDEX] = 0x04;
+//	s->size = 1;
+
 	for (tx=0; tx<c->tx_max; tx++) {
 	    ret = rts_send(&c->rts, s, c->timeout_ms);
 	    if (RTS_SEND_OK == ret)

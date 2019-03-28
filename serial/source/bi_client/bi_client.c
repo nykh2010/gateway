@@ -13,6 +13,7 @@
 #include "../config.h"
 #include "../bilink/bilink.h"
 #include "../task/task.h"
+#include "../inifun/inirw.h"
 
 #define UNIX_NET_ACK "ACK"
 #define UNIX_NET_ACK_LEN 3
@@ -29,7 +30,7 @@
  
 static int running = 1;
  
-int unix_send_without_recv (const char * path, const char * src, int size) {
+int unix_send_without_recv (struct client_conn * c, const char * src, int size) {
 	int ret = -1;
 
 //	int num = 0;
@@ -41,23 +42,23 @@ int unix_send_without_recv (const char * path, const char * src, int size) {
 
 	sock_fd = socket(PF_UNIX, SOCK_STREAM, 0);
 	if (sock_fd < 0) {
-		perror("Fail to socket");
+		log_error("Fail to socket.");
 		return ret;
 	}
 
 	serv_addr.sun_family = AF_UNIX;
-	strcpy(serv_addr.sun_path, path);
+	strcpy(serv_addr.sun_path, c->epdSockPath);
 
 	serv_addr_len = sizeof(serv_addr);
 	if (connect(sock_fd, (struct sockaddr *)&serv_addr, serv_addr_len) < 0)
 	{
-		perror("Fail to connect");
+		log_error("Fail to connect.");
 		close(sock_fd);
 		return ret;
 	}
 	ret = write(sock_fd, src, size);
 	if (ret < 0) {
-		printf("write failed\n");
+		log_error("sock write failed.");
 		close(sock_fd);
 		return ret;
 	}
@@ -72,7 +73,7 @@ int unix_send_without_recv (const char * path, const char * src, int size) {
 }
 
 
-int unix_send_with_recv (const char * path, const char * src, int size, char * dest, int max_size) {
+int unix_send_with_recv (struct client_conn * c, const char * src, int size, char * dest, int max_size) {
 	int ret = -1;
 
 	int sock_fd = -1;
@@ -83,23 +84,23 @@ int unix_send_with_recv (const char * path, const char * src, int size, char * d
  
 	sock_fd = socket(PF_UNIX, SOCK_STREAM, 0);
 	if (sock_fd < 0) {
-		perror("Fail to socket");
+		log_error("Fail to socket.");
 		return ret;
 	}
  
 	serv_addr.sun_family = AF_UNIX;
-	strcpy(serv_addr.sun_path, path);
+	strcpy(serv_addr.sun_path, c->epdSockPath);
 
 	serv_addr_len = sizeof(serv_addr);
 	if (connect(sock_fd, (struct sockaddr *)&serv_addr, serv_addr_len) < 0)
 	{
-		perror("Fail to connect");
+		log_error("Fail to connect.");
 		close(sock_fd);
 		return ret;
 	}
 	ret = write(sock_fd, src, size);
 	if (ret < 0) {
-		printf("write failed\n");
+		log_error("sock write failed.");
 		return ret;
 	}
 	* dest = '\0';
@@ -121,24 +122,27 @@ int client_open (struct client_conn * c) {
 	if (c == NULL) {
 //		if ((c = (struct client_conn *)malloc(sizeof(struct client_conn))) == NULL) {
 //			printf("bilink client open failed\n");
-//			return -1;
+			return -1;
 //		} else {
 //		    printf("client opened\n");
 //		}
 	}
-
+	IniReadValue("[client]", "epdSockPath", c->epdSockPath, CONFIG_PATH);
     //_serial_packet_entryeate write thread
     if (pthread_create(&c->thread, NULL, client_thread_exec, (void *)c) != 0) {
-        PRINTF("create server thread failed\n");
+        log_error("create client thread failed.");
 //        free(c);
         return -1;
     }
+    log_info("client thread created.");
 	return 0;
 }
 
 int client_close (struct client_conn * c) {
-	pthread_join(c->thread, NULL);
-//	free(c);
+//	pthread_join(c->thread, NULL);
+	pthread_cancel(c->thread);
+//	free(s);
+	log_info("client thread closed.");
 	return 0;
 }
 //

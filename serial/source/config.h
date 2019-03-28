@@ -19,13 +19,20 @@
 #include "task/task.h"
 #endif
 
+#include "./log/log.h"
 /*--------------------------------------------------------------------------------*/
 
+//#define ZLOG_CONF_PATH  "/home/user/eclipse-workspace/serialapp/Debug/config/zlog.conf"
+#define ZLOG_CONF_PATH  "./config/zlog.conf"
+#define ZLOG_CATEGORY   "SERIAL"
 
+/*--------------------------------------------------------------------------------*/
 #ifndef SERIAL_CONFIG_PATH
 //#define SERIAL_CONFIG_PATH  "/home/user/eclipse-workspace/serialapp/Debug/config/serial.ini"
 #define SERIAL_CONFIG_PATH  "./config/serial.ini"
 #endif
+
+#define CONFIG_PATH  "./config/config.ini"
 
 #define CONFIG_SECTION_SERIAL          "[serial]"
 #define CONFIG_SECTION_BILINK          "[bilink]"
@@ -50,18 +57,22 @@
 #define CONFIG_DEFAULT_VAL_READ_LIST_MAX_LEN   30
 #define CONFIG_DEFAULT_VAL_WRITE_LIST_MAX_LEN  30
 
+/*--------------------------------------------------------------------------------*/
 //  unix socket config
-#define UNIX_DOMAIN "/var/run/gateway/serialserver.sock"
+//#define UNIX_DOMAIN "/var/run/gateway/serialserver.sock"
 //#define UNIX_DOMAIN "./serialserver.sock"
 #define UNIX_DOMAIN_SIZE 64
 #define UNIX_DOMAINRECV_BUFFER_SIZE   1024
 #define MAX_CLIENT_NUM  10
 
-#define UNIX_DOMAIN_CLIENT "/var/run/gateway/epdserver.sock"
+//#define UNIX_DOMAIN_CLIENT "/var/run/gateway/epdserver.sock"
 #define SELECT_TIMEOUT_S 5
 
-#define SQL_TABLE_PATH  "/var/run/gateway/sqlite3/sqlite3.sock"
-#define DATA_BIN_PATH  "/var/run/gateway/test_bin"
+//#define LOCAL_EXEC_FAIL_TABLE_PATH  "/tmp/exec_fail.list"
+//#define LOCAL_EXEC_OK_TABLE_PATH  "/tmp/exec_ok.list"
+//#define LOCAL_SQL_TABLE_PATH  "/tmp/execlist.db"
+//#define SQL_TABLE_PATH  "/var/run/gateway/sqlite3/sqlite3.sock"
+//#define DATA_BIN_PATH  "/var/run/gateway/test_bin"
 //
 #define RTS_BUSY_TIME_MS  20
 #define RTS_ACK_TIME_MS   20

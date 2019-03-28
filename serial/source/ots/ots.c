@@ -5,6 +5,7 @@
 #include <string.h>
 #include <unistd.h>
 
+#include "../config.h"
 #include "../payload.h"
 #include "../ots/ots.h"
 
@@ -16,13 +17,20 @@
 #define PRINTF(...)
 #endif
 
+
+//#define LOG_DEBUG(...) log_debug(__VA_ARGS__)
+#ifndef LOG_DEBUG
+#define LOG_DEBUG(...)
+#endif
+
+
 // static void * ots_recv_routine(void * arg);
 static int recv_from_serial (struct serial_handler * serial, uint8_t * data, int size) {
 	struct ots_conn * c = (struct ots_conn *)serial;
 	c->pld.rbuf.size = size;
 	memcpy(c->pld.rbuf.buf, data, size);
 	c->pld.rbuf.buf[size] = 0;
-	PRINTF("serial recv %d bytes : %s\n", size, c->pld.rbuf.buf+1);
+	LOG_DEBUG("serial recv cmd %02X.", c->pld.rbuf.buf[0]);
 	c->u->recv(c);
 	return size;
 }
@@ -33,7 +41,7 @@ struct serial_callbacks ots_for_serial = {
 
 /*---------------------------------------------------------------------------*/
 int ots_open (struct ots_conn * c, const struct ots_callbacks * callbacks) {
-	PRINTF("ots_open\n");
+	log_info("ots opened.");
   	c->u = callbacks;
   	c->pld.rbuf.size = 0;
   	c->pld.rbuf.buf[0] = 0;
@@ -61,7 +69,7 @@ int ots_send_ctrl (struct ots_conn *c, uint8_t ctrl) {
 	PAYLOAD_ATTR_SET(c->pld, PAYLOAD_ATTR_OPENLOOP_SENDING);
 	ret = serial_send_to_list(&c->pld.serial, pkt.buf, pkt.size);
 	PAYLOAD_ATTR_RESET(c->pld, PAYLOAD_ATTR_OPENLOOP_SENDING);
-	PRINTF("return ack\n");
+//	log_debug("send cmd.");
   	return ret;
 }
 

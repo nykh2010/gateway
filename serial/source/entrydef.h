@@ -14,6 +14,7 @@
 #include <sys/types.h>
 #include <string.h>
 #include <pthread.h>
+#include "config.h"
 
 //#include "../timer/timer.h"
 //#include "../serial/serial.h"
@@ -30,21 +31,26 @@ struct entry;
 
 struct server_conn {
 	pthread_t thread;
-
+	char serialSockPath[UNIX_DOMAIN_SIZE];
 	struct entry * parent;
 };
 
 struct client_conn {
 	pthread_t thread;
-
+	char epdSockPath[UNIX_DOMAIN_SIZE];
 	struct entry * parent;
 };
 
 struct task_entry {
-	char task_id[16];
-	char data_id[16];
+	pthread_t thread;
+	char task_id[17];
+	char data_id[17];
 	// char data_url[256];
 	char data_path[256];
+	char execlist_ok_path[64];
+	char execlist_failed_path[64];
+//	uint8_t * execlist_cache;
+//	int execlist_len;
 	// struct tm_utc start_time;
 	// struct tm_utc end_time;
 	time_t start_time;

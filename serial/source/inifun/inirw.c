@@ -7,6 +7,7 @@
 #include <stdbool.h>
 #include <string.h>
 
+#include "../config.h"
 #include "../inifun/inirw.h"
 
 #define SECTION_MAX_LEN       256
@@ -35,7 +36,7 @@ int IniReadValue(const char* section, const char* key, char* val, const char* fi
     fp = fopen(file, "r");
     if(fp == NULL)
     {
-        printf("%s: Opent file %s failed.\n", __FILE__, file);
+        log_error("%s: Opent file %s failed.\n", __FILE__, file);
         return READ_STR_ERR;
     }
     while(feof(fp) == 0)
@@ -85,7 +86,7 @@ int IniReadValue(const char* section, const char* key, char* val, const char* fi
                     }  
 //                    strncpy(val, lineContent + position, strlen(lineContent + position));
 //                    strncpy(val, lineContent + position, i-position+1);
-                    strncpy(val, lineContent + position, i-position);
+                    strncpy(val, lineContent + position, i-position+1);
 //                    lineContentLen = strlen(val);
                     ret = i-position;
 
@@ -98,8 +99,12 @@ int IniReadValue(const char* section, const char* key, char* val, const char* fi
             break;
         }
     }
-    if(!bFoundSection){printf("No section = %s\n", section);}
-    else if(!bFoundKey){printf("No key = %s\n", key);}
+    if(!bFoundSection){
+    	log_error("No section = %s\n", section);
+    }
+    else if(!bFoundKey){
+    	log_error("No key = %s\n", key);
+    }
     fclose(fp);
     return ret;
 }
@@ -128,7 +133,7 @@ int readIntValue(const char* section, const char* key, const char* file)
     memset(strValue, '\0', STRVALUE_MAX_LEN);
     if(IniReadValue(section, key, strValue, file) == READ_STR_ERR)
     {
-        printf("%s: error", __func__);
+        log_error("%s: error", __func__);
         return 0;
     }
     return (atoi(strValue));
@@ -150,11 +155,11 @@ void IniWriteValue(const char* section, char* key, char* val, const char* file)
     memset(lineContent, '\0', LINE_CONTENT_MAX_LEN);
     memset(strWrite, '\0', LINE_CONTENT_MAX_LEN);
     // n = sprintf(strWrite, "%s=%s\n", key, val);
-    sprintf(strWrite, "%s=%s\n", key, val);
+    sprintf(strWrite, "%s=%s.", key, val);
     fp = fopen(file, "r+");
     if(fp == NULL)
     {
-        printf("%s: Opent file %s failed.\n", __FILE__, file);
+        printf("%s: Opent file %s failed.", __FILE__, file);
         return;
     }
     while(feof(fp) == 0)
@@ -177,10 +182,12 @@ void IniWriteValue(const char* section, char* key, char* val, const char* file)
                 if(strncmp(lineContent, key, strlen(key)) == 0)
                 {
                     bFoundKey = true;
-                    printf("%s: %s=%s\n", __func__, key, val);
+                    log_debug("%s: %s=%s.", __func__, key, val);
                     fseek(fp, (0-strlen(lineContent)),SEEK_CUR);
                     err = fputs(strWrite, fp);
-                    if(err < 0){printf("%s err.\n", __func__);}
+                    if(err < 0){
+                    	log_error("err.");
+                    }
                     break; 
                 }
                 else if(lineContent[0] == '[') 
@@ -191,8 +198,12 @@ void IniWriteValue(const char* section, char* key, char* val, const char* file)
             break;
         }
     }
-    if(!bFoundSection){printf("No section = %s\n", section);}
-    else if(!bFoundKey){printf("No key = %s\n", key);}
+    if(!bFoundSection){
+    	log_error("No section = %s\n", section);
+    }
+    else if(!bFoundKey){
+    	log_error("No key = %s\n", key);
+    }
     fclose(fp);
 }
 
@@ -202,7 +213,7 @@ int writeStringValue(const char* section, char* key, char* val, const char* file
     //printf("section = %s, key = %s, file = %s\n", section, key, file);
     if (section == NULL || key == NULL || val == NULL || file == NULL)
     {
-        printf("%s: input parameter(s) is NULL!\n", __func__);
+        log_error("%s: input parameter(s) is NULL!\n", __func__);
         return READ_STR_ERR;
     }
     memset(sect, '\0', SECTION_MAX_LEN);

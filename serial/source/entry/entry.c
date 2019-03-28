@@ -54,36 +54,63 @@ static struct bilink_callbacks bilink_callback_obj = {
 /*--------------------------------------------------------------------------------*/
 //int entry_open (struct entry * e) {
 int entry_open (void) {
-//	struct entry * e = &tEntry;
-//	e->thdr = NULL;
 	if (bilink_open(&tEntry.bhdr, &bilink_callback_obj) != 0) {
 		return -1;
 	} else {
-//		tEntry.bhdr.parent = &tEntry;
+		log_info("bilink opened.");
+		tEntry.shdr.parent = &tEntry;
 		if (server_open(&tEntry.shdr) != 0) {
 			bilink_close(&tEntry.bhdr);
+			log_error("bilink closed.");
 			return -1;
 		} else {
-			tEntry.shdr.parent = &tEntry;
+			log_info("server opened.");
+			tEntry.chdr.parent = &tEntry;
+#if 0
 			if (client_open(&tEntry.chdr) != 0) {
 				server_close(&tEntry.shdr);
+				log_error("server closed.");
 				bilink_close(&tEntry.bhdr);
+				log_error("bilink closed.");
 				return -1;
 			} else {
-				// opened
-				tEntry.chdr.parent = &tEntry;
+				int tmp;
+				log_info("client opened.");
+				// create
+				sqlite3 *db=NULL;
+				sqlite3_open(LOCAL_SQL_TABLE_PATH, &db);
+				sqlite3_close(db);
+				log_info("entry opened\n");
+				for(tmp=0; tmp<200; tmp++ ){
+//				        if (0 == rts_send_ctrl(&tEntry.bhdr.rts, SIMPLE_PAYLOAD_STATUS, 500)) {
+//				        	log_info("got MCU status.");
+//				        	if (0 != rts_send_ctrl(&tEntry.bhdr.rts, SIMPLE_PAYLOAD_RESE_MODE, 500)) {
+//				        		log_error("Radio change to RESE mode error.");
+//				        	}
+//				        } else {
+//				        	log_error("The MCU status is not OK.");
+//				//        	return -1;
+//				        }
+//						ots_send_ctrl(&tEntry.bhdr.rts.ots, SIMPLE_PAYLOAD_SEND_MODE);
+//				        timer_wait_ms(2000);
+				}
+
+				return 0;
 			}
+#endif
+			return 0;
 		}
+
 	}
-	PRINTF("entry_open : entry opened\n");
-    // open client
-    return 0;
 }
 
 void entry_close (struct entry * e) {
 	client_close(&e->chdr);
+	log_error("client closed.");
 	server_open(&e->shdr);
+	log_error("server closed.");
 	bilink_close(&e->bhdr);
+	log_error("bilink closed.");
 }
 
 #if 1
@@ -98,10 +125,8 @@ int entry_send_data (const char * data, int size) {
 	}
 	struct simple_payload_buf payload;
 	payload.size = size;
-	memcpy(payload.buf+1, data, size);
-	// payload.buf[0] = 0x80;
-	payload.payload.ctrl = SIMPLE_PAYLOAD_TYPE_DATA;
-	payload.size += 1;
+	memcpy(payload.payload.data, data, size);
+
     ret = bilink_send_data (&tEntry.bhdr, &payload);
 	return ret;
 }

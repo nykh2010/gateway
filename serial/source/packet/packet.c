@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "../config.h"
 #include "../packet/frame.h"
 #include "../packet/packet.h"
 
@@ -31,9 +32,11 @@ void clear_simple_packet (simple_packet_t * pkt) {
 
 int create_simple_packet (simple_packet_t * dest, const uint8_t * src, int size) {
     if (dest == NULL) {
+    	log_error("error.");
         return -1;
     }
     if (size > (SIMPLE_SERIAL_ASYNC_PACKET_BUF_MAX_SIZE-4)) {
+    	log_error("error.");
         return -1;
     }
     dest->buf[SIMPLE_SERIAL_ASYNC_FRAME_HEAD_BYTE_0_INDEX] = SIMPLE_SERIAL_ASYNC_FRAME_HEAD_BYTE_0;
@@ -55,9 +58,11 @@ void clear_simple_packet_recv (simple_packet_recv_t * pkt) {
 
 int parse_simple_packet (simple_packet_recv_t * pkt) {
     if (pkt->size == 0) {
+//    	log_error("error.");
         return -1;
     }
     if (pkt->size > SIMPLE_SERIAL_ASYNC_PACKET_BUF_MAX_SIZE) {
+    	log_error("error.");
         return -1;
     }
 

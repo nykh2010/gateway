@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <pthread.h>
+#include <semaphore.h>
 #include <time.h>
 #include <sys/queue.h>
 #include <signal.h>
@@ -52,6 +53,8 @@ struct serial_handler {
     serial_param_t param;
 
     // thread 
+    sem_t readDataSem;
+    sem_t writeDataSem;
     pthread_mutex_t readDataMut;
     pthread_mutex_t writeDataMut;
     pthread_cond_t readDataCond;

@@ -27,15 +27,21 @@
 
 int main (int argc, char * argv[]) {
 	int ret;
+	log_init(ZLOG_CONF_PATH, ZLOG_CATEGORY);
+
 #if ( EXAMPLE == OTS_EXAMPLE )
+	log_info("ots test start.");
 	ret = ots_test(argc, argv);
 #elif ( EXAMPLE == RTS_EXAMPLE )
+	log_info("rts test start.");
 	ret = rts_test(argc, argv);
 #elif ( EXAMPLE == ENTRY_EXAMPLE )
+	log_info("entry test start.");
 	ret = entry_test(argc, argv);
 #elif ( EXAMPLE == MANAGE_EXAMPLE )
 	ret = local_net_manage_task(argc, argv);
 #endif
+	log_fini();
 	return ret;
 }
 

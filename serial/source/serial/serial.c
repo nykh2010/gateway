@@ -38,17 +38,12 @@ int name_arr[] = {
 
 
 void serial_config (struct serial_handler * handler) {
-    // initial
 	int ret = 0;
-	// char buf[64];
 	ret = IniReadValue(CONFIG_SECTION_SERIAL,
 					CONFIG_KEY_DEVICE, 
 					handler->port, 
 					SERIAL_CONFIG_PATH);
 	handler->port[ret] = '\0';
-
-	printf("ret = %d\n", ret);
-
 	handler->param.baud = readIntValue(CONFIG_SECTION_SERIAL,
 				 CONFIG_KEY_BAUDRATE,
 				 SERIAL_CONFIG_PATH);
@@ -68,16 +63,7 @@ void serial_config (struct serial_handler * handler) {
 	handler->writeListMaxLen = readIntValue(CONFIG_SECTION_SERIAL,
 				 CONFIG_KEY_WRITE_LIST_MAX_LEN,
 				 SERIAL_CONFIG_PATH);
-
-    // handler->param.baud = 115200;
-    // handler->param.parity = 'N';
-    // handler->param.databits = 8;
-    // handler->param.stopbits = 1;
-
-    // message list
-    // handler->readListMaxLen = 30;
-    // handler->writeListMaxLen = 30;
-    PRINTF("init serial with port=%s, baud=%d, parity=%c, databits=%d, stopbits=%d, readListLen=%d, writeListLen=%d\n",
+    log_info("init serial with port=%s, baud=%d, parity=%c, databits=%d, stopbits=%d, readListLen=%d, writeListLen=%d\n",
     		handler->port,
     		handler->param.baud,
 			handler->param.parity,
@@ -94,8 +80,11 @@ static void * write_thread_exec (void * arg) {
     struct timespec waitMoment;
     simple_packet_t _packet;
     simple_packet_t * packet = &_packet;
-    PRINTF("write thread exec created\n");
+    log_info("write thread exec created.");
     tcflush(handler->fd, TCIOFLUSH);
+    if( 0 != sem_post(&handler->writeDataSem)) {
+    	log_error("write semaphore post error.");
+    }
     while (!handler->writeThreadAttr.execStop) {
         serial_packet_entry_t * newEntry = NULL;
 
@@ -115,21 +104,12 @@ static void * write_thread_exec (void * arg) {
 
         if (newEntry != NULL) {
             if (create_simple_packet(packet, newEntry->data, newEntry->length) > 0) {
+//            	int tmp;
             	write(handler->fd, packet->buf, packet->size);
-#if 0
-            	if (packet->size > 0) {
-                	int i;
-                	printf("send: ");
-                	for (i=0; i<packet->size; i++) {
-                		printf("%02X ", packet->buf[i]);
-                	}
-                	printf("\n");
-                }
-#endif
-//            	packet->buf[packet->size-1] = '\0';
-
-            	PRINTF("serial send a %d bytes packet: %s\n", packet->size, (packet->buf+4));
-            }
+//				for(tmp=0; tmp < packet->size; tmp++ ){
+//            	 log_debug("cmd %02X", packet->buf[tmp]);
+//				}
+			}
             SIMPLEQ_REMOVE_HEAD(&handler->writeList, next);
             handler->writeListLen--;
             free(newEntry->data);
@@ -147,52 +127,27 @@ static void * read_thread_exec (void * arg) {
 	struct serial_handler * handler = (struct serial_handler* )arg;
     simple_packet_recv_t packet;
     simple_packet_recv_t * pRecv = &packet;
-    PRINTF("read thread exec created\n");
+    log_info("read thread exec created.");
     clear_simple_packet_recv(pRecv);
     pthread_mutex_init(&pRecv->mutex, NULL);
     tcflush(handler->fd, TCIFLUSH);
-
+    if( 0 != sem_post(&handler->readDataSem)) {
+    	log_error("read semaphore post error.");
+    }
     while (!handler->readThreadAttr.execStop) {
     	timer_wait_us(100);
     	pthread_mutex_lock(&pRecv->mutex);
+    	pRecv->size = 0;
         pRecv->size = read(handler->fd, SIMPLE_PACKET_BUF_ADDR(pRecv), pRecv->sizeToRecv);
-#if 0
-        if (pRecv->size > 0) {
-        	int i;
-        	PRINTF("to Receive %d, received %d, all recvd %d, recvd data ", pRecv->sizeToRecv, pRecv->size, pRecv->sizeRecieved);
-        	for (i=0; i<(pRecv->sizeRecieved+pRecv->size+1); i++) {
-        		PRINTF("%02X ", pRecv->buf[i]);
-        	}
-        	PRINTF("\n");
-        }
-#endif
         pthread_mutex_unlock(&pRecv->mutex);
-
 
         pthread_mutex_lock(&pRecv->mutex);
         if (parse_simple_packet(pRecv) == 0) {
         	handler->u->serial_recv(handler, SIMPLE_PACKET_PAYLOAD_ADDR(pRecv), SIMPLE_PACKET_PAYLOAD_SIZE(pRecv));
             clear_simple_packet_recv(pRecv);
-#if 0
-            serial_packet_entry_t * newEntry = NULL;
-            newEntry = (serial_packet_entry_t *)malloc(sizeof(serial_packet_entry_t));
-
-            newEntry->length = SIMPLE_PACKET_PAYLOAD_SIZE(pRecv);
-
-            newEntry->data = (uint8_t *)malloc(newEntry->length);
-            memcpy(newEntry->data, SIMPLE_PACKET_PAYLOAD_ADDR(pRecv), newEntry->length);
-            if (handler->readListLen < handler->readListMaxLen) {
-                SIMPLEQ_INSERT_TAIL(&handler->readList, newEntry, next);
-                handler->readListLen++;
-                pthread_cond_signal(&handler->readDataCond);
-            }
-#endif
-
         }
         pthread_mutex_unlock(&pRecv->mutex);
-
     }
-
     pthread_exit(NULL);
     return NULL;
 }   
@@ -302,17 +257,109 @@ serial_state_t serial_start (struct serial_handler * handler, struct serial_call
     handler->writeListLen = 0;
 
     if (handler->fd < 0) {
-        PRINTF("open %s error\n", handler->port);
+        log_error("open %s error.", handler->port);
         // close(handler->fd);
         return ERROR_OPENING;
     } else {
-        int idx;
+        struct termios newtio, oldtio;
+
+        if ( tcgetattr( handler->fd, &oldtio) != 0)
+        {
+            printf("SetupSerial 1");
+            return -1;
+        }
+        bzero( &newtio, sizeof( newtio ) );
+        newtio.c_cflag |= CLOCAL | CREAD;
+        newtio.c_cflag &= ~CSIZE;
+
+        switch( handler->param.databits )
+        {
+        case 7:
+            newtio.c_cflag |= CS7;
+            break;
+        case 8:
+            newtio.c_cflag |= CS8;
+            break;
+        }
+
+        switch( handler->param.parity)
+        {
+        case 'O':
+            newtio.c_cflag |= PARENB;
+            newtio.c_cflag |= PARODD;
+            newtio.c_iflag |= INPCK;
+            break;
+        case 'E':
+            newtio.c_iflag |= INPCK ;
+            newtio.c_cflag |= PARENB;
+            newtio.c_cflag &= ~PARODD;
+            break;
+        case 'N':
+            newtio.c_cflag &= ~PARENB;
+            break;
+        case 'S':
+    	newtio.c_cflag &= ~PARENB;
+    	newtio.c_cflag &= ~CSTOPB;
+    	break;
+        }
+        switch( handler->param.baud )
+        {
+        case 2400:
+            cfsetispeed(&newtio, B2400);
+            cfsetospeed(&newtio, B2400);
+            break;
+        case 4800:
+            cfsetispeed(&newtio, B4800);
+            cfsetospeed(&newtio, B4800);
+            break;
+        case 9600:
+            cfsetispeed(&newtio, B9600);
+            cfsetospeed(&newtio, B9600);
+            break;
+        case 115200:
+            cfsetispeed(&newtio, B115200);
+            cfsetospeed(&newtio, B115200);
+            break;
+        default:
+            cfsetispeed(&newtio, B9600);
+            cfsetospeed(&newtio, B9600);
+            break;
+        }
+        if ( handler->param.stopbits == 1 )
+        {
+            newtio.c_cflag &= ~CSTOPB;
+        }
+        else if ( handler->param.stopbits == 2 )
+        {
+            newtio.c_cflag |= CSTOPB;
+        }
+        // remove ICANON standard model
+        // remove ISIG   0x03  ^c (CTRL + C)
+    	newtio.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG);
+
+    	// remove ICRNL IGNCR --> 0x0D ok
+    	// remove IXON IXOFF --> 0x13 ok
+    	newtio.c_iflag &= ~ (INLCR | ICRNL | IGNCR | IXON | IXOFF | IXANY);
+    	//
+    	newtio.c_oflag &= ~(OPOST | ONLCR | OCRNL);
+
+    	newtio.c_cc[VTIME] = 10;			//20
+    	newtio.c_cc[VMIN]  = 50;			//100
+
+        tcflush(handler->fd, TCIFLUSH);
+        if ((tcsetattr(handler->fd, TCSANOW, &newtio)) != 0)
+        {
+            log_error("Com set error");
+            return -1;
+        }
+#if 0
+    	int idx;
         int baudListLen;
         struct termios newtio;
         memset(&newtio, 0, sizeof(newtio));
-        PRINTF("open %s successfully\n", handler->port);
+        log_info("open %s successfully.", handler->port);
         if (tcgetattr(handler->fd, &newtio) != 0) {
-            PRINTF("could not get serial port setting\n");
+            log_error("could not get serial port setting.");
         }
         //
         // cfmakeraw(&newtio);
@@ -323,7 +370,7 @@ serial_state_t serial_start (struct serial_handler * handler, struct serial_call
                 break;
         }
         if (idx >= baudListLen) {
-            perror("baudrate");
+            log_error("baudrate error");
             goto ERROR_STARTING_quit;
         } else {
             cfsetispeed(&newtio, baud_arr[idx]);
@@ -341,7 +388,7 @@ serial_state_t serial_start (struct serial_handler * handler, struct serial_call
                 break;
             default:
                 // fprintf(stderr,"Unsupported data size\n");
-                PRINTF("Unsupported data size\n");
+                log_error("Unsupported data size.");
                 goto ERROR_STARTING_quit;
         }
         // set parity
@@ -352,7 +399,7 @@ serial_state_t serial_start (struct serial_handler * handler, struct serial_call
                 newtio.c_iflag &= ~INPCK;     /* Enable parity checking */
             break;
             case 'o':
-            case 'O':
+            case 'O':    	newtio.c_oflag &= ~OPOST;
                 newtio.c_cflag |= (PARODD | PARENB);  /* 设置为奇效验*/
                 newtio.c_iflag |= INPCK;             /* Disnable parity checking */
             break;
@@ -369,7 +416,7 @@ serial_state_t serial_start (struct serial_handler * handler, struct serial_call
             break;
             default:
                 // fprintf(stderr,"Unsupported parity\n");
-                PRINTF("Unsupported parity\n");
+                log_error("Unsupported parity.");
                 goto ERROR_STARTING_quit;
         }
         // newtio.c_cflag &= ~CRTSCTS ;
@@ -383,7 +430,7 @@ serial_state_t serial_start (struct serial_handler * handler, struct serial_call
             break;
             default:
                 // fprintf(stderr,"Unsupported stop bits\n");
-                PRINTF("Unsupported stop bits\n");
+                log_error("Unsupported stop bits.");
                 goto ERROR_STARTING_quit;
  	    }
         newtio.c_cflag |= ( CLOCAL | CREAD ) ;
@@ -398,39 +445,32 @@ serial_state_t serial_start (struct serial_handler * handler, struct serial_call
 
         // test flush input/output queue
         if (tcflush(handler->fd, TCIOFLUSH) == -1) {
-            PRINTF("could not flush input/output queue for terminal\n");
+            log_error("could not flush input/output queue for terminal.");
             goto ERROR_STARTING_quit;
         }
         // set serial device attr
         if (tcsetattr(handler->fd, TCSANOW, &newtio) == -1) {
-            PRINTF("could not set terminal attribution\n");
+            log_error("could not set terminal attribution.");
             goto ERROR_STARTING_quit;
         }
+#endif
+        // init semaphore
+        sem_init(&handler->readDataSem, 0, 0);
+        sem_init(&handler->writeDataSem, 0, 0);
 
         //_serial_packet_entryeate write thread
         if (pthread_create(&handler->writeThread, NULL, handler->writeExec, (void *)handler->writeThreadAttr.execArgs) != 0) {
-            PRINTF("create write thread failed\n");
+            log_error("create write thread failed.");
             goto ERROR_STARTING_quit;
         } 
-#if DEBUG_PRINTF
-        else {
-            PRINTF("create write thread successfully\n");
-        }
-#endif
         // create read thread
         if (pthread_create(&handler->readThread, NULL, handler->readExec, (void *)handler->readThreadAttr.execArgs) != 0) {
-            PRINTF("create read thread failed\n");
+            log_error("create read thread failed.");
             if (pthread_join(handler->writeThread, NULL) == 0) {
-                PRINTF("successfully waited until serial write thread stopped execution\n");
+                log_info("successfully waited until serial write thread stopped execution.");
             }
             goto ERROR_STARTING_quit;
         } 
-#if DEBUG_PRINTF
-        else {
-      PRINTF("Create read thread successfully\n");
-        }
-      
-#endif
         handler->threadStarted = 0;
     }
     if (0) {
@@ -444,10 +484,10 @@ void serial_close (struct serial_handler * handler) {
 	handler->readThreadAttr.execStop = 1;
 	handler->writeThreadAttr.execStop = 1;
     if (pthread_join(handler->writeThread, NULL) == 0) {
-        PRINTF("successfully waited until serial write thread stopped execution\n");
+        log_info("successfully waited until serial write thread stopped execution.");
     }
     if (pthread_join(handler->readThread, NULL) == 0) {
-        PRINTF("successfully waited until serial read thread stopped execution\n");
+        log_info("successfully waited until serial read thread stopped execution.");
     }
     serial_clear_list(&handler->readList, &handler->readDataMut, &handler->readListLen);
     serial_clear_list(&handler->writeList, &handler->writeDataMut, &handler->writeListLen);

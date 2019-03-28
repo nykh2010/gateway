@@ -43,5 +43,6 @@ void rts_close(struct rts_conn *c);
 
 int rts_send (struct rts_conn * c, struct simple_payload_buf * s, long int msec);
 
+int rts_send_ctrl (struct rts_conn * c, uint8_t ctrl, long int msec);
 
 #endif
