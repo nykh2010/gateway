@@ -40,13 +40,15 @@ class Gateway(Config):
             return ""
 
     def create_whitelist(self, url, md5):
+        LOG.info("download white list file")
         os.system("wget -c %s -O %s.tmp" % (url, self.white_list_url))
         ret = self.check_whitelist_integrity(md5)
         if not ret:
             return False
         else:
+            LOG.info("store white list file")
             os.system("mv %s.tmp %s" % (self.white_list_url, self.white_list_url))
-            self.get_whitelist()
+            self.__whiteListMD5 = self.get_whitelist()
             return True
     
     def check_whitelist_integrity(self, md5):

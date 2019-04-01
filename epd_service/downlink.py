@@ -21,7 +21,11 @@ class DownlinkServer(StreamRequestHandler):
         data = json.loads(data, encoding='utf-8')
         HandleClass = self.route(data)
         handler = HandleClass()
-        handler.func(data)
+        send_data = handler.func(data)
+        if isinstance(send_data, dict):
+            content = json.dumps(send_data)
+            self.wfile.write(content.encode('utf-8'))
+
 
 class Downlink(UnixStreamServer):
     __error = False

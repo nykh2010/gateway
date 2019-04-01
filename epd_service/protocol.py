@@ -35,7 +35,8 @@ class HeartRequest(Handle):
         send_data = {
             "status":status
         }
-        dl.send_service('serial', send_data)
+        return send_data
+        # dl.send_service('serial', send_data)
         self.upload(request)
     
     def upload(self, data):
@@ -64,7 +65,8 @@ class RegisterRequest(Handle):
         send_data = {
             "status":status
         }
-        dl.send_service('serial', send_data)
+        return send_data
+        # dl.send_service('serial', send_data)
         
 
 class TaskRequest(Handle):
