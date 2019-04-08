@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+import os
+import sys
+
+print(os.chdir(os.path.abspath(os.path.dirname(__file__))))
+print(os.path.curdir)
+
+os.system("mkdir -p build")
+try:
+    if sys.argv[1] == 'pc':
+        os.system("cp -rf config build")
+    else:
+        print("args invalid")
+except:
+    os.system("mkdir -p build/config")
+    os.system("cp -rf /etc/gateway/* build/config")
+
+os.system("cp -rf epd_service build")
+os.system("cp -rf web build")
+os.system("cp -rf serial/serial_apt build")
+os.system("chmod 0777 install")
+os.system("chmod 0777 packet")
+os.system("cp install build")
+os.system("cp packet build")
+
+os.system("tar -czvf backup.tar.gz build/")
+os.system("rm -rf build/")
+print("packet done")

@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import os
 import sys
-import shutil
 import threading
 
 print("application install started")
@@ -23,26 +22,38 @@ serial_exec_path = os.path.join(exec_path, 'serial')
 print("epd path:%s" % epd_exec_path)
 print("web path:%s" % web_exec_path)
 print("serial_path:%s" % serial_exec_path)
+back_up_path = r'/var/backup'
+
+def backup():
+    os.system("%s" % (os.path.join(exec_path, 'packet')))
+    os.system("cp backup.tar.gz %s" % back_up_path)
+
+def rollback():
+    os.chdir(back_up_path)
+    os.system("tar -xvf backup.tar.gz")
+    os.system("%s" % os.path.join("backup", "install"))
 
 try:
+    backup()
     # 拷贝epd服务
     if os.path.exists(epd_exec_path):
-        shutil.rmtree(epd_exec_path)
-        # print("epd exec file path not exist")
-        # os.makedirs(epd_exec_path)
-        # print("create %s" % epd_exec_path)
-    shutil.copytree(epd_path, epd_exec_path)
+        os.system("rm -r %s" % epd_exec_path)
+    os.system("mkdir -p %s" % epd_exec_path)        # 创建目标文件夹
+    os.system("cp %s %s -rf" % (epd_path, epd_exec_path))
     # 拷贝web服务
     if os.path.exists(web_exec_path):
-        shutil.rmtree(web_exec_path)
-    shutil.copytree(web_path, web_exec_path)
+        os.system("rm -r %s" % web_exec_path)
+    os.system("mkdir -p %s" % web_exec_path)
+    os.system("cp %s %s -rf" % (web_path, web_exec_path))
     # 拷贝serial服务
     if os.path.exists(serial_exec_path):
-        shutil.rmtree(serial_exec_path)
-    shutil.copytree(serial_path, serial_exec_path)
+        os.system("rm -rf %s" % serial_exec_path)
+    os.system("mkdir -p %s" % serial_exec_path)
+    os.system("cp -rf %s %s" % (os.path.join(serial_path, "serial_apt"), serial_exec_path))
     # 拷贝ini文件
     if not os.path.exists(ini_path):
-        shutil.copytree(config_path, ini_path)
+        os.system("mkdir -p %s" % ini_path)
+        os.system("cp -rf %s %s" % (config_path, ini_path))
     else:
         ls = os.listdir(config_path)
         ls = set(ls)
@@ -50,9 +61,13 @@ try:
         ld = set(ld)
         l = ls - ld
         for f in l:
-            shutil.copy(os.path.join(config_path, f), ini_path)
+            os.system("cp -rf %s %s" % (os.path.join(config_path, f), ini_path))
+    # 保存安装文件
+    os.system("cp install %s" % exec_path)
+    os.system("cp packet %s" % exec_path)
 except Exception as e:
     print("error: %s" % e.__str__())
+    rollback()
     sys.exit(-1)
 
 # 10秒之后重新启动

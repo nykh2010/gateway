@@ -80,7 +80,7 @@ class Gateway(Config):
             return False
 
         # 0-none 1-sleep 2-ready 3-run 4-finish 5-suspend
-        if self.__taskId is None or (task_id != self.__taskId and self.__taskStatus in ('','none','sleep','finish','suspend')):
+        if self.__taskId == 0 or (task_id != self.__taskId and self.__taskStatus in ('','none','sleep','finish','suspend')):
             # 保存任务状态
             epd_task = EpdTask()
             epd_task.set_item('task_id', str(task_id))
@@ -124,6 +124,7 @@ class Gateway(Config):
             hash_obj.update(datafile.read())
             hash_code = hash_obj.hexdigest()
         if image_data_md5 != hash_code:
+            LOG.info("image data md5 check failed")
             return False
         
         hash_obj = hashlib.md5()
@@ -131,6 +132,7 @@ class Gateway(Config):
             hash_obj.update(devfile.read())
             hash_code = hash_obj.hexdigest()
         if iot_dev_list_md5 != hash_code:
+            LOG.info("iot dev list md5 check failed")
             return False
         return True
 
