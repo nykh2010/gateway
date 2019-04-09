@@ -4,20 +4,20 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../source/json/jsonfunc.c 
+../source/serial/serial.c 
 
 OBJS += \
-./source/json/jsonfunc.o 
+./source/serial/serial.o 
 
 C_DEPS += \
-./source/json/jsonfunc.d 
+./source/serial/serial.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
-source/json/%.o: ../source/json/%.c
+source/serial/%.o: ../source/serial/%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: GCC C Compiler'
-	gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
+	${CC} -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

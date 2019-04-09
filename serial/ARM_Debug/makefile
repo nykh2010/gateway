@@ -22,6 +22,20 @@ RM := rm -rf
 -include source/bi_client/subdir.mk
 -include source/subdir.mk
 -include example/subdir.mk
+-include ARM_Debug/source/timer/subdir.mk
+-include ARM_Debug/source/task/subdir.mk
+-include ARM_Debug/source/serial/subdir.mk
+-include ARM_Debug/source/rts/subdir.mk
+-include ARM_Debug/source/packet/subdir.mk
+-include ARM_Debug/source/ots/subdir.mk
+-include ARM_Debug/source/log/subdir.mk
+-include ARM_Debug/source/inifun/subdir.mk
+-include ARM_Debug/source/entry/subdir.mk
+-include ARM_Debug/source/bilink/subdir.mk
+-include ARM_Debug/source/bi_server/subdir.mk
+-include ARM_Debug/source/bi_client/subdir.mk
+-include ARM_Debug/source/subdir.mk
+-include ARM_Debug/example/subdir.mk
 -include subdir.mk
 -include objects.mk
 
@@ -42,7 +56,7 @@ all: serialapp
 serialapp: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C Linker'
-	gcc  -o "serialapp" $(OBJS) $(USER_OBJS) $(LIBS)
+	${CC}  -o "serialapp" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

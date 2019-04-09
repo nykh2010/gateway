@@ -4,5 +4,5 @@
 
 USER_OBJS :=
 
-LIBS := -lpthread -lzlog -lsqlite3 -ljson-c
+LIBS := -lpthread -lzlog -ljson-c
 
