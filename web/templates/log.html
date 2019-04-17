@@ -49,7 +49,7 @@
                 <script type="text/javascript">
                     $(document).ready(function(){
                         window.setInterval(function(){
-                            $.get("/log/system",function(data){
+                            $.get("/log/epd",function(data){
                                 if (data) {
                                     $(".TabBody").replaceWith(data);
                                     console.log("%o",data);

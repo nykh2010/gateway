@@ -22,7 +22,7 @@ serial_exec_path = os.path.join(exec_path, 'serial')
 print("epd path:%s" % epd_exec_path)
 print("web path:%s" % web_exec_path)
 print("serial_path:%s" % serial_exec_path)
-back_up_path = r'/var/backup'
+back_up_path = r'/var/backups'
 
 def backup():
     os.system("%s" % (os.path.join(exec_path, 'packet')))
@@ -39,12 +39,12 @@ try:
     if os.path.exists(epd_exec_path):
         os.system("rm -r %s" % epd_exec_path)
     os.system("mkdir -p %s" % epd_exec_path)        # 创建目标文件夹
-    os.system("cp %s %s -rf" % (epd_path, epd_exec_path))
+    os.system("cp %s/* %s -rf" % (epd_path, epd_exec_path))
     # 拷贝web服务
     if os.path.exists(web_exec_path):
         os.system("rm -r %s" % web_exec_path)
     os.system("mkdir -p %s" % web_exec_path)
-    os.system("cp %s %s -rf" % (web_path, web_exec_path))
+    os.system("cp %s/* %s -rf" % (web_path, web_exec_path))
     # 拷贝serial服务
     if os.path.exists(serial_exec_path):
         os.system("rm -rf %s" % serial_exec_path)
@@ -53,7 +53,7 @@ try:
     # 拷贝ini文件
     if not os.path.exists(ini_path):
         os.system("mkdir -p %s" % ini_path)
-        os.system("cp -rf %s %s" % (config_path, ini_path))
+        os.system("cp -rf %s/* %s" % (config_path, ini_path))
     else:
         ls = os.listdir(config_path)
         ls = set(ls)

@@ -2,7 +2,7 @@ from random import randint
 from time import time
 from config import Config
 import uplink
-import downlink
+from downlink import dl
 import threading
 import hashlib
 from epd_log import epdlog as LOG
@@ -163,6 +163,17 @@ class Gateway(Config):
         upload.send(data, topic='gateway/report/status')
         timer = threading.Timer(handler_interval, self.timer_handler)
         timer.start()
+
+    def try_handler(self, service_name, data):
+        ret = dl.send_service(service_name, data, need_resp=True)
+        if ret['status'] != 'ok':
+            t = threading.Timer(5, self.try_handler, args=(service_name, data))
+            t.start()
+
+    def set_try_data(self, service_name, data):
+        t = threading.Timer(5, self.try_handler, args=(service_name, data))
+        t.start()
+
     
     # def set_group(self, gateways):
     #     '''设置组内网关个数'''

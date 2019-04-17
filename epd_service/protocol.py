@@ -57,14 +57,13 @@ class RegisterRequest(Handle):
         device_id = data['device_id']
         LOG.info("%s register", device_id)
         ret = gw.is_in_whitelist(device_id)
+        send_data = {}
         if ret:
             LOG.info("%s is in white list", device_id)
-            status = "ok"
+            send_data['status'] = 'ok'
+            send_data['key'] = int(gw.get_auth_key())
         else:
-            status = "error"
-        send_data = {
-            "status":status
-        }
+            send_data['status'] = 'error'
         return send_data
         # dl.send_service('serial', send_data)
         
@@ -134,10 +133,13 @@ class TaskApp(RequestHandler):
                         "cmd":"task",
                         "method":"create",
                         "task_id":body['task_id'],
+                        "data_id":body['image_data_id'],
                         "start_time":body['start_time'],
                         "end_time":body['end_time']
                     }
-                    dl.send_service('serial', data)
+                    ret = dl.send_service('serial', data, need_resp=True)
+                    if ret['status'] != 'ok':
+                        gw.set_try_data('serial', data)
                     # raise HTTPError(200)
                     status = 'ok'
                     msg = "task_id %s create success" % body['task_id']
@@ -167,8 +169,10 @@ class TaskApp(RequestHandler):
                     "method":"cancel",
                     "task_id":body['task_id']
                 }
-                dl.send_service('serial', data)
-                
+                ret = dl.send_service('serial', data, need_resp=True)
+                if ret['status'] != 'ok':               # 向模块发出取消命令
+                    gw.set_try_data('serial', data)  
+
                 ret = gw.cancel_task(body['task_id'])
                 if ret:
                     status = 'ok'
@@ -218,7 +222,9 @@ class RadioApp(RequestHandler):
                 "cmd":"restart",
                 "radio":radio_number
             }
-            dl.send_service("serial", data)     # 向串口发送消息
+            ret = dl.send_service("serial", data, need_resp=True)     # 向串口发送消息
+            if ret['status'] != 'ok':
+                gw.set_try_data('serial', data)
 
 class GatewayApp(RequestHandler):
     def post(self, cmd):
@@ -238,6 +244,7 @@ class GatewayApp(RequestHandler):
                 gw.set_auth_key(body['check_code'])
                 resp_status = "ok"
                 resp_data = {"result":"ok"}
+                
         except EpdException as e:
             LOG.error(e.__repr__())
             resp_status = "err",

@@ -44,7 +44,7 @@ class LogHandler(RequestHandler):
     def get(self, name=None):
         log = Config("log")
         if name is None:
-            records = self.__logmsg.read(path=os.path.join(log.path, "system.log"))
+            records = self.__logmsg.read(path=os.path.join(log.path, "epd.log"))
             self.render('log.html', records=records)
         else:
             records = self.__logmsg.read(path=os.path.join(log.path, "%s.log" % name))
