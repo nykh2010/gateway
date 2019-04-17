@@ -6,17 +6,20 @@
 C_SRCS += \
 ../example/entry_test.c \
 ../example/ots_test.c \
-../example/rts_test.c 
+../example/rts_test.c \
+../example/task_test.c 
 
 OBJS += \
 ./example/entry_test.o \
 ./example/ots_test.o \
-./example/rts_test.o 
+./example/rts_test.o \
+./example/task_test.o 
 
 C_DEPS += \
 ./example/entry_test.d \
 ./example/ots_test.d \
-./example/rts_test.d 
+./example/rts_test.d \
+./example/task_test.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

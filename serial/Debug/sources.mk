@@ -17,6 +17,7 @@ ARM_Debug/example \
 ARM_Debug/source/bi_client \
 ARM_Debug/source/bi_server \
 ARM_Debug/source/bilink \
+ARM_Debug/source/crc \
 ARM_Debug/source/entry \
 ARM_Debug/source/inifun \
 ARM_Debug/source/log \
@@ -31,6 +32,7 @@ example \
 source/bi_client \
 source/bi_server \
 source/bilink \
+source/crc \
 source/entry \
 source/inifun \
 source/log \

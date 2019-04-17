@@ -28,8 +28,15 @@
 int main (int argc, char * argv[]) {
 	int ret;
 	log_init(ZLOG_CONF_PATH, ZLOG_CATEGORY);
-
-#if ( EXAMPLE == OTS_EXAMPLE )
+#if ( EXAMPLE == NON_EXAMPLE )
+	if (0 == entry_open()) {
+		log_info("entry opened successfully.");
+	} else {
+		log_error("entry opened failed.");
+		return -1;
+	}
+	while(1);
+#elif ( EXAMPLE == OTS_EXAMPLE )
 	log_info("ots test start.");
 	ret = ots_test(argc, argv);
 #elif ( EXAMPLE == RTS_EXAMPLE )
@@ -38,8 +45,8 @@ int main (int argc, char * argv[]) {
 #elif ( EXAMPLE == ENTRY_EXAMPLE )
 	log_info("entry test start.");
 	ret = entry_test(argc, argv);
-#elif ( EXAMPLE == MANAGE_EXAMPLE )
-	ret = local_net_manage_task(argc, argv);
+#elif ( EXAMPLE == TASK_EXAMPLE )
+	ret = task_test(argc, argv);
 #endif
 	log_fini();
 	return ret;

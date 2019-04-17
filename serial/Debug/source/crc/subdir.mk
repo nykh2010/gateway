@@ -4,20 +4,20 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../source/bi_server/bi_server.c 
+../source/crc/crc.c 
 
 OBJS += \
-./source/bi_server/bi_server.o 
+./source/crc/crc.o 
 
 C_DEPS += \
-./source/bi_server/bi_server.d 
+./source/crc/crc.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
-source/bi_server/%.o: ../source/bi_server/%.c
+source/crc/%.o: ../source/crc/%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: GCC C Compiler'
-	${CC} -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
+	gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

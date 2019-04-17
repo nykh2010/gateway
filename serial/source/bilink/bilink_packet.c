@@ -1,9 +1,11 @@
-#include "../bilink/bilink_packet.h"
+
 
 #include <stdint.h>
 #include <stdio.h>
 #include <stdarg.h>
 #include <string.h>
+#include "../bilink/bilink_packet.h"
+#include "../crc/crc.h"
 /*--------------------------------------------------------------------------------*/
 #define BILINK_TEST 0
 
@@ -225,21 +227,11 @@ uint16_t crc16_data(const uint8_t *data, int len, uint16_t acc)
 
 /*--------------------------------------------------------------------------------*/
 int authorization_key (uint8_t * word, uint8_t * src, uint8_t * key) {
-	uint16_t crc_key;
+	uint8_t  crc_src[10];
 	uint16_t crc;
-#if LITTLE_ENDIAN
-	// Low bits first (Little-Endian)
-	crc_key = (uint16_t)(key[1]);
-	crc_key <<= 8;
-	crc_key += key[0];
-#else
-	// High bits first (Big-Endian)
-	crc_key = (uint16_t)(key[0]);
-	crc_key <<= 8;
-	crc_key += key[1];
-#endif
-
-	crc = crc16_data(src, BILINK_PACKECT_SRC_ADDR_SIZE, crc_key);
+	memcpy(crc_src, src, 8);
+	memcpy(crc_src+8, key, 2);
+	crc = CRC16Calc(crc_src, 10);
 
 #if LITTLE_ENDIAN
 	// Low bits first (Little-Endian)
@@ -309,11 +301,11 @@ int packet_add_key (uint8_t * buf, int index, uint8_t * key) {
 	union bilink_packet * bpkt = (union bilink_packet *)buf;
 	memcpy(buf+index, key, BILINK_PACKECT_AUTHORIZATION_KEY_SIZE);
 	index += 2;
-	if(bpkt->ctrl.broad) {
-		bpkt->bc.length += 2;
-	} else {
-		bpkt->uc.length += 2;
-	}
+//	if(bpkt->ctrl.broad) {
+//		bpkt->bc.length += 2;
+//	} else {
+//		bpkt->uc.length += 2;
+//	}
 	return index;
 }
 
@@ -322,129 +314,11 @@ int packet_add_autherization_key (uint8_t * buf, int index, uint8_t * key) {
 	union bilink_packet * bpkt = (union bilink_packet *)buf;
 	authorization_key(buf+index, ((union bilink_packet *)buf)->srcaddr, key);
 	index += 2;
-	if(bpkt->ctrl.broad) {
-		bpkt->bc.length += 2;
-	} else {
-		bpkt->uc.length += 2;
-	}
+//	if(bpkt->ctrl.broad) {
+//		bpkt->bc.length += 2;
+//	} else {
+//		bpkt->uc.length += 2;
+//	}
 	return index;
 }
-#if 0
-/*--------------------------------------------------------------------------------*/
-int create_bilink_broadcast_packet (uint8_t * buf, uint8_t * srcaddr, uint8_t * key, uint8_t ctrl, ...) {
-	va_list ap;
-	union bilink_packet * bpkt = (union bilink_packet *)buf;
-	uint8_t tol_len = 0;
-//	uint8_t tol_len = 0;
-	int len = 0;
-	int type = 0;
-	long valaddr;
-	char * val = 0;
 
-	bpkt->bc.length = 0;
-	memcpy(bpkt->srcaddr, srcaddr, BILINK_PACKECT_SRC_ADDR_SIZE);
-	bpkt->ctrl.broad = 1;
-	bpkt->ctrl.comm = ctrl & BILINK_PACKECT_CTRL_COMM_MASK;
-	va_start(ap, ctrl);
-	while (bpkt->bc.length < BILINK_PACKECT_MAX_BROADCAST_MSG_SIZE) {
-		if ((type = va_arg(ap, int)) != -1) {
-			if ((len = va_arg(ap, int)) != -1) {
-				if (len == 0) {
-					bpkt->bc.msg[bpkt->bc.length++] = (uint8_t)type;
-					bpkt->bc.msg[bpkt->bc.length++] = (uint8_t)len;
-				} else {
-					if ((valaddr = va_arg(ap, long)) != -1) {
-						val = (char *)valaddr;
-						bpkt->bc.msg[bpkt->bc.length++] = (uint8_t)type;
-						bpkt->bc.msg[bpkt->bc.length++] = (uint8_t)len;
-						memcpy(bpkt->bc.msg+bpkt->bc.length, val, len);
-						bpkt->bc.length += len;
-					}
-				}
-			}
-		} else {
-			break;
-		}
-	}
-	authorization_key(bpkt->bc.msg+bpkt->bc.length, srcaddr, key);
-
-	va_end(ap);
-	tol_len = bpkt->bc.length + BILINK_PACKECT_MAX_BROADCAST_HEAD_SIZE;
-	return tol_len;
-}
-
-/*--------------------------------------------------------------------------------*/
-int create_bilink_unicast_packet (uint8_t * buf, uint8_t * srcaddr, uint8_t * destaddr, uint8_t * key, uint8_t ctrl, ...) {
-	va_list ap;
-	union bilink_packet * bpkt = (union bilink_packet *)buf;
-	uint8_t tol_len = 0;
-//	uint8_t tol_len = 0;
-	int len = 0;
-	int type = 0;
-	long valaddr;
-	char * val = 0;
-
-	bpkt->uc.length = 0;
-	memcpy(bpkt->srcaddr, srcaddr, BILINK_PACKECT_SRC_ADDR_SIZE);
-	memcpy(bpkt->uc.destaddr, destaddr, BILINK_PACKECT_DEST_ADDR_SIZE);
-	bpkt->ctrl.broad = 0;
-	bpkt->ctrl.comm = ctrl & BILINK_PACKECT_CTRL_COMM_MASK;
-	va_start(ap, ctrl);
-	while (bpkt->uc.length < BILINK_PACKECT_MAX_UNICAST_MSG_SIZE) {
-		if ((type = va_arg(ap, int)) != -1) {
-			if ((len = va_arg(ap, int)) != -1) {
-				if (len == 0) {
-					bpkt->uc.msg[bpkt->uc.length++] = (uint8_t)type;
-					bpkt->uc.msg[bpkt->uc.length++] = (uint8_t)len;
-				} else {
-					if ((valaddr = va_arg(ap, long)) != -1) {
-						val = (char *)valaddr;
-						bpkt->uc.msg[bpkt->uc.length++] = (uint8_t)type;
-						bpkt->uc.msg[bpkt->uc.length++] = (uint8_t)len;
-						memcpy(bpkt->uc.msg+bpkt->uc.length, val, len);
-						bpkt->uc.length += len;
-					}
-				}
-			}
-		} else {
-			break;
-		}
-	}
-	authorization_key(bpkt->uc.msg+bpkt->uc.length, srcaddr, key);
-
-	va_end(ap);
-	tol_len = bpkt->uc.length + BILINK_PACKECT_MAX_UNICAST_HEAD_SIZE;
-	return tol_len;
-}
-/*--------------------------------------------------------------------------------*/
-#endif
-
-
-/*--------------------------------------------------------------------------------*/
-#if BILINK_TEST
-int main (int argc, char * argv[]) {
-	int i;
-
-	union bilink_packet pkt;
-
-	int len = 0;
-//	* ((uint64_t *)pkt.uc.srcaddr) = 0x0123456789ABCDEF;
-	uint64_to_array(0x0123456789ABCDEF, pkt.uc.srcaddr);
-	pkt.uc.ctrl.broad = 1;
-	pkt.uc.ctrl.comm = 1;
-//	* ((uint64_t *)pkt.uc.destaddr) = 0x8080808080808080;
-	uint64_to_array(0x8080808080808080, pkt.uc.destaddr);
-	pkt.uc.length = 1;
-	pkt.uc.msg[0] = 'A';
-	len = 30;
-	printf("pkt val (hex): ");
-	for (i=0; i<len; i++) {
-		printf("%02X ", *(pkt.buf+i));
-	}
-	printf("\n");
-
-
-	return 0;
-}
-#endif
-/*--------------------------------------------------------------------------------*/

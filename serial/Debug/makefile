@@ -17,6 +17,7 @@ RM := rm -rf
 -include source/log/subdir.mk
 -include source/inifun/subdir.mk
 -include source/entry/subdir.mk
+-include source/crc/subdir.mk
 -include source/bilink/subdir.mk
 -include source/bi_server/subdir.mk
 -include source/bi_client/subdir.mk
@@ -31,6 +32,7 @@ RM := rm -rf
 -include ARM_Debug/source/log/subdir.mk
 -include ARM_Debug/source/inifun/subdir.mk
 -include ARM_Debug/source/entry/subdir.mk
+-include ARM_Debug/source/crc/subdir.mk
 -include ARM_Debug/source/bilink/subdir.mk
 -include ARM_Debug/source/bi_server/subdir.mk
 -include ARM_Debug/source/bi_client/subdir.mk

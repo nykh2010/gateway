@@ -35,11 +35,12 @@
 #define PRINTF(...)
 #endif
 
-#define LOCAL_DEBUG 1
+#define LOCAL_DEBUG 0
 #if LOCAL_DEBUG
 
 #endif
 
+#define PACKET_DELAY 20
 
 //extern struct entry tEntry;
 
@@ -52,6 +53,9 @@
 //int check_white_list (const char * filename, uint8_t * srcaddr);
 int read_bin_data(char * path, uint8_t ** data);
 //void signal_handler (int signo);
+/*--------------------------------------------------------------------------------*/
+static struct timeval local_time;
+static int taskflag = 0;
 /*--------------------------------------------------------------------------------*/
 int write_string_to_file (const char * filename, char * srcaddr) {
 	FILE *fp;
@@ -159,9 +163,9 @@ static void * task_send_thread_exec(void * arg) {
 	time(&timer);
 
 #if LOCAL_DEBUG
-	timer_wait_ms((t->start_time - timer)*1000);
-//	timer_wait_ms(1000);
-#elif
+//	timer_wait_ms((t->start_time - timer)*1000);
+	timer_wait_ms(1000);
+#else
 	timer_wait_ms((t->start_time - timer)*1000);
 #endif
 
@@ -206,6 +210,7 @@ static void * task_send_thread_exec(void * arg) {
 		// add data packet number
 		temp_array[0] = (uint8_t)(t->packets_num >> 8);
 		temp_array[1] = (uint8_t)(t->packets_num);
+		log_info("task packet number %d.", t->packets_num);
 		p.size = packet_add_content (p.payload.data,
 									 p.size,
 									 BILINK_CONTROL_REQ_SUB_KEY_PKT_NUM,
@@ -223,7 +228,7 @@ static void * task_send_thread_exec(void * arg) {
 		// send a packet
 		bilink_send_data(&t->parent->bhdr, &p);
 		// wait 8ms at least
-		timer_wait_ms(8);
+		timer_wait_ms(PACKET_DELAY);
 		// create data packet
 		p.size = create_broadcast_packet (p.payload.data,
 										  t->parent->bhdr.selfaddr,
@@ -246,6 +251,9 @@ static void * task_send_thread_exec(void * arg) {
 			}
 			// copy data
 			memcpy(p.payload.data+p.size, array+index, psize);
+			//=================================================================
+//			memset(p.payload.data+p.size, 0xFF, psize);
+			//=================================================================
 			// add data length
 			p.size += psize;
 			// add author key
@@ -253,7 +261,8 @@ static void * task_send_thread_exec(void * arg) {
 			// send a packet
 			bilink_send_data(&t->parent->bhdr, &p);
 			// wait 8ms at least
-			timer_wait_ms(8);
+			log_info("pkt num %d, size %d.", count, p.size);
+			timer_wait_ms(PACKET_DELAY);
 			count++;
 		}
 		t->task_status = TASK_STATUS_SEND_OVER;
@@ -280,15 +289,15 @@ static void * task_send_thread_exec(void * arg) {
 		t->task_status = TASK_STATUS_LISTEN_TMP_RESULT;
 		log_info("task %d status : listen temp result.", t->task_id);
 
-		if (0 != rts_send_ctrl(&t->parent->bhdr.rts, SIMPLE_PAYLOAD_RECV_MODE, 20)) {
-			log_error("Radio change to RECV mode error.");
+		if (0 != rts_send_ctrl(&t->parent->bhdr.rts, SIMPLE_PAYLOAD_RESE_MODE, 20)) {
+			log_error("Radio change to RESE mode error.");
 		}
 		// ==============================================================================
 		// set timer signal
 		time(&timer);
 #if LOCAL_DEBUG
 		timer_wait_ms(((t->end_time>>1) - (t->start_time>>1))*1000);
-#elif
+#else
 		timer_wait_ms(((t->end_time>>1) + (t->start_time>>1) - timer)*1000);
 #endif
 
@@ -331,7 +340,7 @@ static void * task_send_thread_exec(void * arg) {
 				// send a packet
 				bilink_send_data(&t->parent->bhdr, &p);
 				// wait 8ms at least
-				timer_wait_ms(8);
+				timer_wait_ms(PACKET_DELAY);
 			}
 			count++;
 		}
@@ -358,14 +367,14 @@ static void * task_send_thread_exec(void * arg) {
 		t->task_status = TASK_STATUS_LISTEN_RESULT;
 		log_info("task %d status : listen result.", t->task_id);
 
-		if (0 != rts_send_ctrl(&t->parent->bhdr.rts, SIMPLE_PAYLOAD_RECV_MODE, 20)) {
-			log_error("Radio change to RECV mode error.");
+		if (0 != rts_send_ctrl(&t->parent->bhdr.rts, SIMPLE_PAYLOAD_RESE_MODE, 20)) {
+			log_error("Radio change to RESE mode error.");
 		}
 		//==================================================================================
 		time(&timer);
 #if LOCAL_DEBUG
 		timer_wait_ms(((t->end_time>>1) - (t->start_time>>1))*1000);
-#elif
+#else
 		timer_wait_ms((t->end_time - timer)*1000);
 #endif
 	}
@@ -378,6 +387,7 @@ static void * task_send_thread_exec(void * arg) {
 		log_error("Radio change to RESE mode error.");
 	}
 	free(t->packet_status);
+	taskflag = 0;
 	return NULL;
 }
 /*--------------------------------------------------------------------------------*/
@@ -538,6 +548,7 @@ int send_register_to_epd (struct client_conn * c, uint8_t * device_id, uint8_t *
 	struct json_object * new_obj = NULL;
 	struct json_object * key_obj = NULL;
 	char tmp_str[20];
+	int newkey;
     char * send_buf;
     char * recv_buf;
 //    int tmp;
@@ -570,13 +581,24 @@ int send_register_to_epd (struct client_conn * c, uint8_t * device_id, uint8_t *
     log_debug("recv json : %s", recv_buf);
 
     if (TRUE == json_object_object_get_ex(new_obj, "status", &key_obj)) {
-    	if (0 == strncmp(json_object_to_json_string(key_obj), "ok", 2)) {
-    		log_debug("recv ok.");
-    		ret = 0;
+    	if (0 == strncmp(json_object_get_string(key_obj), "ok", 2)) {
+    		log_debug("recv ok from epd.");
+//    		ret = 0;
     	} else {
-    		log_error("have not recv ok.");
+    		log_error("have not recv ok from epd.");
     		ret = -1;
     	}
+    }
+    if (TRUE == json_object_object_get_ex(new_obj, "key", &key_obj)) {
+    	if ((newkey = json_object_get_int(key_obj)) != 0) {
+    		auth_key[0] = (uint8_t)(newkey >> 8) & 0xFF;
+    		auth_key[1] = (uint8_t)(newkey) & 0xFF;
+    		log_debug("recv key from epd.");
+    		ret = 0;
+    	}
+    } else {
+		log_error("have not recv key from epd.");
+		ret = -1;
     }
     json_object_put(new_obj);
     free(recv_buf);
@@ -613,9 +635,11 @@ int send_network_access_to_epd (struct client_conn * c, uint8_t * device_id, uin
     unix_send_with_recv (c, send_buf, strlen(send_buf), recv_buf, UNIX_DOMAINRECV_BUFFER_SIZE);
     new_obj = json_tokener_parse(recv_buf);
     if (TRUE == json_object_object_get_ex(new_obj, "status", &key_obj)) {
-    	if (0 == strncmp(json_object_to_json_string(key_obj), "ok", 2)) {
+    	if (0 == strncmp(json_object_get_string(key_obj), "ok", 2)) {
+    		log_debug("recv ok from epd.");
     		ret = 0;
     	} else {
+    		log_debug("have not recv ok from epd.");
     		ret = -1;
     	}
     }
@@ -648,21 +672,19 @@ int parse_serial_data (struct entry * e) {
 	uint8_t last_flush_time[4];
 	uint8_t str_time[4];
 	time_t cur_time;
+//	struct timeval now;
 	size = serial_receive_from_list (&e->bhdr.rts.ots.pld.serial, b.buf, 20);
 
 	if (size > 0) {
-		log_debug("get a new data packet.");
+//		log_debug("get a new data packet.");
 		if (b.ctrl.broad) {
 			switch (b.ctrl.comm) {
 				case BILINK_BEAT_REQ :
-					// test , without check
-//					if (0 || SRC_INCLUDED != check_execute_list(SQL_TABLE_PATH, b.srcaddr)) {
-//						break;
-//					}
-					log_debug("get a new beat req.");
+
 					authorization_key(word, b.srcaddr, e->bhdr.newkey);
 					// check a-key
-					if ( 0 && 0 != memcmp(word, b.bc.msg+b.bc.length, BILINK_PACKECT_AUTHORIZATION_KEY_SIZE)) {
+					if ( 0 != memcmp(word, b.bc.msg+b.bc.length, BILINK_PACKECT_AUTHORIZATION_KEY_SIZE)) {
+						log_error("beat req key error. crc : %02X %02X", word[0], word[1]);
 						break;
 					}
 					// read msg
@@ -682,8 +704,11 @@ int parse_serial_data (struct entry * e) {
 						}
 						index += length;
 					}
+		            gettimeofday(&local_time, NULL);
+					log_debug("%ld %ld: get a new beat req.", local_time.tv_sec, local_time.tv_usec);
+//					gettimeofday(&local_time, NULL);
 					// check data version in the same
-					if (1 || 0 == send_network_access_to_epd(&e->chdr, b.srcaddr, msg, battery)) {
+					if ( 0 == send_network_access_to_epd(&e->chdr, b.srcaddr, msg, battery)) {
 						// check execute list ok
 						// respond
 						p.size = create_unicast_packet(p.payload.data,
@@ -707,18 +732,23 @@ int parse_serial_data (struct entry * e) {
 								BILINK_ACCESS_REQ_SUB_LEN_UTC_TIME,
 								(uint8_t *)str_time);
 						// a-key
-						p.size = packet_add_key(p.payload.data,
+//						authorization_key(e->thdr.auth_key, e->bhdr.selfaddr, e->bhdr.newkey);
+						p.size = packet_add_autherization_key(p.payload.data,
 								p.size,
-								e->thdr.auth_key);
+								e->bhdr.newkey);
 						// send packet
-						log_info("send beat request.");
+						bilink_send_data(&e->bhdr, &p);
+
+			            gettimeofday(&local_time, NULL);
+						log_debug("%ld %ld: send beat request", local_time.tv_sec, local_time.tv_usec);
+//						gettimeofday(&local_time, NULL);
 						// ==========================================================
 						for (length=0; length<p.size; length++) {
 							printf("%02X ",  p.payload.data[length]);
 						}
 						printf("\n");
 						// ==========================================================
-						bilink_send_data(&e->bhdr, &p);
+
 					} else {
 						// check execute list failed
 						// respond
@@ -727,43 +757,43 @@ int parse_serial_data (struct entry * e) {
 								BILINK_ACCESS_REQ,
 								b.srcaddr,
 								WITH_CONTENT);
-//						// update time
-//						uint32_to_array(e->thdr.start_time, str_time);
-//						p.size = packet_add_content(p.payload.data,
-//								p.size,
-//								BILINK_ACCESS_REQ_SUB_KEY_FLUSH_TIME,
-//								BILINK_ACCESS_REQ_SUB_LEN_FLUSH_TIME,
-//								(uint8_t *)str_time);
-//						// cur_time
-//						time(&cur_time);
-//						uint32_to_array(cur_time, str_time);
-//						p.size = packet_add_content(p.payload.data,
-//								p.size,
-//								BILINK_ACCESS_REQ_SUB_KEY_UTC_TIME,
-//								BILINK_ACCESS_REQ_SUB_LEN_UTC_TIME,
-//								(uint8_t *)str_time);
 						// a-key
-						p.size = packet_add_key(p.payload.data,
+//						authorization_key(e->thdr.auth_key, e->bhdr.selfaddr, e->bhdr.newkey);
+						p.size = packet_add_autherization_key(p.payload.data,
 								p.size,
-								e->thdr.auth_key);
+								e->bhdr.newkey);
 						// send packet
 						bilink_send_data(&e->bhdr, &p);
+
+			            gettimeofday(&local_time, NULL);
+						log_debug("%ld %ld: send beat refuse.", local_time.tv_sec, local_time.tv_usec);
+//						gettimeofday(&local_time, NULL);
+						// ==========================================================
+						for (length=0; length<p.size; length++) {
+							printf("%02X ",  p.payload.data[length]);
+						}
+						printf("\n");
 					}
 
 					break;
 				case BILINK_REGISTER_BEAT_REQ :
 
 //					uint8_t word[2];
-					log_debug("get a new register beat req.");
+		            gettimeofday(&local_time, NULL);
+					log_debug("%ld %ld: get a new register beat req.", local_time.tv_sec, local_time.tv_usec);
+
 					authorization_key(word, b.srcaddr, e->bhdr.initkey);
-					if (1 || 0 == memcmp(word, b.bc.akey,
-							BILINK_PACKECT_AUTHORIZATION_KEY_SIZE)) {
+					if ( 0 != memcmp(word, b.bc.akey, BILINK_PACKECT_AUTHORIZATION_KEY_SIZE)) {
+						log_error("register beat req key error. crc : %02X %02X", word[0], word[1]);
+						break;
+					} else {
 						//==========================================================
-						log_info("source addr : %s", hex_to_str(tmp_str, b.srcaddr, 8));
-						log_info("self addr : %s", hex_to_str(tmp_str, e->bhdr.selfaddr, 8));
+//						log_info("source addr : %s", hex_to_str(tmp_str, b.srcaddr, 8));
+//						log_info("self addr : %s", hex_to_str(tmp_str, e->bhdr.selfaddr, 8));
 						//
-						if (1 || 0 != send_register_to_epd (&e->chdr, b.srcaddr, word)) {
+						if ( 0 == send_register_to_epd (&e->chdr, b.srcaddr, word)) {
 							// check ok
+							memcpy(e->bhdr.newkey, word, 2);
 							p.size = create_unicast_packet(p.payload.data,
 									e->bhdr.selfaddr,
 									BILINK_REGISTER_REQ,
@@ -779,7 +809,11 @@ int parse_serial_data (struct entry * e) {
 									e->bhdr.initkey);
 
 							bilink_send_data(&e->bhdr, &p);
-							log_info("send register requst.");
+
+				            gettimeofday(&local_time, NULL);
+							log_debug("%ld %ld: send register requst.", local_time.tv_sec, local_time.tv_usec);
+//							gettimeofday(&local_time, NULL);
+
 							// ==========================================================
 							for (length=0; length<p.size; length++) {
 								printf("%02X ",  p.payload.data[length]);
@@ -792,7 +826,7 @@ int parse_serial_data (struct entry * e) {
 									e->bhdr.selfaddr,
 									BILINK_REGISTER_REQ,
 									b.srcaddr,
-									WITH_CONTENT);
+									WITH_CONTENT);	//					send_update_schedule_to_server(b.srcaddr);
 //							p.size = packet_add_content(p.payload.data,
 //									p.size,
 //									BILINK_REGISTER_REQ_SUB_KEY_NEWKEY,
@@ -801,9 +835,15 @@ int parse_serial_data (struct entry * e) {
 							p.size = packet_add_autherization_key(p.payload.data,
 									p.size,
 									e->bhdr.initkey);
-							log_info("send register refused.");
 
 							bilink_send_data(&e->bhdr, &p);
+
+				            gettimeofday(&local_time, NULL);
+							log_debug("%ld %ld: send register refused.", local_time.tv_sec, local_time.tv_usec);
+							for (length=0; length<p.size; length++) {
+								printf("%02X ",  p.payload.data[length]);
+							}
+							printf("\n");
 						}
 					}
 					break;
@@ -819,12 +859,14 @@ int parse_serial_data (struct entry * e) {
 
 			// create and match A-key
 			authorization_key(word, b.srcaddr, e->bhdr.newkey);
-			if (0 != memcmp(word, b.bc.akey, BILINK_PACKECT_AUTHORIZATION_KEY_SIZE))
-				return 0;
 
 			// select
 			switch (b.ctrl.comm) {
 				case BILINK_ACCESS_RESP :
+					if (0 != memcmp(word, b.uc.msg+b.uc.length, BILINK_PACKECT_AUTHORIZATION_KEY_SIZE)) {
+						log_error("key error. crc : %02X %02X", word[0], word[1]);
+						break;
+					}
 					index = 0;
 					while (index < b.uc.length) {
 						type = b.uc.msg[index++];
@@ -841,11 +883,23 @@ int parse_serial_data (struct entry * e) {
 						}
 						index += length;
 					}
-					log_debug("recv access respond.");
-					//
+
+		            gettimeofday(&local_time, NULL);
+					log_debug("%ld %ld: recv access respond.", local_time.tv_sec, local_time.tv_usec);
+//					gettimeofday(&local_time, NULL);
+					if(taskflag == 0) {
+						taskflag = 1;
+//						task_open(&e->thdr);
+					}
+
+					//=================================================================================
 //					send_network_access_to_epd (b.srcaddr, msg, battery);
 					break;
 				case BILINK_QUERY_RESP :
+					if (0 != memcmp(word, b.uc.msg+b.uc.length, BILINK_PACKECT_AUTHORIZATION_KEY_SIZE)) {
+						log_error("key error. crc : %02X %02X", word[0], word[1]);
+						break;
+					}
 					if (e->thdr.task_status == TASK_STATUS_LISTEN_ACCESS
 						|| e->thdr.task_status == TASK_STATUS_LISTEN_TMP_RESULT ) {
 
@@ -879,13 +933,22 @@ int parse_serial_data (struct entry * e) {
 							}
 							index += length;
 						}
-	//					send_update_schedule_to_server(b.srcaddr);
 
+			            gettimeofday(&local_time, NULL);
+						log_debug("%ld %ld: recv query respond.", local_time.tv_sec, local_time.tv_usec);
+//						gettimeofday(&local_time, NULL);
 					}
 					break;
 				case BILINK_REGISTER_RESP :
+					if (0 != memcmp(word, b.uc.akey, BILINK_PACKECT_AUTHORIZATION_KEY_SIZE)) {
+						log_error("key error. crc : %02X %02X", word[0], word[1]);
+						break;
+					}
 //					send_register_success_to_epd (b.srcaddr, e->bhdr.newkey, NULL);
-					log_info("recv register respond.");
+
+		            gettimeofday(&local_time, NULL);
+					log_debug("%ld %ld: recv register respond.", local_time.tv_sec, local_time.tv_usec);
+//					gettimeofday(&local_time, NULL);
 					break;
 
 				default  :

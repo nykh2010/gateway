@@ -23,7 +23,7 @@
 #define PRINTF(...)
 #endif
 
-#define LOCAL_TEST 1
+#define LOCAL_TEST 0
 #if LOCAL_TEST
 
 #endif
@@ -52,7 +52,6 @@ static void * server_thread_exec (void * arg) {
 	fd_set write_set;
 	fd_set select_read_set;
 
-
 	FD_ZERO(&read_set);
 	FD_ZERO(&write_set);
 	FD_ZERO(&select_read_set);
@@ -71,17 +70,13 @@ static void * server_thread_exec (void * arg) {
 		log_info("connect creat communication socket.");
 	}
 
-
-
 	// set srv_addr param
 	srv_addr.sun_family = AF_UNIX;
-	// strncpy (srv_addr.sun_path, UNIX_DOMAIN, sizeof(srv_addr.sun_path)-1);
-	//    strncpy (srv_addr.sun_path, UNIX_DOMAIN, sizeof(UNIX_DOMAIN));
 	log_debug("server sock path %s", s->serialSockPath );
-	strncpy (srv_addr.sun_path, s->serialSockPath, UNIX_DOMAIN_SIZE);
+	strncpy(srv_addr.sun_path, s->serialSockPath, UNIX_DOMAIN_SIZE);
 
 	// delete UNIX_DOMAIN
-	unlink (s->serialSockPath);
+	unlink(s->serialSockPath);
 
 	//bind sockfd&addr
 	ret = bind(listen_fd, (struct sockaddr*)&srv_addr, sizeof(srv_addr));
@@ -109,7 +104,6 @@ static void * server_thread_exec (void * arg) {
 
 	max_fd = listen_fd;
 	FD_SET(listen_fd, &read_set);
-
 
 
 	///////////////////////////////////////////////////////////////////////////////////

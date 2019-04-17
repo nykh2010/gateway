@@ -76,7 +76,7 @@ int entry_open (void) {
 			} else {
 //				int tmp;
 				log_info("client opened.");
-				log_info("entry opened\n");
+				log_info("entry opened.");
 				return 0;
 			}
 

@@ -63,7 +63,7 @@ void serial_config (struct serial_handler * handler) {
 	handler->writeListMaxLen = readIntValue(CONFIG_SECTION_SERIAL,
 				 CONFIG_KEY_WRITE_LIST_MAX_LEN,
 				 SERIAL_CONFIG_PATH);
-    log_info("init serial with port=%s, baud=%d, parity=%c, databits=%d, stopbits=%d, readListLen=%d, writeListLen=%d\n",
+    log_info("init serial with \nport=%s, \nbaud=%d, \nparity=%c, \ndatabits=%d, \nstopbits=%d, \nreadListLen=%d, \nwriteListLen=%d",
     		handler->port,
     		handler->param.baud,
 			handler->param.parity,
@@ -106,7 +106,7 @@ static void * write_thread_exec (void * arg) {
             if (create_simple_packet(packet, newEntry->data, newEntry->length) > 0) {
 //            	int tmp;
             	write(handler->fd, packet->buf, packet->size);
-            	log_debug("send %d byte", packet->size);
+//            	log_debug("send %d byte", packet->size);
 //				for(tmp=0; tmp < packet->size; tmp++ ){
 //            	 log_debug("cmd %02X", packet->buf[tmp]);
 //				}

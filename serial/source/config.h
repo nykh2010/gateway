@@ -2,21 +2,23 @@
 #define __CONFIG_H__
 
 /*--------------------------------------------------------------------------------*/
-
+#define NON_EXAMPLE        0 //
 #define OTS_EXAMPLE        2 //
 #define RTS_EXAMPLE        3 //
 #define ENTRY_EXAMPLE      4 //
-#define MANAGE_EXAMPLE     5 //
-#define EXAMPLE  ENTRY_EXAMPLE
+#define TASK_EXAMPLE       5 //
+#define EXAMPLE  NON_EXAMPLE
 
-#if ( EXAMPLE == OTS_EXAMPLE )
+#if ( EXAMPLE == NON_EXAMPLE )
+
+#elif ( EXAMPLE == OTS_EXAMPLE )
 #include "../example/ots_test.h"
 #elif ( EXAMPLE == RTS_EXAMPLE )
 #include "../example/rts_test.h"
 #elif ( EXAMPLE == ENTRY_EXAMPLE )
 #include "../example/entry_test.h"
-#elif ( EXAMPLE == MANAGE_EXAMPLE )
-#include "task/task.h"
+#elif ( EXAMPLE == TASK_EXAMPLE )
+#include "../example/task_test.h"
 #endif
 
 #include "./log/log.h"
@@ -49,7 +51,7 @@
 #define CONFIG_KEY_READ_LIST_MAX_LEN   "readListMaxLen"
 #define CONFIG_KEY_WRITE_LIST_MAX_LEN  "writeListMaxLen"
 // value of section [serial]
-#define CONFIG_DEFAULT_VAL_DEVICE              "/dev/ttyS0"
+#define CONFIG_DEFAULT_VAL_DEVICE              "/dev/ttymxc1"
 #define CONFIG_DEFAULT_VAL_BAUDRATE            115200
 #define CONFIG_DEFAULT_VAL_PARITY              'N'
 #define CONFIG_DEFAULT_VAL_DATABITS            8
@@ -64,7 +66,7 @@
 #define UNIX_DOMAIN_SIZE 64
 #define UNIX_DOMAINRECV_BUFFER_SIZE   1024
 #define MAX_CLIENT_NUM  10
-
+#define SN_PATH "/etc/gateway/sn"
 //#define UNIX_DOMAIN_CLIENT "/var/run/gateway/epdserver.sock"
 #define SELECT_TIMEOUT_S 5
 

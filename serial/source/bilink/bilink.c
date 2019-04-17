@@ -76,8 +76,16 @@ static struct rts_callbacks rts_callback_obj = {
 int bilink_open (struct bilink_conn * c, const struct bilink_callbacks * callbacks) {
 	int ret;
 	char tmp_str[64];
+	FILE *fp;
+	// IniReadValue("[bilink]", "selfId", tmp_str, CONFIG_PATH);
 
-	IniReadValue("[bilink]", "selfId", tmp_str, CONFIG_PATH);
+	if ((fp = fopen(SN_PATH, "r")) == NULL) {
+		log_error("fopen %s error.", SN_PATH);
+	}
+	fgets(tmp_str, 64, fp);
+	// close the file
+	fclose(fp);
+
 	log_debug("selfId = %s", tmp_str);
 	str_to_hex(c->selfaddr, tmp_str, 16);
 //	log_debug("selfId = %s", hex_to_str(tmp_str, c->selfaddr, 8));
@@ -98,12 +106,12 @@ int bilink_open (struct bilink_conn * c, const struct bilink_callbacks * callbac
     if ((ret = rts_open(&c->rts, &rts_callback_obj)) == 0) {
 
         log_info("rts successfully opened.");
-        log_debug("wait for write semaphore.");
+//        log_debug("wait for write semaphore.");
         sem_wait(&c->rts.ots.pld.serial.writeDataSem);
-        log_debug("wait for read semaphore.");
+//        log_debug("wait for read semaphore.");
         sem_wait(&c->rts.ots.pld.serial.readDataSem);
         log_info("got read and write semaphores.");
-        log_debug("wait for MCU status.");
+//        log_debug("wait for MCU status.");
 
         if (0 == rts_send_ctrl(&c->rts, SIMPLE_PAYLOAD_STATUS, 500)) {
         	log_info("got MCU status.");
