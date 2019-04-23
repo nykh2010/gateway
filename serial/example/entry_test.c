@@ -7,15 +7,15 @@
 #include <sys/queue.h>
 #include <string.h>
 
-#include "../source/config.h"
-#include "../source/payload.h"
+#include "../config.h"
+#include "../payload.h"
 
-#include "../source/serial/serial.h"
-#include "../source/packet/packet.h"
-#include "../source/timer/timer.h"
-#include "../source/rts/rts.h"
-#include "../source/entry/entry.h"
-#include "../source/timer/timer.h"
+#include "../serialp/serial.h"
+#include "../packet/packet.h"
+#include "../timer/timer.h"
+#include "../rts/rts.h"
+#include "../entry/entry.h"
+#include "../timer/timer.h"
 /*--------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------*/
 #define DEBUG_PRINTF 1

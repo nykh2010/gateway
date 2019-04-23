@@ -8,36 +8,35 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
--include source/timer/subdir.mk
--include source/task/subdir.mk
--include source/serial/subdir.mk
--include source/rts/subdir.mk
--include source/packet/subdir.mk
--include source/ots/subdir.mk
--include source/log/subdir.mk
--include source/inifun/subdir.mk
--include source/entry/subdir.mk
--include source/crc/subdir.mk
--include source/bilink/subdir.mk
--include source/bi_server/subdir.mk
--include source/bi_client/subdir.mk
--include source/subdir.mk
+-include timer/subdir.mk
+-include task/subdir.mk
+-include server/subdir.mk
+-include serialp/subdir.mk
+-include rts/subdir.mk
+-include packet/subdir.mk
+-include ots/subdir.mk
+-include log/subdir.mk
+-include inifun/subdir.mk
 -include example/subdir.mk
--include ARM_Debug/source/timer/subdir.mk
--include ARM_Debug/source/task/subdir.mk
--include ARM_Debug/source/serial/subdir.mk
--include ARM_Debug/source/rts/subdir.mk
--include ARM_Debug/source/packet/subdir.mk
--include ARM_Debug/source/ots/subdir.mk
--include ARM_Debug/source/log/subdir.mk
--include ARM_Debug/source/inifun/subdir.mk
--include ARM_Debug/source/entry/subdir.mk
--include ARM_Debug/source/crc/subdir.mk
--include ARM_Debug/source/bilink/subdir.mk
--include ARM_Debug/source/bi_server/subdir.mk
--include ARM_Debug/source/bi_client/subdir.mk
--include ARM_Debug/source/subdir.mk
+-include entry/subdir.mk
+-include crc/subdir.mk
+-include client/subdir.mk
+-include bilink/subdir.mk
+-include ARM_Debug/timer/subdir.mk
+-include ARM_Debug/task/subdir.mk
+-include ARM_Debug/server/subdir.mk
+-include ARM_Debug/serialp/subdir.mk
+-include ARM_Debug/rts/subdir.mk
+-include ARM_Debug/packet/subdir.mk
+-include ARM_Debug/ots/subdir.mk
+-include ARM_Debug/log/subdir.mk
+-include ARM_Debug/inifun/subdir.mk
 -include ARM_Debug/example/subdir.mk
+-include ARM_Debug/entry/subdir.mk
+-include ARM_Debug/crc/subdir.mk
+-include ARM_Debug/client/subdir.mk
+-include ARM_Debug/bilink/subdir.mk
+-include ARM_Debug/subdir.mk
 -include subdir.mk
 -include objects.mk
 
@@ -52,19 +51,19 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: serialapp
+all: serial
 
 # Tool invocations
-serialapp: $(OBJS) $(USER_OBJS)
+serial: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
-	@echo 'Invoking: GCC C Linker'
-	gcc  -o "serialapp" $(OBJS) $(USER_OBJS) $(LIBS)
+	@echo 'Invoking: Cross GCC Linker'
+	gcc  -o "serial" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(EXECUTABLES)$(OBJS)$(C_DEPS) serialapp
+	-$(RM) $(EXECUTABLES)$(OBJS)$(C_DEPS) serial
 	-@echo ' '
 
 .PHONY: all clean dependents

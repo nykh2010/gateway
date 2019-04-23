@@ -9,13 +9,13 @@
 #include <sys/queue.h>
 #include <string.h>
 
-#include "../source/config.h"
-#include "../source/payload.h"
+#include "../config.h"
+#include "../payload.h"
 
-#include "../source/serial/serial.h"
-#include "../source/packet/packet.h"
-#include "../source/timer/timer.h"
-#include "../source/ots/ots.h"
+#include "../serialp/serial.h"
+#include "../packet/packet.h"
+#include "../timer/timer.h"
+#include "../ots/ots.h"
 
 
 /*--------------------------------------------------------------------------------*/
