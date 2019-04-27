@@ -67,7 +67,6 @@ serial-->epd
 * ### 射频模块配置
 epd-->serial
 
-
     发送：
     {
         "cmd":"update",
@@ -186,5 +185,76 @@ epd-->iot
         "d":{
             "result":"<ok|err>",
             "msg":"[错误信息]"
+        }
+    }
+
+* ### 射频模块配置
+web-->epd
+
+    url:localhost:5000/radio/update
+    {
+        "from":"local",
+        "body":{
+            "radio_number":"<射频模块序号>"
+        }
+    }
+
+* ### 射频模块重启
+web-->epd
+
+    url:localhost:5000/radio/restart
+    {
+        "from":"local",
+        "body":{
+            "radio_number":"<射频模块序号>"
+        }
+    }
+
+## 主动上报
+* ### 定时状态上报
+epd-->iot
+
+    url://localhost:7788/mqtt/publish
+    {
+        "topic":"gateway/report/status",
+        "payload":{
+            "d":{
+                "task_id":<本地已存在的任务id>,
+                "whitelist_md5":<本地已存在的白名单md5>,
+                "check_code":<本地已存在的key>
+            }
+        }
+    }
+
+* ### 心跳上报
+epd-->iot
+
+    url://localhost:7788/mqtt/publish
+    {
+        "topic":"dma/report/periph",
+        "nid":"<终端id>",
+        "payload":{
+            "d":{
+                "data_id":"<终端当前数据版本>",
+                "battery":<终端电量>,
+                "status":"<终端状态>",
+                "msg":"[终端信息]"
+            }
+        }
+    }
+
+* ### 任务执行状态上报
+epd-->iot
+
+    url://localhost:7788/mqtt/publish
+    {
+        "topic":"gateway/report/task/result",
+        "payload":{
+            "d":{
+                "task_id":<任务id>,
+                "task_status":"<ok|failed>",
+                "success_list":[成功列表],
+                "fail_list":[失败列表]
+            }
         }
     }
