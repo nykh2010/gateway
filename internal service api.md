@@ -3,6 +3,7 @@
 * ### 心跳上报
 serial-->epd
 
+
     发送：
     {
         "cmd":"heart",
@@ -19,6 +20,7 @@ serial-->epd
 
 * ### 注册上报
 seiral-->epd
+
     
     发送：
     {
@@ -33,6 +35,7 @@ seiral-->epd
 
 * ### 任务通知
 epd-->serial
+
 
     发送：
     {
@@ -51,6 +54,7 @@ epd-->serial
 * ### 任务状态上报
 serial-->epd
 
+
     发送：
     {
         "cmd":"task",
@@ -67,6 +71,7 @@ serial-->epd
 * ### 射频模块配置
 epd-->serial
 
+
     发送：
     {
         "cmd":"update",
@@ -79,6 +84,7 @@ epd-->serial
 
 * ### 射频模块重启
 epd-->serial
+
 
     发送：
     {
@@ -95,6 +101,8 @@ epd-->serial
 iot-->epd
 
     url:localhost:5000/task/create
+    
+    
     {
         "id":"<命令id>",
         "from":"<命令来源>",
@@ -117,6 +125,8 @@ iot-->epd
 epd-->iot
 
     url:localhost:7788/mqtt/publish
+    
+    
     {
         "topic":"dma/cmd/resp",
         "payload":{
@@ -135,6 +145,8 @@ epd-->iot
 iot-->epd
 
     url:localhost:5000/gateway/white_list
+    
+    
     {
         "id":"<命令id>",
         "from":"<命令来源>",
@@ -149,6 +161,8 @@ iot-->epd
 epd-->iot
 
     url:localhost:7788/mqtt/publish
+    
+    
     {
         "id":"<命令id>",
         "from":"<命令来源>",
@@ -164,6 +178,8 @@ epd-->iot
 iot-->epd
 
     url:localhost:5000/gateway/check_code
+    
+    
     {
         "id":"<命令id>",
         "from":"<命令来源>",
@@ -177,6 +193,8 @@ iot-->epd
 epd-->iot
 
     url:localhost:7788/mqtt/publish
+    
+    
     {
         "id":"<命令id>",
         "from":"<命令来源>",
@@ -192,6 +210,8 @@ epd-->iot
 web-->epd
 
     url:localhost:5000/radio/update
+    
+    
     {
         "from":"local",
         "body":{
@@ -203,6 +223,8 @@ web-->epd
 web-->epd
 
     url:localhost:5000/radio/restart
+    
+    
     {
         "from":"local",
         "body":{
@@ -215,6 +237,8 @@ web-->epd
 epd-->iot
 
     url://localhost:7788/mqtt/publish
+    
+    
     {
         "topic":"gateway/report/status",
         "payload":{
@@ -230,6 +254,8 @@ epd-->iot
 epd-->iot
 
     url://localhost:7788/mqtt/publish
+    
+    
     {
         "topic":"dma/report/periph",
         "nid":"<终端id>",
@@ -247,6 +273,8 @@ epd-->iot
 epd-->iot
 
     url://localhost:7788/mqtt/publish
+    
+    
     {
         "topic":"gateway/report/task/result",
         "payload":{
