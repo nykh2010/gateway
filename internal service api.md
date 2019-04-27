@@ -1,6 +1,6 @@
-#内部接口api
+# 内部接口api
 ## epd业务服务
-* ###心跳上报
+* ### 心跳上报
 serial-->epd
     
 
@@ -18,7 +18,7 @@ serial-->epd
         "status": "<ok|error>"
     }
 
-* ###注册上报
+* ### 注册上报
 seiral-->epd
     
     
@@ -33,7 +33,7 @@ seiral-->epd
         "key":(鉴权码)
     }
 
-* ###任务通知
+* ### 任务通知
 epd-->serial
 
 
@@ -51,7 +51,7 @@ epd-->serial
         "status":"ok"
     }
 
-* ###任务状态上报
+* ### 任务状态上报
 serial-->epd
 
 
@@ -68,7 +68,7 @@ serial-->epd
     备注：
     1. 0-none 1-sleep 2-ready 3-run 4-finish 5-suspend
     
-* ###射频模块配置
+* ### 射频模块配置
 epd-->serial
 
 
@@ -82,7 +82,8 @@ epd-->serial
         "status":"<ok|error>"
     }
 
-* ###射频模块重启
+* ### 射频模块重启
+epd-->serial
 
 
     发送：
