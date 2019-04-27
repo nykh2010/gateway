@@ -1,8 +1,7 @@
 # 内部接口api
-## epd业务服务
+## epd业务服务下行接口协议
 * ### 心跳上报
 serial-->epd
-    
 
     发送：
     {
@@ -21,7 +20,6 @@ serial-->epd
 * ### 注册上报
 seiral-->epd
     
-    
     发送：
     {
         "cmd":"register",
@@ -35,7 +33,6 @@ seiral-->epd
 
 * ### 任务通知
 epd-->serial
-
 
     发送：
     {
@@ -53,7 +50,6 @@ epd-->serial
 
 * ### 任务状态上报
 serial-->epd
-
 
     发送：
     {
@@ -85,7 +81,6 @@ epd-->serial
 * ### 射频模块重启
 epd-->serial
 
-
     发送：
     {
         "cmd":"restart",
@@ -96,6 +91,100 @@ epd-->serial
         "status":"<ok|error>"
     }
     
+## epd业务服务上行接口协议
+* ### 任务创建
+iot-->epd
 
+    url:localhost:5000/task/create
+    {
+        "id":"<命令id>",
+        "from":"<命令来源>",
+        "command":"task",
+        "d":{
+            "task_id":<任务id>,
+            "image_data_id":<数据id>,
+            "image_data_url":"数据地址",
+            "image_data_md5":<数据md5>,
+            "iot_dev_list_url":"更新终端列表地址",
+            "iot_dev_list_md5":<更新终端列表地址md5>,
+            "start_time":"<起始时间>",
+            "end_time":"<终止时间>"
+        }
+    }
+    备注：
+    1. 时间格式 2019-09-10 10:23:30
+
+* ### 任务创建应答
+epd-->iot
+
+    url:localhost:7788/mqtt/publish
+    {
+        "topic":"dma/cmd/resp",
+        "payload":{
+            "id":"<命令id>",
+            "from":"<命令来源>",
+            "status":"<ok|failed>"
+            "command":"task",
+            "d":{
+                "code":"<ok|failed>",
+                "msg":"[错误消息]"
+            }
+        }
+    }
+
+* ### 白名单下发
+iot-->epd
+
+    url:localhost:5000/gateway/white_list
+    {
+        "id":"<命令id>",
+        "from":"<命令来源>",
+        "command":"white_list",
+        "d":{
+            "url":"<白名单地址>",
+            "md5":<白名单md5>
+        }
+    }
     
-    
+* ### 白名单下发应答
+epd-->iot
+
+    url:localhost:7788/mqtt/publish
+    {
+        "id":"<命令id>",
+        "from":"<命令来源>",
+        "command":"white_list",
+        "status":"<ok|err>",
+        "d":{
+            "result":"<ok|err>",
+            "msg":"[错误信息]"
+        }
+    }
+
+* ### key下发
+iot-->epd
+
+    url:localhost:5000/gateway/check_code
+    {
+        "id":"<命令id>",
+        "from":"<命令来源>",
+        "command":"check_code",
+        "d":{
+            "check_code":<key>,
+        }
+    }
+
+* ### key下发应答
+epd-->iot
+
+    url:localhost:7788/mqtt/publish
+    {
+        "id":"<命令id>",
+        "from":"<命令来源>",
+        "command":"check_code",
+        "status":"<ok|err>",
+        "d":{
+            "result":"<ok|err>",
+            "msg":"[错误信息]"
+        }
+    }
